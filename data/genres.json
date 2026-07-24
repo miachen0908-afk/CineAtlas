@@ -1,0 +1,8 @@
+[
+  { "id": "drama", "nameZh": "剧情", "nameEn": "Drama" },
+  { "id": "comedy", "nameZh": "喜剧", "nameEn": "Comedy" },
+  { "id": "romance", "nameZh": "爱情", "nameEn": "Romance" },
+  { "id": "action", "nameZh": "动作", "nameEn": "Action" },
+  { "id": "horror", "nameZh": "恐怖", "nameEn": "Horror" },
+  { "id": "animation", "nameZh": "动画", "nameEn": "Animation" }
+]

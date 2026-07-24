@@ -1,0 +1,44 @@
+[
+  {
+    "code": "cn",
+    "nameZh": "中国",
+    "nameEn": "China",
+    "center": { "latitude": 35.0, "longitude": 105.0 },
+    "summary": "从早期无声电影到当代商业大片，中国电影以独特的叙事传统与地域文化，在世界银幕上留下深刻印记。"
+  },
+  {
+    "code": "jp",
+    "nameZh": "日本",
+    "nameEn": "Japan",
+    "center": { "latitude": 36.0, "longitude": 138.0 },
+    "summary": "日本电影以精密构图、细腻情感与类型创新著称，从黑泽明的史诗到宫崎骏的动画梦境，影响全球电影语言。"
+  },
+  {
+    "code": "fr",
+    "nameZh": "法国",
+    "nameEn": "France",
+    "center": { "latitude": 46.0, "longitude": 2.0 },
+    "summary": "作为电影发明之地，法国新浪潮重塑了现代电影美学，巴黎始终是欧洲艺术电影的重要中心。"
+  },
+  {
+    "code": "it",
+    "nameZh": "意大利",
+    "nameEn": "Italy",
+    "center": { "latitude": 42.5, "longitude": 12.5 },
+    "summary": "意大利新现实主义与费里尼式的幻想共同构成该国电影的双重气质，罗马与威尼斯是重要电影城市。"
+  },
+  {
+    "code": "us",
+    "nameZh": "美国",
+    "nameEn": "United States",
+    "center": { "latitude": 39.0, "longitude": -98.0 },
+    "summary": "好莱坞与独立电影并存，美国电影工业以类型片体系与技术创新深刻塑造了 twentieth 世纪以来的全球流行文化。"
+  },
+  {
+    "code": "in",
+    "nameZh": "印度",
+    "nameEn": "India",
+    "center": { "latitude": 22.0, "longitude": 79.0 },
+    "summary": "宝莱坞与区域电影工业并重，印度电影以音乐、色彩与家庭叙事，成为世界上产量最丰富的电影传统之一。"
+  }
+]

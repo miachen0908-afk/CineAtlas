@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Film {
+  id                       String    @id
+  tmdbId                   Int?      @unique
+  titleZh                  String
+  titleOriginal            String
+  year                     Int
+  primaryProductionCountry String
+  otherProductionCountries Json      @default("[]")
+  productionCity           String?
+  filmingLocations         Json      @default("[]")
+  coordinates              Json
+  genreIds                 Json      @default("[]")
+  directorIds              Json      @default("[]")
+  posterUrl                String?
+  posterColor              String?
+  summary                  String    @default("")
+  rating                   Float?
+  likeCount                Int       @default(0)
+  importStatus             String    @default("pending")
+  importCandidates         Json?
+  importError              String?
+  dataSource               String?
+  importedAt               DateTime?
+  updatedAt                DateTime  @updatedAt
+}
