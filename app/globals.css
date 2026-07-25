@@ -1,10 +1,22 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a12;
-  --foreground: #ededed;
-  --accent: #c9a962;
-  --accent-light: #e8d5a3;
+  --bg-deep: #000000;
+  --background: #000000;
+  --foreground: #1a2e3b;
+  --ink: #1a2e3b;
+  --ink-muted: #4a6678;
+  --paper: #f2f6f4;
+  --paper-translucent: rgba(242, 246, 244, 0.92);
+  --ocean: #3a8fb7;
+  --ocean-deep: #2f6f9e;
+  --land: #f2e9db;
+  --land-deep: #10bf9b;
+  --cloud: #f4f7fa;
+  --accent: #e8c547;
+  --accent-soft: #f5e6a3;
+  --border-soft: rgba(26, 46, 59, 0.12);
+  --panel-shadow: 0 8px 28px rgba(14, 39, 68, 0.18);
 }
 
 @theme inline {
@@ -15,18 +27,43 @@
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--bg-deep);
+  color: var(--ink);
   font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
 
-/* Starfield subtle background for non-globe pages */
+/* Soft illustrated starfield for non-globe pages */
 .starfield-bg {
-  background-color: #0a0a12;
-  background-image: radial-gradient(1px 1px at 20px 30px, rgba(255,255,255,0.15), transparent),
-    radial-gradient(1px 1px at 80px 120px, rgba(255,255,255,0.1), transparent),
-    radial-gradient(1px 1px at 160px 60px, rgba(255,255,255,0.12), transparent);
-  background-size: 200px 200px;
+  background-color: var(--bg-deep);
+  background-image:
+    radial-gradient(1px 1px at 24px 36px, rgba(255, 255, 255, 0.22), transparent),
+    radial-gradient(1px 1px at 90px 140px, rgba(245, 230, 163, 0.18), transparent),
+    radial-gradient(1.5px 1.5px at 170px 70px, rgba(255, 255, 255, 0.14), transparent),
+    radial-gradient(1px 1px at 210px 200px, rgba(255, 255, 255, 0.1), transparent);
+  background-size: 240px 240px;
+}
+
+.panel-surface {
+  background: var(--paper-translucent);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--panel-shadow);
+  color: var(--ink);
+  backdrop-filter: blur(10px);
+}
+
+.chip-active {
+  background: rgba(58, 143, 183, 0.16);
+  color: var(--ocean-deep);
+  box-shadow: inset 0 0 0 1px rgba(47, 111, 158, 0.45);
+}
+
+.chip-idle {
+  background: rgba(255, 255, 255, 0.55);
+  color: var(--ink-muted);
+}
+
+.chip-idle:hover {
+  background: rgba(255, 255, 255, 0.85);
 }
 
 /* Year slider styling */
@@ -35,7 +72,7 @@ body {
   appearance: none;
   height: 4px;
   border-radius: 2px;
-  background: linear-gradient(to right, #c9a962, #3d4f6f);
+  background: linear-gradient(to right, var(--ocean), var(--land));
   outline: none;
 }
 
@@ -45,51 +82,67 @@ body {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: #e8d5a3;
-  border: 2px solid #c9a962;
+  background: var(--cloud);
+  border: 2px solid var(--ocean);
   cursor: pointer;
-  box-shadow: 0 0 8px rgba(201, 169, 98, 0.4);
 }
 
 .year-slider::-moz-range-thumb {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  background: #e8d5a3;
-  border: 2px solid #c9a962;
+  background: var(--cloud);
+  border: 2px solid var(--ocean);
   cursor: pointer;
 }
 
-/* Dual-handle year range slider */
+/* Dual-handle year range — train timeline */
 .year-range-input {
   -webkit-appearance: none;
   appearance: none;
-  height: 32px;
   background: transparent;
   pointer-events: none;
+  margin: 0;
+}
+
+.year-range-input::-webkit-slider-runnable-track {
+  height: 100%;
+  background: transparent;
+}
+
+.year-range-input::-moz-range-track {
+  height: 100%;
+  background: transparent;
+  border: none;
 }
 
 .year-range-input::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: #e8d5a3;
-  border: 2px solid #c9a962;
-  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  cursor: grab;
   pointer-events: auto;
-  box-shadow: 0 0 8px rgba(201, 169, 98, 0.4);
 }
 
 .year-range-input::-moz-range-thumb {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: #e8d5a3;
-  border: 2px solid #c9a962;
-  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  cursor: grab;
   pointer-events: auto;
+}
+
+.year-range-input:active::-webkit-slider-thumb,
+.year-range-input:active::-moz-range-thumb {
+  cursor: grabbing;
 }
 
 .year-range-input-start {
@@ -98,6 +151,42 @@ body {
 
 .year-range-input-end {
   z-index: 3;
+}
+
+.train-track-ties {
+  background: repeating-linear-gradient(
+    to right,
+    transparent 0,
+    transparent 10px,
+    rgba(47, 107, 58, 0.35) 10px,
+    rgba(47, 107, 58, 0.35) 16px
+  );
+  border-radius: 1px;
+}
+
+.train-rail {
+  height: 2px;
+  border-radius: 1px;
+  background: linear-gradient(
+    to right,
+    rgba(58, 143, 183, 0.25),
+    rgba(58, 143, 183, 0.7),
+    rgba(58, 143, 183, 0.25)
+  );
+}
+
+.train-track-active {
+  background: linear-gradient(
+    to bottom,
+    rgba(95, 168, 74, 0.2),
+    rgba(58, 143, 183, 0.4),
+    rgba(95, 168, 74, 0.2)
+  );
+  border-radius: 2px;
+}
+
+.train-thumb {
+  filter: drop-shadow(0 2px 3px rgba(14, 39, 68, 0.25));
 }
 
 @media (prefers-reduced-motion: reduce) {

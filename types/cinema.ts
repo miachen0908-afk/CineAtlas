@@ -68,11 +68,13 @@ export type MapState = {
   selectedGenreId: string | null;
   selectedFilmId: string | null;
   likedFilmIds: string[];
+  posterScale: number;
   setYearRange: (start: number, end: number) => void;
   setCountry: (code: string | null) => void;
   setGenre: (id: string | null) => void;
   selectFilm: (id: string | null) => void;
   clearFilters: () => void;
+  setPosterScale: (scale: number) => void;
   toggleLike: (filmId: string) => void;
   isLiked: (filmId: string) => boolean;
 };

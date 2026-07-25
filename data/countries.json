@@ -14,11 +14,88 @@
     "summary": "日本电影以精密构图、细腻情感与类型创新著称，从黑泽明的史诗到宫崎骏的动画梦境，影响全球电影语言。"
   },
   {
+    "code": "kr",
+    "nameZh": "韩国",
+    "nameEn": "South Korea",
+    "center": { "latitude": 36.5, "longitude": 127.8 },
+    "summary": "韩国电影近年以强烈类型片与社会议题叙事走向世界，釜山与首尔是重要产业与影展中心。"
+  },
+  {
+    "code": "ir",
+    "nameZh": "伊朗",
+    "nameEn": "Iran",
+    "center": { "latitude": 32.4, "longitude": 53.7 },
+    "summary": "伊朗新浪潮以诗意现实主义与儿童视角闻名，德黑兰是本国电影创作与发行的重要据点。"
+  },
+  {
+    "code": "in",
+    "nameZh": "印度",
+    "nameEn": "India",
+    "center": { "latitude": 22.0, "longitude": 79.0 },
+    "summary": "宝莱坞与区域电影工业并重，印度电影以音乐、色彩与家庭叙事，成为世界上产量最丰富的电影传统之一。"
+  },
+  {
+    "code": "th",
+    "nameZh": "泰国",
+    "nameEn": "Thailand",
+    "center": { "latitude": 15.0, "longitude": 101.0 },
+    "summary": "泰国电影融合民俗奇观与当代类型片，曼谷是东南亚重要的拍摄与后期制作中心之一。"
+  },
+  {
+    "code": "vn",
+    "nameZh": "越南",
+    "nameEn": "Vietnam",
+    "center": { "latitude": 16.0, "longitude": 108.0 },
+    "summary": "越南电影在历史叙事与都市情感之间寻找新声音，胡志明市与河内构成南北创作双极。"
+  },
+  {
+    "code": "sg",
+    "nameZh": "新加坡",
+    "nameEn": "Singapore",
+    "center": { "latitude": 1.35, "longitude": 103.82 },
+    "summary": "新加坡电影体量精悍，擅长都市疏离与多元文化议题，并活跃于国际影展网络。"
+  },
+  {
+    "code": "tw",
+    "nameZh": "中国台湾",
+    "nameEn": "Taiwan",
+    "center": { "latitude": 23.7, "longitude": 121.0 },
+    "summary": "台湾新电影与当代独立创作并立，以细腻人文关怀与作者风格在华语影坛占据独特位置。"
+  },
+  {
+    "code": "hk",
+    "nameZh": "中国香港",
+    "nameEn": "Hong Kong",
+    "center": { "latitude": 22.32, "longitude": 114.17 },
+    "summary": "香港电影曾以动作片与都市类型片风靡全球，今仍延续作者电影与商业类型的双重传统。"
+  },
+  {
+    "code": "au",
+    "nameZh": "澳大利亚",
+    "nameEn": "Australia",
+    "center": { "latitude": -25.0, "longitude": 134.0 },
+    "summary": "澳大利亚电影以广袤景观与类型创新著称，悉尼与墨尔本是主要产业基地。"
+  },
+  {
+    "code": "nz",
+    "nameZh": "新西兰",
+    "nameEn": "New Zealand",
+    "center": { "latitude": -41.0, "longitude": 174.0 },
+    "summary": "新西兰电影与视效工业紧密相连，惠灵顿等地既是本土叙事也是国际大片的制作重镇。"
+  },
+  {
     "code": "fr",
     "nameZh": "法国",
     "nameEn": "France",
     "center": { "latitude": 46.0, "longitude": 2.0 },
     "summary": "作为电影发明之地，法国新浪潮重塑了现代电影美学，巴黎始终是欧洲艺术电影的重要中心。"
+  },
+  {
+    "code": "gb",
+    "nameZh": "英国",
+    "nameEn": "United Kingdom",
+    "center": { "latitude": 54.0, "longitude": -2.0 },
+    "summary": "英国电影横跨社会现实主义、文学改编与流行类型，伦敦是欧洲重要的制作与发行枢纽。"
   },
   {
     "code": "it",
@@ -28,6 +105,48 @@
     "summary": "意大利新现实主义与费里尼式的幻想共同构成该国电影的双重气质，罗马与威尼斯是重要电影城市。"
   },
   {
+    "code": "se",
+    "nameZh": "瑞典",
+    "nameEn": "Sweden",
+    "center": { "latitude": 62.0, "longitude": 15.0 },
+    "summary": "瑞典电影以冷静叙事与存在主义气质闻名，伯格曼传统仍深刻影响北欧影像语言。"
+  },
+  {
+    "code": "de",
+    "nameZh": "德国",
+    "nameEn": "Germany",
+    "center": { "latitude": 51.2, "longitude": 10.4 },
+    "summary": "从表现主义到新德国电影，德国影像始终在形式实验与历史反思之间推进。"
+  },
+  {
+    "code": "ru",
+    "nameZh": "俄罗斯",
+    "nameEn": "Russia",
+    "center": { "latitude": 61.5, "longitude": 99.0 },
+    "summary": "俄罗斯与苏联电影传统以宏大诗意与蒙太奇理论著称，莫斯科仍是重要创作中心。"
+  },
+  {
+    "code": "dk",
+    "nameZh": "丹麦",
+    "nameEn": "Denmark",
+    "center": { "latitude": 56.0, "longitude": 10.0 },
+    "summary": "丹麦电影以道格玛精神与当代类型片并进，哥本哈根是北欧电影产业的核心节点。"
+  },
+  {
+    "code": "za",
+    "nameZh": "南非",
+    "nameEn": "South Africa",
+    "center": { "latitude": -29.0, "longitude": 25.0 },
+    "summary": "南非电影直面历史创伤与当代社会议题，开普敦等地也是国际取景与制作基地。"
+  },
+  {
+    "code": "ng",
+    "nameZh": "尼日利亚",
+    "nameEn": "Nigeria",
+    "center": { "latitude": 9.0, "longitude": 8.0 },
+    "summary": "诺莱坞以高产量与流行叙事著称，拉各斯是非洲最具活力的商业电影中心之一。"
+  },
+  {
     "code": "us",
     "nameZh": "美国",
     "nameEn": "United States",
@@ -35,10 +154,31 @@
     "summary": "好莱坞与独立电影并存，美国电影工业以类型片体系与技术创新深刻塑造了 twentieth 世纪以来的全球流行文化。"
   },
   {
-    "code": "in",
-    "nameZh": "印度",
-    "nameEn": "India",
-    "center": { "latitude": 22.0, "longitude": 79.0 },
-    "summary": "宝莱坞与区域电影工业并重，印度电影以音乐、色彩与家庭叙事，成为世界上产量最丰富的电影传统之一。"
+    "code": "ca",
+    "nameZh": "加拿大",
+    "nameEn": "Canada",
+    "center": { "latitude": 56.0, "longitude": -106.0 },
+    "summary": "加拿大电影兼具法语与英语传统，多伦多与蒙特利尔是北美重要的影展与制作城市。"
+  },
+  {
+    "code": "mx",
+    "nameZh": "墨西哥",
+    "nameEn": "Mexico",
+    "center": { "latitude": 23.0, "longitude": -102.0 },
+    "summary": "墨西哥电影在黄金年代与当代作者浪潮之间回响，墨西哥城是拉丁美洲重要的影像中心。"
+  },
+  {
+    "code": "ar",
+    "nameZh": "阿根廷",
+    "nameEn": "Argentina",
+    "center": { "latitude": -34.0, "longitude": -64.0 },
+    "summary": "阿根廷新电影以社会观察与都市叙事见长，布宜诺斯艾利斯是南美重要的创作与影展城市。"
+  },
+  {
+    "code": "br",
+    "nameZh": "巴西",
+    "nameEn": "Brazil",
+    "center": { "latitude": -14.0, "longitude": -51.0 },
+    "summary": "巴西电影从新电影运动到当代都市类型片持续演变，里约与圣保罗构成产业双城。"
   }
 ]

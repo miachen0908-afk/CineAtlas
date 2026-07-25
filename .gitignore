@@ -41,6 +41,9 @@ prisma/dev.db-journal
 # tmdb downloaded posters
 public/posters/tmdb/
 
+# Cesium static assets (copied from node_modules on predev/prebuild)
+public/cesium/
+
 # vercel
 .vercel
 

@@ -1,0 +1,82 @@
+[
+  {
+    "id": "test-fr-01",
+    "titleZh": "法国占位 1",
+    "featuredPriority": 1,
+    "posterColor": "#c9a962",
+    "year": 1960,
+    "genreIds": ["drama"]
+  },
+  {
+    "id": "test-fr-02",
+    "titleZh": "法国占位 2",
+    "featuredPriority": 2,
+    "posterColor": "#e8d5a3",
+    "year": 1965,
+    "genreIds": ["drama"]
+  },
+  {
+    "id": "test-fr-03",
+    "titleZh": "法国占位 3",
+    "featuredPriority": 3,
+    "posterColor": "#8b7355",
+    "year": 1972,
+    "genreIds": ["comedy"]
+  },
+  {
+    "id": "test-fr-04",
+    "titleZh": "法国占位 4",
+    "featuredPriority": 4,
+    "posterColor": "#a89060",
+    "year": 1981,
+    "genreIds": ["romance"]
+  },
+  {
+    "id": "test-fr-05",
+    "titleZh": "法国占位 5",
+    "featuredPriority": 5,
+    "posterColor": "#d4b878",
+    "year": 1995,
+    "genreIds": ["drama"]
+  },
+  {
+    "id": "test-fr-06",
+    "titleZh": "法国占位 6",
+    "featuredPriority": 6,
+    "posterColor": "#6b5640",
+    "year": 2001,
+    "genreIds": ["action"]
+  },
+  {
+    "id": "test-fr-07",
+    "titleZh": "法国占位 7",
+    "featuredPriority": 7,
+    "posterColor": "#b8a070",
+    "year": 2008,
+    "genreIds": ["horror"]
+  },
+  {
+    "id": "test-fr-08",
+    "titleZh": "法国占位 8",
+    "featuredPriority": 8,
+    "posterColor": "#9a8560",
+    "year": 2012,
+    "genreIds": ["comedy"]
+  },
+  {
+    "id": "test-fr-09",
+    "titleZh": "法国占位 9",
+    "featuredPriority": 9,
+    "posterColor": "#f0e0b8",
+    "year": 2018,
+    "genreIds": ["animation"]
+  },
+  {
+    "id": "test-fr-10",
+    "titleZh": "法国占位 10",
+    "featuredPriority": 10,
+    "posterColor": "#7a6848",
+    "year": 2023,
+    "genreIds": ["drama"]
+  }
+]

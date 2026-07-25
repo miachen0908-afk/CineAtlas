@@ -1,7 +1,11 @@
 "use client";
 
 import { countries, genres } from "@/lib/data";
-import { useMapStore } from "@/store/useMapStore";
+import {
+  MAX_POSTER_SCALE,
+  MIN_POSTER_SCALE,
+  useMapStore,
+} from "@/store/useMapStore";
 import { getActiveFilterLabels } from "@/utils/filmFilters";
 
 type FilterPanelProps = {
@@ -11,8 +15,10 @@ type FilterPanelProps = {
 export function FilterPanel({ onClose }: FilterPanelProps) {
   const selectedCountryCode = useMapStore((s) => s.selectedCountryCode);
   const selectedGenreId = useMapStore((s) => s.selectedGenreId);
+  const posterScale = useMapStore((s) => s.posterScale);
   const setCountry = useMapStore((s) => s.setCountry);
   const setGenre = useMapStore((s) => s.setGenre);
+  const setPosterScale = useMapStore((s) => s.setPosterScale);
   const clearFilters = useMapStore((s) => s.clearFilters);
 
   const activeLabels = getActiveFilterLabels({
@@ -23,9 +29,32 @@ export function FilterPanel({ onClose }: FilterPanelProps) {
   });
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-5 text-[var(--ink)]">
       <div>
-        <h3 className="mb-2 text-xs font-medium uppercase tracking-wider text-white/40">
+        <h3 className="mb-2 text-xs font-medium uppercase tracking-wider text-[var(--ink-muted)]">
+          海报大小
+        </h3>
+        <div className="flex items-center gap-3">
+          <span className="text-[10px] text-[var(--ink-muted)]">小</span>
+          <input
+            type="range"
+            min={MIN_POSTER_SCALE}
+            max={MAX_POSTER_SCALE}
+            step={0.05}
+            value={posterScale}
+            onChange={(e) => setPosterScale(parseFloat(e.target.value))}
+            className="h-1.5 flex-1 cursor-pointer appearance-none rounded-full bg-[rgba(58,143,183,0.2)] accent-[var(--ocean)]"
+            aria-label="海报缩略图大小"
+          />
+          <span className="text-[10px] text-[var(--ink-muted)]">大</span>
+          <span className="w-8 text-right font-mono text-[10px] tabular-nums text-[var(--ocean-deep)]">
+            {posterScale.toFixed(2)}
+          </span>
+        </div>
+      </div>
+
+      <div>
+        <h3 className="mb-2 text-xs font-medium uppercase tracking-wider text-[var(--ink-muted)]">
           国家筛选
         </h3>
         <div className="flex flex-wrap gap-2">
@@ -41,8 +70,8 @@ export function FilterPanel({ onClose }: FilterPanelProps) {
               }}
               className={`rounded-full px-3 py-1 text-xs transition-colors ${
                 selectedCountryCode === country.code
-                  ? "bg-[#c9a962]/20 text-[#e8d5a3] ring-1 ring-[#c9a962]/50"
-                  : "bg-white/5 text-white/60 hover:bg-white/10"
+                  ? "chip-active"
+                  : "chip-idle"
               }`}
             >
               {country.nameZh}
@@ -52,7 +81,7 @@ export function FilterPanel({ onClose }: FilterPanelProps) {
       </div>
 
       <div>
-        <h3 className="mb-2 text-xs font-medium uppercase tracking-wider text-white/40">
+        <h3 className="mb-2 text-xs font-medium uppercase tracking-wider text-[var(--ink-muted)]">
           类型筛选
         </h3>
         <div className="flex flex-wrap gap-2">
@@ -65,9 +94,7 @@ export function FilterPanel({ onClose }: FilterPanelProps) {
                 onClose?.();
               }}
               className={`rounded-full px-3 py-1 text-xs transition-colors ${
-                selectedGenreId === genre.id
-                  ? "bg-[#c9a962]/20 text-[#e8d5a3] ring-1 ring-[#c9a962]/50"
-                  : "bg-white/5 text-white/60 hover:bg-white/10"
+                selectedGenreId === genre.id ? "chip-active" : "chip-idle"
               }`}
             >
               {genre.nameZh}
@@ -77,9 +104,9 @@ export function FilterPanel({ onClose }: FilterPanelProps) {
       </div>
 
       {activeLabels.length > 0 && (
-        <div className="rounded-lg border border-white/10 bg-white/5 px-3 py-2">
-          <p className="mb-1 text-xs text-white/40">当前筛选</p>
-          <p className="text-xs text-white/70">{activeLabels.join(" · ")}</p>
+        <div className="rounded-lg border border-[var(--border-soft)] bg-white/60 px-3 py-2">
+          <p className="mb-1 text-xs text-[var(--ink-muted)]">当前筛选</p>
+          <p className="text-xs text-[var(--ink)]">{activeLabels.join(" · ")}</p>
         </div>
       )}
 
@@ -90,7 +117,7 @@ export function FilterPanel({ onClose }: FilterPanelProps) {
             clearFilters();
             onClose?.();
           }}
-          className="rounded-lg border border-white/15 py-2 text-xs text-white/60 transition-colors hover:bg-white/5"
+          className="rounded-lg border border-[var(--border-soft)] py-2 text-xs text-[var(--ink-muted)] transition-colors hover:bg-white/50"
         >
           清除筛选
         </button>

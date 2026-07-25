@@ -1,8 +1,9 @@
 "use client";
 
-import { useMemo, useState, useCallback } from "react";
+import { useMemo, useState, useCallback, useRef } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
 import { getCountry, getGenre, getPerson } from "@/lib/data";
 import type { Film, FilmWithRelations } from "@/types/cinema";
 import {
@@ -28,6 +29,8 @@ const CinemaGlobe = dynamic(
     ),
   }
 );
+
+const TIMELINE_CLOSE_DELAY_MS = 300;
 
 function buildFilmWithRelations(film: Film): FilmWithRelations | undefined {
   const country = getCountry(film.primaryProductionCountry);
@@ -57,8 +60,14 @@ export function MapHomeClient({ films }: MapHomeClientProps) {
   const setYearRange = useMapStore((s) => s.setYearRange);
   const setCountry = useMapStore((s) => s.setCountry);
   const selectFilm = useMapStore((s) => s.selectFilm);
+  const posterScale = useMapStore((s) => s.posterScale);
 
   const [filterOpen, setFilterOpen] = useState(false);
+  const [timelineOpen, setTimelineOpen] = useState(false);
+  const [hoveredCountryCode, setHoveredCountryCode] = useState<string | null>(
+    null
+  );
+  const timelineCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const yearRangeLabel = formatYearRange(yearStart, yearEnd);
 
@@ -79,6 +88,30 @@ export function MapHomeClient({ films }: MapHomeClientProps) {
     return film ? buildFilmWithRelations(film) ?? null : null;
   }, [films, selectedFilmId]);
 
+  const cancelTimelineClose = useCallback(() => {
+    if (timelineCloseTimer.current) {
+      clearTimeout(timelineCloseTimer.current);
+      timelineCloseTimer.current = null;
+    }
+  }, []);
+
+  const scheduleTimelineClose = useCallback(() => {
+    cancelTimelineClose();
+    timelineCloseTimer.current = setTimeout(
+      () => setTimelineOpen(false),
+      TIMELINE_CLOSE_DELAY_MS
+    );
+  }, [cancelTimelineClose]);
+
+  const openTimeline = useCallback(() => {
+    cancelTimelineClose();
+    setTimelineOpen(true);
+  }, [cancelTimelineClose]);
+
+  const toggleTimelineMobile = useCallback(() => {
+    setTimelineOpen((prev) => !prev);
+  }, []);
+
   const handleCountrySelect = useCallback(
     (code: string | null) => {
       setCountry(code);
@@ -86,17 +119,28 @@ export function MapHomeClient({ films }: MapHomeClientProps) {
     [setCountry]
   );
 
+  const handleCountryHover = useCallback(
+    (code: string | null) => {
+      if (code && selectedCountryCode && code !== selectedCountryCode) {
+        setCountry(null);
+      }
+      setHoveredCountryCode(code);
+    },
+    [selectedCountryCode, setCountry]
+  );
+
   const handleBackgroundClick = useCallback(() => {
     selectFilm(null);
     setCountry(null);
   }, [selectFilm, setCountry]);
 
-  const highlightedCountry = selectedCountryCode;
-  const countryInfo = highlightedCountry
-    ? getCountry(highlightedCountry)
+  // Hover takes priority for overlay; fall back to click-selected country
+  const overlayCountryCode = hoveredCountryCode ?? selectedCountryCode;
+  const countryInfo = overlayCountryCode
+    ? getCountry(overlayCountryCode)
     : null;
-  const countryFilmCount = highlightedCountry
-    ? countFilmsByCountry(films, yearStart, yearEnd, highlightedCountry)
+  const countryFilmCount = overlayCountryCode
+    ? countFilmsByCountry(films, yearStart, yearEnd, overlayCountryCode)
     : 0;
 
   return (
@@ -110,34 +154,36 @@ export function MapHomeClient({ films }: MapHomeClientProps) {
           <button
             type="button"
             onClick={() => setFilterOpen(true)}
-            className="absolute left-3 top-3 z-20 rounded-full border border-white/15 bg-[#0a0a12]/80 px-3 py-1.5 text-xs text-white/70 backdrop-blur-md md:hidden"
+            className="absolute left-3 top-3 z-20 rounded-full border border-[var(--border-soft)] bg-[var(--paper-translucent)] px-3 py-1.5 text-xs text-[var(--ink-muted)] backdrop-blur-md md:hidden"
           >
             筛选
           </button>
 
           {/* Country info overlay */}
           {countryInfo && (
-            <div className="absolute left-1/2 top-3 z-20 -translate-x-1/2 rounded-xl border border-white/10 bg-[#0a0a12]/85 px-4 py-3 text-center backdrop-blur-md">
-              <p className="text-sm font-medium text-[#e8d5a3]">
+            <div className="absolute left-1/2 top-3 z-20 -translate-x-1/2 rounded-xl border border-[var(--border-soft)] bg-[var(--paper-translucent)] px-4 py-3 text-center shadow-[var(--panel-shadow)] backdrop-blur-md">
+              <p className="text-sm font-medium text-[var(--ink)]">
                 {countryInfo.nameZh}
               </p>
-              <p className="text-xs text-white/50">
+              <p className="text-xs text-[var(--ink-muted)]">
                 {countryFilmCount} 部影片
               </p>
               <div className="mt-2 flex justify-center gap-2">
                 <Link
                   href={`/country/${countryInfo.code}`}
-                  className="rounded-full bg-[#c9a962]/20 px-3 py-1 text-xs text-[#e8d5a3]"
+                  className="rounded-full bg-[rgba(58,143,183,0.16)] px-3 py-1 text-xs text-[var(--ocean-deep)] ring-1 ring-[rgba(47,111,158,0.4)]"
                 >
                   进入国家页
                 </Link>
-                <button
-                  type="button"
-                  onClick={() => setCountry(null)}
-                  className="rounded-full border border-white/15 px-3 py-1 text-xs text-white/50"
-                >
-                  取消
-                </button>
+                {selectedCountryCode && (
+                  <button
+                    type="button"
+                    onClick={() => setCountry(null)}
+                    className="rounded-full border border-[var(--border-soft)] px-3 py-1 text-xs text-[var(--ink-muted)]"
+                  >
+                    取消选中
+                  </button>
+                )}
               </div>
             </div>
           )}
@@ -154,11 +200,57 @@ export function MapHomeClient({ films }: MapHomeClientProps) {
             <CinemaGlobe
               films={filteredFilms}
               selectedFilmId={selectedFilmId}
-              highlightedCountryCode={highlightedCountry}
+              highlightedCountryCode={selectedCountryCode}
+              posterScale={posterScale}
+              yearStart={yearStart}
+              yearEnd={yearEnd}
+              genreId={selectedGenreId}
               onSelectFilm={selectFilm}
               onSelectCountry={handleCountrySelect}
+              onHoverCountry={handleCountryHover}
               onBackgroundClick={handleBackgroundClick}
             />
+
+            {/* Bottom timeline: collapsed trigger + hover/tap expand */}
+            <div
+              className="absolute inset-x-0 bottom-0 z-30"
+              onMouseEnter={openTimeline}
+              onMouseLeave={scheduleTimelineClose}
+            >
+              {/* Collapsed hit strip */}
+              <button
+                type="button"
+                className="flex h-3.5 w-full items-end justify-center md:h-4"
+                onClick={toggleTimelineMobile}
+                aria-expanded={timelineOpen}
+                aria-label="展开时间轴"
+              >
+                <span
+                  className="mb-1 h-px w-16 rounded-full bg-[rgba(58,143,183,0.45)]"
+                  aria-hidden
+                />
+              </button>
+
+              <AnimatePresence>
+                {timelineOpen && (
+                  <motion.div
+                    initial={{ y: 24, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: 24, opacity: 0 }}
+                    transition={{ duration: 0.22, ease: "easeOut" }}
+                    className="motion-reduce:transition-none border-t border-[var(--border-soft)] bg-[var(--paper-translucent)] backdrop-blur-md"
+                    onMouseEnter={cancelTimelineClose}
+                  >
+                    <YearRangeSlider
+                      yearStart={yearStart}
+                      yearEnd={yearEnd}
+                      onChange={setYearRange}
+                      filmCount={filteredFilms.length}
+                    />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
         </div>
 
@@ -169,16 +261,6 @@ export function MapHomeClient({ films }: MapHomeClientProps) {
         />
       </div>
 
-      {/* Year range slider */}
-      <footer className="shrink-0 border-t border-white/10 bg-[#0a0a12]/80 backdrop-blur-md">
-        <YearRangeSlider
-          yearStart={yearStart}
-          yearEnd={yearEnd}
-          onChange={setYearRange}
-          filmCount={filteredFilms.length}
-        />
-      </footer>
-
       {/* Mobile filter drawer */}
       {filterOpen && (
         <div className="fixed inset-0 z-50 md:hidden">
@@ -188,13 +270,13 @@ export function MapHomeClient({ films }: MapHomeClientProps) {
             onClick={() => setFilterOpen(false)}
             aria-label="关闭筛选"
           />
-          <div className="absolute bottom-0 left-0 right-0 max-h-[80vh] overflow-y-auto rounded-t-2xl border-t border-white/10 bg-[#0a0a12] p-5">
+          <div className="absolute bottom-0 left-0 right-0 max-h-[80vh] overflow-y-auto rounded-t-2xl border-t border-[var(--border-soft)] bg-[var(--paper)] p-5 text-[var(--ink)]">
             <div className="mb-4 flex items-center justify-between">
-              <h2 className="text-sm font-medium text-white/80">筛选</h2>
+              <h2 className="text-sm font-medium text-[var(--ink)]">筛选</h2>
               <button
                 type="button"
                 onClick={() => setFilterOpen(false)}
-                className="text-white/40"
+                className="text-[var(--ink-muted)]"
               >
                 ✕
               </button>

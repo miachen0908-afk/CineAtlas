@@ -1,10 +1,17 @@
 import { ProxyAgent, fetch as undiciFetch } from "undici";
 
 const TMDB_BASE = "https://api.themoviedb.org/3";
-const IMAGE_BASE = "https://image.tmdb.org/t/p/w500";
+const IMAGE_BASE_W500 = "https://image.tmdb.org/t/p/w500";
+const IMAGE_BASE_W185 = "https://image.tmdb.org/t/p/w185";
 const MIN_INTERVAL_MS = 250;
 const MAX_RETRIES = 3;
 const REQUEST_TIMEOUT_MS = 30_000;
+
+export type PosterImageSize = "w185" | "w500";
+
+function imageBase(size: PosterImageSize): string {
+  return size === "w185" ? IMAGE_BASE_W185 : IMAGE_BASE_W500;
+}
 
 let lastRequestAt = 0;
 let proxyAgent: ProxyAgent | undefined;
@@ -56,10 +63,12 @@ type FetchOptions = {
   auth?: boolean;
 };
 
+type UndiciResponse = Awaited<ReturnType<typeof undiciFetch>>;
+
 async function tmdbFetch(
   url: string,
   options: FetchOptions = {}
-): Promise<Response> {
+): Promise<UndiciResponse> {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
 
@@ -78,7 +87,7 @@ async function tmdbFetch(
 async function fetchWithRetry(
   url: string,
   attempt = 0
-): Promise<Response> {
+): Promise<UndiciResponse> {
   await throttle();
   const response = await tmdbFetch(url, {
     headers: {
@@ -139,7 +148,43 @@ export type TmdbSearchResult = {
 
 export type TmdbSearchResponse = {
   results: TmdbSearchResult[];
+  page?: number;
+  total_pages?: number;
+  total_results?: number;
 };
+
+export type TmdbDiscoverOptions = {
+  originCountry: string;
+  page?: number;
+  sortBy?: string;
+  voteCountGte?: number;
+  language?: string;
+};
+
+export async function discoverMovies(
+  options: TmdbDiscoverOptions
+): Promise<{ results: TmdbSearchResult[]; totalPages: number }> {
+  const params = new URLSearchParams({
+    with_origin_country: options.originCountry.toUpperCase(),
+    sort_by: options.sortBy ?? "vote_average.desc",
+    "vote_count.gte": String(options.voteCountGte ?? 80),
+    include_adult: "false",
+    language: options.language ?? "zh-CN",
+    page: String(options.page ?? 1),
+  });
+  const url = `${TMDB_BASE}/discover/movie?${params}`;
+  const response = await fetchWithRetry(url);
+  if (!response.ok) {
+    throw new Error(
+      `TMDB discover failed (${response.status}): ${options.originCountry} page ${options.page ?? 1}`
+    );
+  }
+  const data = (await response.json()) as TmdbSearchResponse;
+  return {
+    results: data.results ?? [],
+    totalPages: data.total_pages ?? 1,
+  };
+}
 
 export type TmdbMovieDetail = TmdbSearchResult & {
   production_countries?: { iso_3166_1: string; name: string }[];
@@ -188,16 +233,20 @@ export async function getMovieDetail(tmdbId: number): Promise<TmdbMovieDetail> {
   return (await response.json()) as TmdbMovieDetail;
 }
 
-export function posterUrlFromPath(path: string | null | undefined): string | null {
+export function posterUrlFromPath(
+  path: string | null | undefined,
+  size: PosterImageSize = "w500"
+): string | null {
   if (!path) return null;
-  return `${IMAGE_BASE}${path}`;
+  return `${imageBase(size)}${path}`;
 }
 
 export async function downloadPoster(
   posterPath: string,
-  destPath: string
+  destPath: string,
+  size: PosterImageSize = "w500"
 ): Promise<void> {
-  const url = posterUrlFromPath(posterPath);
+  const url = posterUrlFromPath(posterPath, size);
   if (!url) return;
 
   await throttle();
@@ -205,7 +254,7 @@ export async function downloadPoster(
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
 
-  let response: Response;
+  let response: UndiciResponse;
   try {
     response = await undiciFetch(url, {
       signal: controller.signal,

@@ -30,9 +30,9 @@ export function EdgeFilterPanel() {
 
   return (
     <>
-      {/* Desktop: left edge trigger */}
+      {/* Desktop: right edge trigger */}
       <div
-        className="absolute left-0 top-0 z-30 hidden h-full w-6 md:block"
+        className="absolute right-0 top-0 z-30 hidden h-full w-6 md:block"
         onMouseEnter={handleOpen}
         onMouseLeave={scheduleClose}
         aria-hidden
@@ -41,16 +41,16 @@ export function EdgeFilterPanel() {
       <AnimatePresence>
         {open && (
           <motion.aside
-            initial={{ x: -PANEL_WIDTH }}
+            initial={{ x: PANEL_WIDTH }}
             animate={{ x: 0 }}
-            exit={{ x: -PANEL_WIDTH }}
+            exit={{ x: PANEL_WIDTH }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="motion-reduce:transition-none absolute left-0 top-0 z-40 hidden h-full overflow-y-auto border-r border-white/10 bg-[#0a0a12]/92 p-4 backdrop-blur-md md:block"
+            className="motion-reduce:transition-none absolute right-0 top-0 z-40 hidden h-full overflow-y-auto border-l border-[var(--border-soft)] bg-[var(--paper-translucent)] p-4 shadow-[var(--panel-shadow)] backdrop-blur-md md:block"
             style={{ width: PANEL_WIDTH }}
             onMouseEnter={cancelClose}
             onMouseLeave={scheduleClose}
           >
-            <h2 className="mb-4 text-xs font-medium uppercase tracking-wider text-white/40">
+            <h2 className="mb-4 text-xs font-medium uppercase tracking-wider text-[var(--ink-muted)]">
               筛选
             </h2>
             <FilterPanel />

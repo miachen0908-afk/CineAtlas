@@ -4,9 +4,16 @@ import type { MapState } from "@/types/cinema";
 
 export const MIN_YEAR = 1895;
 export const MAX_YEAR = 2025;
+export const MIN_POSTER_SCALE = 0.4;
+export const MAX_POSTER_SCALE = 2;
+export const DEFAULT_POSTER_SCALE = 1;
 
 function clampYear(year: number): number {
   return Math.min(MAX_YEAR, Math.max(MIN_YEAR, year));
+}
+
+function clampPosterScale(scale: number): number {
+  return Math.min(MAX_POSTER_SCALE, Math.max(MIN_POSTER_SCALE, scale));
 }
 
 function normalizeRange(start: number, end: number): { yearStart: number; yearEnd: number } {
@@ -24,6 +31,7 @@ export const useMapStore = create<MapState>()(
       selectedGenreId: null,
       selectedFilmId: null,
       likedFilmIds: [],
+      posterScale: DEFAULT_POSTER_SCALE,
 
       setYearRange: (start, end) => {
         const range = normalizeRange(start, end);
@@ -39,6 +47,7 @@ export const useMapStore = create<MapState>()(
           selectedGenreId: null,
           selectedFilmId: null,
         }),
+      setPosterScale: (scale) => set({ posterScale: clampPosterScale(scale) }),
       toggleLike: (filmId) => {
         const { likedFilmIds } = get();
         const isLiked = likedFilmIds.includes(filmId);
@@ -52,7 +61,10 @@ export const useMapStore = create<MapState>()(
     }),
     {
       name: "world-cinema-map-storage",
-      partialize: (state) => ({ likedFilmIds: state.likedFilmIds }),
+      partialize: (state) => ({
+        likedFilmIds: state.likedFilmIds,
+        posterScale: state.posterScale,
+      }),
     }
   )
 );

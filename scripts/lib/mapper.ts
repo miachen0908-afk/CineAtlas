@@ -42,6 +42,10 @@ export function mapGenreIds(tmdbGenres: { id: number }[] | undefined): string[] 
   return Array.from(ids);
 }
 
+export function mapGenreIdsFromNumbers(genreIds: number[] | undefined): string[] {
+  return mapGenreIds((genreIds ?? []).map((id) => ({ id })));
+}
+
 export function mapDirectorIds(detail: TmdbMovieDetail): string[] {
   const directors =
     detail.credits?.crew?.filter((member) => member.job === "Director") ?? [];

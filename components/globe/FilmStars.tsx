@@ -1,77 +1,184 @@
 "use client";
 
-import { useRef, useMemo } from "react";
-import { useFrame } from "@react-three/fiber";
+import { useMemo, Suspense } from "react";
+import { useLoader } from "@react-three/fiber";
+import { Billboard } from "@react-three/drei";
 import * as THREE from "three";
 import type { Film } from "@/types/cinema";
-import { spreadOverlappingStars, getEarthRadius } from "@/utils/geo";
+import { countries } from "@/lib/data";
+import { layoutPostersByCountry } from "@/utils/countryPosterLayout";
 
 type FilmStarsProps = {
   films: Film[];
   selectedFilmId: string | null;
   onSelectFilm: (id: string) => void;
+  posterScale?: number;
 };
 
-type StarProps = {
+const BASE_WIDTH = 0.06;
+const BASE_HEIGHT = 0.09;
+
+function PosterFallback({
+  position,
+  color,
+  scale,
+  isSelected,
+  onSelect,
+}: {
+  position: THREE.Vector3;
+  color: string;
+  scale: number;
+  isSelected: boolean;
+  onSelect: () => void;
+}) {
+  const r = 0.016 * scale * (isSelected ? 1.4 : 1);
+  return (
+    <mesh
+      position={position}
+      renderOrder={6}
+      onClick={(e) => {
+        e.stopPropagation();
+        onSelect();
+      }}
+    >
+      <sphereGeometry args={[r, 12, 12]} />
+      <meshStandardMaterial
+        color={isSelected ? "#fff6dc" : color}
+        emissive={isSelected ? "#e8c878" : "#a89060"}
+        emissiveIntensity={isSelected ? 0.7 : 0.35}
+        roughness={0.55}
+      />
+    </mesh>
+  );
+}
+
+function PosterBillboard({
+  film,
+  position,
+  isSelected,
+  posterScale,
+  onSelect,
+}: {
   film: Film;
   position: THREE.Vector3;
   isSelected: boolean;
+  posterScale: number;
   onSelect: () => void;
-};
+}) {
+  const texture = useLoader(THREE.TextureLoader, film.posterUrl!);
+  texture.colorSpace = THREE.SRGBColorSpace;
 
-function Star({ position, isSelected, onSelect }: Omit<StarProps, "film">) {
-  const meshRef = useRef<THREE.Mesh>(null);
-  const targetScale = isSelected ? 1.8 : 1;
-  const targetOpacity = isSelected ? 1 : 0.85;
-
-  useFrame(() => {
-    if (!meshRef.current) return;
-    const material = meshRef.current.material as THREE.MeshStandardMaterial;
-    meshRef.current.scale.lerp(
-      new THREE.Vector3(targetScale, targetScale, targetScale),
-      0.12
-    );
-    material.opacity += (targetOpacity - material.opacity) * 0.12;
-  });
+  const scale = posterScale * (isSelected ? 1.35 : 1);
+  const w = BASE_WIDTH * scale;
+  const h = BASE_HEIGHT * scale;
 
   return (
-    <group position={position}>
+    <Billboard position={position} follow lockZ={false} renderOrder={6}>
       <mesh
-        ref={meshRef}
         onClick={(e) => {
           e.stopPropagation();
           onSelect();
         }}
+        renderOrder={6}
       >
-        <sphereGeometry args={[0.035, 12, 12]} />
-        <meshStandardMaterial
-          color={isSelected ? "#f5e6b8" : "#e8d5a3"}
-          emissive={isSelected ? "#c9a962" : "#8b7355"}
-          emissiveIntensity={isSelected ? 1.2 : 0.6}
+        <planeGeometry args={[w, h]} />
+        <meshBasicMaterial
+          map={texture}
           transparent
-          opacity={0.85}
+          depthWrite={false}
+          side={THREE.DoubleSide}
+          toneMapped={false}
         />
       </mesh>
       {isSelected && (
-        <pointLight color="#c9a962" intensity={0.8} distance={0.5} />
+        <mesh position={[0, 0, -0.001]} renderOrder={5}>
+          <planeGeometry args={[w * 1.08, h * 1.08]} />
+          <meshBasicMaterial
+            color="#3a8fb7"
+            transparent
+            opacity={0.55}
+            depthWrite={false}
+            side={THREE.DoubleSide}
+          />
+        </mesh>
       )}
-    </group>
+    </Billboard>
   );
 }
 
-export function FilmStars({ films, selectedFilmId, onSelectFilm }: FilmStarsProps) {
+function PosterItem({
+  film,
+  position,
+  isSelected,
+  posterScale,
+  onSelect,
+}: {
+  film: Film;
+  position: THREE.Vector3;
+  isSelected: boolean;
+  posterScale: number;
+  onSelect: () => void;
+}) {
+  if (!film.posterUrl) {
+    return (
+      <PosterFallback
+        position={position}
+        color={film.posterColor ?? "#3a8fb7"}
+        scale={posterScale}
+        isSelected={isSelected}
+        onSelect={onSelect}
+      />
+    );
+  }
+
+  return (
+    <Suspense
+      fallback={
+        <PosterFallback
+          position={position}
+          color={film.posterColor ?? "#3a8fb7"}
+          scale={posterScale}
+          isSelected={isSelected}
+          onSelect={onSelect}
+        />
+      }
+    >
+      <PosterBillboard
+        film={film}
+        position={position}
+        isSelected={isSelected}
+        posterScale={posterScale}
+        onSelect={onSelect}
+      />
+    </Suspense>
+  );
+}
+
+export function FilmStars({
+  films,
+  selectedFilmId,
+  onSelectFilm,
+  posterScale = 1,
+}: FilmStarsProps) {
+  const countriesByCode = useMemo(() => {
+    const map = new Map(countries.map((c) => [c.code, c]));
+    return map;
+  }, []);
+
   const positions = useMemo(
-    () => spreadOverlappingStars(films, getEarthRadius() + 0.02),
-    [films]
+    () => layoutPostersByCountry(films, countriesByCode),
+    [films, countriesByCode]
   );
 
   return (
     <group>
       {positions.map(({ film, position }) => (
-        <Star
+        <PosterItem
           key={film.id}
+          film={film}
           position={position}
           isSelected={selectedFilmId === film.id}
+          posterScale={posterScale}
           onSelect={() => onSelectFilm(film.id)}
         />
       ))}

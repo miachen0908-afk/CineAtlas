@@ -35,7 +35,7 @@ export function FilmPreviewCard({ film, onClose }: FilmPreviewCardProps) {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: 20 }}
             transition={{ duration: 0.25 }}
-            className="motion-reduce:transition-none hidden w-80 shrink-0 flex-col overflow-y-auto border-l border-white/10 bg-[#0a0a12]/90 p-5 backdrop-blur-md lg:flex xl:w-96"
+            className="motion-reduce:transition-none panel-surface hidden w-80 shrink-0 flex-col overflow-y-auto border-l p-5 lg:flex xl:w-96"
           >
             <FilmCardContent film={film} query={query} onClose={onClose} />
           </motion.aside>
@@ -47,9 +47,9 @@ export function FilmPreviewCard({ film, onClose }: FilmPreviewCardProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 40 }}
             transition={{ duration: 0.25 }}
-            className="motion-reduce:transition-none fixed inset-x-0 bottom-0 z-40 max-h-[70vh] overflow-y-auto rounded-t-2xl border-t border-white/10 bg-[#0a0a12]/95 p-5 backdrop-blur-md lg:hidden"
+            className="motion-reduce:transition-none panel-surface fixed inset-x-0 bottom-0 z-40 max-h-[70vh] overflow-y-auto rounded-t-2xl border-t p-5 lg:hidden"
           >
-            <div className="mx-auto mb-3 h-1 w-10 rounded-full bg-white/20" />
+            <div className="mx-auto mb-3 h-1 w-10 rounded-full bg-[rgba(58,143,183,0.35)]" />
             <FilmCardContent film={film} query={query} onClose={onClose} />
           </motion.div>
         </>
@@ -68,18 +68,18 @@ function FilmCardContent({
   onClose: () => void;
 }) {
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 text-[var(--ink)]">
       <div className="flex items-start justify-between gap-2">
         <div
           className="h-28 w-20 shrink-0 rounded-lg"
-          style={{ backgroundColor: film.posterColor ?? "#2d3748" }}
+          style={{ backgroundColor: film.posterColor ?? "#3a8fb7" }}
           role="img"
           aria-label={`${film.titleZh} 占位海报`}
         />
         <button
           type="button"
           onClick={onClose}
-          className="rounded-full p-1 text-white/40 hover:bg-white/10 hover:text-white/70"
+          className="rounded-full p-1 text-[var(--ink-muted)] hover:bg-white/60 hover:text-[var(--ink)]"
           aria-label="关闭预览"
         >
           ✕
@@ -87,11 +87,11 @@ function FilmCardContent({
       </div>
 
       <div>
-        <h2 className="text-lg font-medium text-white">{film.titleZh}</h2>
-        <p className="text-sm text-white/50">{film.titleOriginal}</p>
+        <h2 className="text-lg font-medium text-[var(--ink)]">{film.titleZh}</h2>
+        <p className="text-sm text-[var(--ink-muted)]">{film.titleOriginal}</p>
       </div>
 
-      <div className="flex flex-wrap gap-2 text-xs text-white/50">
+      <div className="flex flex-wrap gap-2 text-xs text-[var(--ink-muted)]">
         <span>{film.year}</span>
         <span>·</span>
         <span>{film.country.nameZh}</span>
@@ -104,7 +104,7 @@ function FilmCardContent({
       </div>
 
       {film.directors.length > 0 && (
-        <p className="text-xs text-white/60">
+        <p className="text-xs text-[var(--ink-muted)]">
           导演：{film.directors.map((d) => d.nameZh).join("、")}
         </p>
       )}
@@ -114,7 +114,7 @@ function FilmCardContent({
           {film.genres.map((g) => (
             <span
               key={g.id}
-              className="rounded-full bg-white/5 px-2 py-0.5 text-xs text-white/50"
+              className="rounded-full bg-white/70 px-2 py-0.5 text-xs text-[var(--ink-muted)]"
             >
               {g.nameZh}
             </span>
@@ -122,7 +122,7 @@ function FilmCardContent({
         </div>
       )}
 
-      <p className="line-clamp-4 text-sm leading-relaxed text-white/65">
+      <p className="line-clamp-4 text-sm leading-relaxed text-[var(--ink)]/80">
         {film.summary}
       </p>
 
@@ -130,7 +130,7 @@ function FilmCardContent({
         <LikeButton filmId={film.id} baseCount={film.likeCount} />
         <Link
           href={`/film/${film.id}?${query}`}
-          className="flex-1 rounded-full bg-[#c9a962]/20 py-2 text-center text-sm text-[#e8d5a3] ring-1 ring-[#c9a962]/40 transition-colors hover:bg-[#c9a962]/30"
+          className="flex-1 rounded-full bg-[rgba(58,143,183,0.16)] py-2 text-center text-sm text-[var(--ocean-deep)] ring-1 ring-[rgba(47,111,158,0.4)] transition-colors hover:bg-[rgba(58,143,183,0.26)]"
         >
           查看详情
         </Link>

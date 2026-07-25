@@ -97,13 +97,13 @@ export function CountryPageClient({
     <div className="mx-auto max-w-4xl px-4 py-8 md:px-6">
       <Link
         href={`/?${mapQuery}`}
-        className="mb-6 inline-flex items-center gap-2 text-sm text-white/50 hover:text-[#e8d5a3]"
+        className="mb-6 inline-flex items-center gap-2 text-sm text-white/50 hover:text-[var(--cloud)]"
       >
         ← 返回世界地图
       </Link>
 
       <header className="mb-8">
-        <h1 className="text-3xl font-light text-[#e8d5a3]">{country.nameZh}</h1>
+        <h1 className="text-3xl font-light text-[var(--cloud)]">{country.nameZh}</h1>
         <p className="mt-1 text-sm text-white/40">{country.nameEn}</p>
         <p className="mt-4 leading-relaxed text-white/65">{country.summary}</p>
       </header>
@@ -199,7 +199,7 @@ export function CountryPageClient({
                 }
                 className={`rounded-xl border px-4 py-3 text-left transition-colors ${
                   selectedPersonId === person.id
-                    ? "border-[#c9a962]/50 bg-[#c9a962]/10"
+                    ? "border-[rgba(58,143,183,0.5)] bg-[rgba(58,143,183,0.12)]"
                     : "border-white/10 bg-white/5 hover:bg-white/8"
                 }`}
               >
@@ -266,7 +266,7 @@ function StatCard({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded-xl border border-white/10 bg-white/5 px-4 py-3">
       <p className="text-xs text-white/40">{label}</p>
-      <p className="mt-1 font-mono text-xl text-[#e8d5a3]">{value}</p>
+      <p className="mt-1 font-mono text-xl text-[var(--cloud)]">{value}</p>
     </div>
   );
 }

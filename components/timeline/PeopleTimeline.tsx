@@ -140,7 +140,7 @@ function PersonMarker({
       <div
         className={`flex h-12 w-12 items-center justify-center rounded-full border-2 text-lg ${
           isSelected
-            ? "border-[#c9a962] bg-[#c9a962]/20"
+            ? "border-[#3a8fb7] bg-[rgba(58,143,183,0.2)]"
             : "border-white/20 bg-white/5"
         }`}
         aria-hidden
@@ -149,7 +149,7 @@ function PersonMarker({
       </div>
       <span
         className={`max-w-[80px] truncate text-[10px] ${
-          isSelected ? "text-[#e8d5a3]" : "text-white/50"
+          isSelected ? "text-[var(--cloud)]" : "text-white/50"
         }`}
       >
         {person.nameZh}
@@ -195,7 +195,7 @@ function PersonDetailPanel({
                 <li key={f.id}>
                   <a
                     href={`/film/${f.id}`}
-                    className="rounded-full bg-white/5 px-3 py-1 text-xs text-[#e8d5a3] hover:bg-white/10"
+                    className="rounded-full bg-white/5 px-3 py-1 text-xs text-[var(--cloud)] hover:bg-white/10"
                   >
                     {f.titleZh}
                   </a>
@@ -229,7 +229,7 @@ function FilterGroup({
           onClick={() => onChange(null)}
           className={`rounded-full px-3 py-1 text-xs ${
             !value
-              ? "bg-[#c9a962]/20 text-[#e8d5a3]"
+              ? "bg-[rgba(58,143,183,0.2)] text-[var(--cloud)]"
               : "bg-white/5 text-white/50"
           }`}
         >
@@ -242,7 +242,7 @@ function FilterGroup({
             onClick={() => onChange(value === opt.id ? null : opt.id)}
             className={`rounded-full px-3 py-1 text-xs ${
               value === opt.id
-                ? "bg-[#c9a962]/20 text-[#e8d5a3]"
+                ? "bg-[rgba(58,143,183,0.2)] text-[var(--cloud)]"
                 : "bg-white/5 text-white/50"
             }`}
           >

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "cn-beijing",
+    "nameZh": "北京",
+    "longitude": 116.4074,
+    "latitude": 39.9042
+  },
+  {
+    "id": "jp-tokyo",
+    "nameZh": "东京",
+    "longitude": 139.6503,
+    "latitude": 35.6762
+  },
+  {
+    "id": "fr-paris",
+    "nameZh": "巴黎",
+    "longitude": 2.3522,
+    "latitude": 48.8566
+  },
+  {
+    "id": "us-new-york",
+    "nameZh": "纽约",
+    "longitude": -74.006,
+    "latitude": 40.7128
+  }
+]

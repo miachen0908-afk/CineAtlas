@@ -23,6 +23,18 @@ export function latLngToVector3(
   return new THREE.Vector3(x, y, z);
 }
 
+/** Inverse of latLngToVector3 — for raycast hit → geographic lookup. */
+export function vector3ToLatLng(position: THREE.Vector3): {
+  latitude: number;
+  longitude: number;
+} {
+  const p = position.clone().normalize();
+  const latitude = 90 - (Math.acos(Math.max(-1, Math.min(1, p.y))) * 180) / Math.PI;
+  const longitude =
+    ((Math.atan2(p.z, -p.x) * 180) / Math.PI + 360) % 360 - 180;
+  return { latitude, longitude };
+}
+
 export type FilmPosition = {
   film: Film;
   position: THREE.Vector3;
@@ -103,10 +115,11 @@ export function latLngToSpherical(
 /** Convert a GeoJSON ring [lng, lat][] to globe surface points. */
 export function geoJsonRingToGlobePoints(
   ring: number[][],
-  radius: number = EARTH_RADIUS + 0.012
+  radius: number = EARTH_RADIUS + 0.011
 ): THREE.Vector3[] {
   const points: THREE.Vector3[] = [];
-  const step = ring.length > 120 ? Math.ceil(ring.length / 120) : 1;
+  // Keep more samples so borders align tightly with fill meshes
+  const step = ring.length > 240 ? Math.ceil(ring.length / 240) : 1;
 
   for (let i = 0; i < ring.length; i += step) {
     const [lng, lat] = ring[i];

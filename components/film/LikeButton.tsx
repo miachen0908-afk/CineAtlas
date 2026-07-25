@@ -20,8 +20,8 @@ export function LikeButton({ filmId, baseCount, size = "md" }: LikeButtonProps) 
       onClick={() => toggleLike(filmId)}
       className={`flex items-center gap-1.5 rounded-full border transition-colors ${
         isLiked
-          ? "border-[#c9a962]/60 bg-[#c9a962]/15 text-[#e8d5a3]"
-          : "border-white/15 bg-white/5 text-white/60 hover:border-white/30"
+          ? "border-[rgba(232,197,71,0.65)] bg-[rgba(232,197,71,0.18)] text-[var(--ink)]"
+          : "border-[var(--border-soft)] bg-white/50 text-[var(--ink-muted)] hover:border-[rgba(58,143,183,0.4)]"
       } ${size === "sm" ? "px-2.5 py-1 text-xs" : "px-4 py-2 text-sm"}`}
       aria-pressed={isLiked}
       aria-label={isLiked ? "取消喜欢" : "喜欢"}

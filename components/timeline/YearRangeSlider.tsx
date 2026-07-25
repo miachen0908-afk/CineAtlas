@@ -1,6 +1,7 @@
 "use client";
 
 import { MIN_YEAR, MAX_YEAR } from "@/store/useMapStore";
+import { CarriageThumb, LocomotiveThumb } from "./TrainThumb";
 
 type YearRangeSliderProps = {
   yearStart: number;
@@ -28,30 +29,62 @@ export function YearRangeSlider({
   };
 
   return (
-    <div className="flex flex-col gap-2 px-4 py-3 md:px-6">
-      <div className="flex items-center justify-between gap-4">
-        <span className="text-xs text-white/40">时间段</span>
-        <span className="font-mono text-lg font-light tabular-nums text-[#e8d5a3] md:text-2xl">
+    <div className="flex flex-col gap-1 px-3 py-2 md:px-5">
+      <div className="flex items-center justify-between gap-3">
+        <span className="text-[10px] text-[var(--ink-muted)]">时间段</span>
+        <span className="font-mono text-sm font-medium tabular-nums text-[var(--ocean-deep)] md:text-base">
           {yearStart === yearEnd ? yearStart : `${yearStart} — ${yearEnd}`}
         </span>
-        <span className="text-xs text-white/40">
+        <span className="text-[10px] text-[var(--ink-muted)]">
           {filmCount > 0 ? `${filmCount} 部影片` : "暂无影片"}
         </span>
       </div>
 
-      <div className="relative h-8">
-        <div className="year-range-track absolute inset-x-0 top-1/2 h-1 -translate-y-1/2 rounded-full bg-white/10" />
+      <div className="train-timeline relative h-9 touch-none md:h-10">
+        {/* Station buffers */}
         <div
-          className="year-range-fill absolute top-1/2 h-1 -translate-y-1/2 rounded-full bg-gradient-to-r from-[#c9a962] to-[#8b7355]"
-          style={{ left: `${startPct}%`, right: `${100 - endPct}%` }}
+          className="pointer-events-none absolute left-0 top-1/2 z-[1] h-5 w-1 -translate-y-1/2 rounded-sm bg-[var(--ocean-deep)]/80"
+          aria-hidden
         />
+        <div
+          className="pointer-events-none absolute right-0 top-1/2 z-[1] h-5 w-1 -translate-y-1/2 rounded-sm bg-[var(--ocean-deep)]/80"
+          aria-hidden
+        />
+
+        {/* Sleepers + rails */}
+        <div className="train-track pointer-events-none absolute inset-x-2 top-1/2 h-3.5 -translate-y-1/2 md:inset-x-3">
+          <div className="train-track-ties absolute inset-x-0 top-1/2 h-2.5 -translate-y-1/2" />
+          <div className="train-rail train-rail-top absolute inset-x-0 top-[calc(50%-4px)]" />
+          <div className="train-rail train-rail-bottom absolute inset-x-0 top-[calc(50%+2px)]" />
+          <div
+            className="train-track-active absolute top-1/2 h-2.5 -translate-y-1/2"
+            style={{ left: `${startPct}%`, right: `${100 - endPct}%` }}
+          />
+        </div>
+
+        {/* Visual thumbs */}
+        <div className="pointer-events-none absolute inset-x-2 top-0 bottom-0 md:inset-x-3">
+          <div
+            className="train-thumb absolute top-1/2 z-[4] -translate-x-1/2 -translate-y-[58%] scale-[0.65] md:scale-75"
+            style={{ left: `${startPct}%` }}
+          >
+            <LocomotiveThumb />
+          </div>
+          <div
+            className="train-thumb absolute top-1/2 z-[5] -translate-x-1/2 -translate-y-[55%] scale-[0.65] md:scale-75"
+            style={{ left: `${endPct}%` }}
+          >
+            <CarriageThumb />
+          </div>
+        </div>
+
         <input
           type="range"
           min={MIN_YEAR}
           max={MAX_YEAR}
           value={yearStart}
           onChange={(e) => handleStartChange(parseInt(e.target.value, 10))}
-          className="year-range-input year-range-input-start absolute inset-0 w-full"
+          className="year-range-input year-range-input-start absolute inset-x-2 top-0 h-full w-[calc(100%-1rem)] md:inset-x-3 md:w-[calc(100%-1.5rem)]"
           aria-label={`起始年份 ${yearStart}`}
         />
         <input
@@ -60,13 +93,14 @@ export function YearRangeSlider({
           max={MAX_YEAR}
           value={yearEnd}
           onChange={(e) => handleEndChange(parseInt(e.target.value, 10))}
-          className="year-range-input year-range-input-end absolute inset-0 w-full"
+          className="year-range-input year-range-input-end absolute inset-x-2 top-0 h-full w-[calc(100%-1rem)] md:inset-x-3 md:w-[calc(100%-1.5rem)]"
           aria-label={`结束年份 ${yearEnd}`}
         />
       </div>
 
-      <div className="flex justify-between text-[10px] text-white/30">
+      <div className="flex justify-between px-1 text-[9px] text-white/30">
         <span>{MIN_YEAR}</span>
+        <span className="text-white/20">铁轨时光</span>
         <span>{MAX_YEAR}</span>
       </div>
     </div>
