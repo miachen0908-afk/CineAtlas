@@ -4,12 +4,6 @@ export type LonLat = { longitude: number; latitude: number };
 
 export type ZoomTier = "world" | "continent" | "country";
 
-export type PosterCandidate = {
-  x: number;
-  y: number;
-  score: number;
-};
-
 export type DebugCandidate = {
   x: number;
   y: number;
@@ -38,6 +32,8 @@ export type PlacedPoster = {
   lat: number;
   widthM: number;
   heightM: number;
+  /** Final per-country adaptive render height on the globe. */
+  displayHeightGlobe: number;
   rank: number;
 };
 
@@ -51,7 +47,6 @@ export type LayoutDebugInfo = {
 export type CountryPosterLayoutResult = {
   countryCode: string;
   placed: PlacedPoster[];
-  capacity: number;
   tier: ZoomTier;
   fallback: boolean;
   debug: LayoutDebugInfo;

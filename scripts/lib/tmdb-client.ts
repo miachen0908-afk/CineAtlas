@@ -153,6 +153,20 @@ export type TmdbSearchResponse = {
   total_results?: number;
 };
 
+export type TmdbPersonSearchResult = {
+  id: number;
+  name: string;
+  original_name: string;
+  known_for_department?: string;
+  profile_path?: string | null;
+};
+
+export type TmdbPersonDetail = TmdbPersonSearchResult & {
+  birthday?: string | null;
+  deathday?: string | null;
+  place_of_birth?: string | null;
+};
+
 export type TmdbDiscoverOptions = {
   originCountry: string;
   page?: number;
@@ -231,6 +245,20 @@ export async function getMovieDetail(tmdbId: number): Promise<TmdbMovieDetail> {
     throw new Error(`TMDB detail failed (${response.status}): ${tmdbId}`);
   }
   return (await response.json()) as TmdbMovieDetail;
+}
+
+export async function searchPerson(query: string): Promise<TmdbPersonSearchResult[]> {
+  const params = new URLSearchParams({ query, language: "en-US", include_adult: "false" });
+  const response = await fetchWithRetry(`${TMDB_BASE}/search/person?${params}`);
+  if (!response.ok) throw new Error(`TMDB person search failed (${response.status}): ${query}`);
+  const data = (await response.json()) as { results?: TmdbPersonSearchResult[] };
+  return data.results ?? [];
+}
+
+export async function getPersonDetail(tmdbId: number): Promise<TmdbPersonDetail> {
+  const response = await fetchWithRetry(`${TMDB_BASE}/person/${tmdbId}?language=en-US`);
+  if (!response.ok) throw new Error(`TMDB person detail failed (${response.status}): ${tmdbId}`);
+  return (await response.json()) as TmdbPersonDetail;
 }
 
 export function posterUrlFromPath(

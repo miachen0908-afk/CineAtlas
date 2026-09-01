@@ -3,7 +3,6 @@ import { polygon as turfPolygon } from "@turf/helpers";
 import { getCountryFeatures } from "@/lib/countryLookup";
 import { COUNTRY_ISO_NUMERIC, isCountryHotspot } from "@/lib/countryIso";
 import { pickLargestPolygon } from "@/lib/posterLayout/geometry";
-import type { ZoomTier } from "@/lib/posterLayout/types";
 
 export type AreaBand = "tiny" | "small" | "medium" | "large" | "huge";
 
@@ -59,42 +58,6 @@ export function getAreaBand(countryCode: string): AreaBand {
   if (km2 < 1_000_000) return "medium";
   if (km2 < 3_000_000) return "large";
   return "huge";
-}
-
-/** Max posters by area band × zoom tier (before geometry / mobile). */
-export function areaTierCap(band: AreaBand, tier: ZoomTier): number {
-  const table: Record<AreaBand, Record<ZoomTier, number>> = {
-    tiny: { world: 0, continent: 1, country: 2 },
-    small: { world: 1, continent: 2, country: 4 },
-    medium: { world: 1, continent: 3, country: 8 },
-    large: { world: 2, continent: 4, country: 10 },
-    huge: { world: 2, continent: 5, country: 14 },
-  };
-  return table[band][tier];
-}
-
-export function posterCapForCountry(
-  countryCode: string,
-  tier: ZoomTier,
-  geometryCapacity: number,
-  isMobile: boolean
-): number {
-  const band = getAreaBand(countryCode);
-  const areaCap = areaTierCap(band, tier);
-
-  if (areaCap === 0) return 0;
-
-  let cap = Math.min(areaCap, Math.max(geometryCapacity, 1));
-  // If geometry says 0 but area allows, still allow 1 for non-world (fallback poster)
-  if (geometryCapacity <= 0) {
-    cap = tier === "world" ? 0 : Math.min(areaCap, 1);
-  }
-
-  if (isMobile) {
-    if (cap <= 0) return 0;
-    return Math.max(1, Math.floor(cap / 2));
-  }
-  return cap;
 }
 
 /** Inward buffer distance (km) — smaller countries use tighter inset. */

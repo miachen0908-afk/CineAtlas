@@ -23,6 +23,92 @@ export function latLngToVector3(
   return new THREE.Vector3(x, y, z);
 }
 
+export type NorthTiltedPosterTransform = {
+  position: THREE.Vector3;
+  quaternion: THREE.Quaternion;
+  surfaceNormal: THREE.Vector3;
+  geographicNorth: THREE.Vector3;
+  posterNormal: THREE.Vector3;
+};
+
+/**
+ * Build a deterministic local frame whose horizontal axis runs east-west and
+ * whose vertical projection points toward geographic north. The poster plane
+ * rises by a fixed angle above the local globe tangent plane.
+ */
+export function getNorthTiltedPosterTransform(
+  latitude: number,
+  longitude: number,
+  posterWidth: number,
+  posterHeight: number,
+  radius: number = EARTH_RADIUS,
+  tiltDegrees: number = 50,
+  surfaceGap: number = 0.006,
+  radialLift: number = 0
+): NorthTiltedPosterTransform {
+  const surfaceNormal = latLngToVector3(latitude, longitude, 1).normalize();
+  const theta = (longitude + 180) * (Math.PI / 180);
+  const east = new THREE.Vector3(
+    Math.sin(theta),
+    0,
+    Math.cos(theta)
+  ).normalize();
+  const geographicNorth = surfaceNormal.clone().cross(east).normalize();
+  const tilt = THREE.MathUtils.degToRad(tiltDegrees);
+  const posterUp = geographicNorth
+    .clone()
+    .multiplyScalar(Math.cos(tilt))
+    .addScaledVector(surfaceNormal, Math.sin(tilt))
+    .normalize();
+  const posterNormal = east.clone().cross(posterUp).normalize();
+
+  const rotation = new THREE.Matrix4().makeBasis(
+    east,
+    posterUp,
+    posterNormal
+  );
+  const quaternion = new THREE.Quaternion().setFromRotationMatrix(rotation);
+
+  const halfWidth = posterWidth / 2;
+  const halfHeight = posterHeight / 2;
+  const cornerLengthSq = halfWidth ** 2 + halfHeight ** 2;
+  const eastRadial = east.dot(surfaceNormal);
+  const upRadial = posterUp.dot(surfaceNormal);
+  const targetRadius = radius + surfaceGap + radialLift;
+  let centerLift = targetRadius - radius;
+
+  for (const xSign of [-1, 1]) {
+    for (const ySign of [-1, 1]) {
+      const radialOffset =
+        xSign * halfWidth * eastRadial +
+        ySign * halfHeight * upRadial;
+      const tangentialSq = Math.max(
+        0,
+        cornerLengthSq - radialOffset ** 2
+      );
+      const requiredCenterRadius = Math.sqrt(
+        Math.max(0, targetRadius ** 2 - tangentialSq)
+      );
+      centerLift = Math.max(
+        centerLift,
+        requiredCenterRadius - radius - radialOffset
+      );
+    }
+  }
+
+  const position = surfaceNormal
+    .clone()
+    .multiplyScalar(radius + centerLift);
+
+  return {
+    position,
+    quaternion,
+    surfaceNormal,
+    geographicNorth,
+    posterNormal,
+  };
+}
+
 /** Inverse of latLngToVector3 — for raycast hit → geographic lookup. */
 export function vector3ToLatLng(position: THREE.Vector3): {
   latitude: number;
@@ -138,4 +224,3 @@ export type CountryBorderLine = {
   id: string;
   points: THREE.Vector3[];
 };
-

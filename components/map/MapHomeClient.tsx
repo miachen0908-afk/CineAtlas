@@ -1,36 +1,41 @@
 "use client";
 
-import { useMemo, useState, useCallback, useRef } from "react";
+import { useMemo, useState, useCallback, useEffect, useRef } from "react";
 import dynamic from "next/dynamic";
-import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { getCountry, getGenre, getPerson } from "@/lib/data";
 import type { Film, FilmWithRelations } from "@/types/cinema";
 import {
+  buildMapQueryParams,
   formatYearRange,
   useMapStore,
 } from "@/store/useMapStore";
-import { filterFilms, countFilmsByCountry } from "@/utils/filmFilters";
+import { filterFilms } from "@/utils/filmFilters";
 import { EdgeFilterPanel } from "@/components/filters/EdgeFilterPanel";
 import { FilterPanel } from "@/components/filters/FilterPanel";
 import { YearRangeSlider } from "@/components/timeline/YearRangeSlider";
 import { FilmPreviewCard } from "@/components/film/FilmPreviewCard";
+import {
+  AnchoredFilmPreviewCard,
+  type FilmPreviewAnchor,
+} from "@/components/film/AnchoredFilmPreviewCard";
+import { CountryFilmDrawer } from "@/components/country/CountryFilmDrawer";
 import { EmptyState } from "@/components/layout/EmptyState";
+import { useHomeExperience } from "@/components/home/HomeExperienceContext";
+import { IntroBrandTitle } from "@/components/home/IntroBrandTitle";
 
 const CinemaGlobe = dynamic(
   () =>
     import("@/components/globe/CinemaGlobe").then((m) => m.CinemaGlobe),
   {
     ssr: false,
-    loading: () => (
-      <div className="flex h-full items-center justify-center text-white/30">
-        载入地球…
-      </div>
-    ),
+    loading: () => <div className="h-full w-full" aria-hidden />,
   }
 );
 
 const TIMELINE_CLOSE_DELAY_MS = 300;
+const COUNTRY_DRAWER_CLOSE_DELAY_MS = 300;
+const GLOBE_AUTO_ROTATE_IDLE_MS = 5000;
 
 function buildFilmWithRelations(film: Film): FilmWithRelations | undefined {
   const country = getCountry(film.primaryProductionCountry);
@@ -49,9 +54,20 @@ function buildFilmWithRelations(film: Film): FilmWithRelations | undefined {
 
 type MapHomeClientProps = {
   films: Film[];
+  initialFilters?: {
+    yearStart?: number;
+    yearEnd?: number;
+    countryCode?: string | null;
+    genreId?: string | null;
+  };
 };
 
-export function MapHomeClient({ films }: MapHomeClientProps) {
+type FilmPreviewSource = "globe" | "country-list" | null;
+
+export function MapHomeClient({ films, initialFilters }: MapHomeClientProps) {
+  const { phase, startExit, completeExit } = useHomeExperience();
+  const prefersReducedMotion = useReducedMotion() ?? false;
+  const uiReady = phase === "ready";
   const yearStart = useMapStore((s) => s.yearStart);
   const yearEnd = useMapStore((s) => s.yearEnd);
   const selectedCountryCode = useMapStore((s) => s.selectedCountryCode);
@@ -59,15 +75,112 @@ export function MapHomeClient({ films }: MapHomeClientProps) {
   const selectedFilmId = useMapStore((s) => s.selectedFilmId);
   const setYearRange = useMapStore((s) => s.setYearRange);
   const setCountry = useMapStore((s) => s.setCountry);
+  const setGenre = useMapStore((s) => s.setGenre);
   const selectFilm = useMapStore((s) => s.selectFilm);
+  const clearFilters = useMapStore((s) => s.clearFilters);
   const posterScale = useMapStore((s) => s.posterScale);
 
   const [filterOpen, setFilterOpen] = useState(false);
   const [timelineOpen, setTimelineOpen] = useState(false);
-  const [hoveredCountryCode, setHoveredCountryCode] = useState<string | null>(
+  const [hoveredDrawerCode, setHoveredDrawerCode] = useState<string | null>(
     null
   );
+  const [pinnedDrawerCode, setPinnedDrawerCode] = useState<string | null>(null);
+  const [previewSource, setPreviewSource] =
+    useState<FilmPreviewSource>(null);
+  const [listPreviewAnchor, setListPreviewAnchor] =
+    useState<FilmPreviewAnchor | null>(null);
+  const [globePreviewAnchor, setGlobePreviewAnchor] =
+    useState<FilmPreviewAnchor | null>(null);
+  const [autoRotateGlobe, setAutoRotateGlobe] = useState(false);
   const timelineCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const countryDrawerCloseTimer = useRef<ReturnType<typeof setTimeout> | null>(
+    null
+  );
+  const initialFiltersApplied = useRef(false);
+  const autoRotateIdleTimer = useRef<ReturnType<typeof setTimeout> | null>(
+    null
+  );
+  const visibleDrawerCode = pinnedDrawerCode ?? hoveredDrawerCode;
+  const autoRotationBlocked =
+    !uiReady ||
+    prefersReducedMotion ||
+    visibleDrawerCode !== null ||
+    previewSource !== null;
+
+  const resetAutoRotationIdle = useCallback(() => {
+    if (autoRotateIdleTimer.current) {
+      clearTimeout(autoRotateIdleTimer.current);
+      autoRotateIdleTimer.current = null;
+    }
+
+    setAutoRotateGlobe(false);
+    if (autoRotationBlocked || document.hidden) return;
+
+    autoRotateIdleTimer.current = setTimeout(() => {
+      if (!document.hidden) setAutoRotateGlobe(true);
+      autoRotateIdleTimer.current = null;
+    }, GLOBE_AUTO_ROTATE_IDLE_MS);
+  }, [autoRotationBlocked]);
+
+  useEffect(() => {
+    const setupTimer = window.setTimeout(resetAutoRotationIdle, 0);
+
+    const handleActivity = () => resetAutoRotationIdle();
+    const handleVisibilityChange = () => resetAutoRotationIdle();
+
+    window.addEventListener("pointerdown", handleActivity, { passive: true });
+    window.addEventListener("touchstart", handleActivity, { passive: true });
+    window.addEventListener("wheel", handleActivity, { passive: true });
+    window.addEventListener("keydown", handleActivity);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      window.clearTimeout(setupTimer);
+      window.removeEventListener("pointerdown", handleActivity);
+      window.removeEventListener("touchstart", handleActivity);
+      window.removeEventListener("wheel", handleActivity);
+      window.removeEventListener("keydown", handleActivity);
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      if (autoRotateIdleTimer.current) {
+        clearTimeout(autoRotateIdleTimer.current);
+        autoRotateIdleTimer.current = null;
+      }
+    };
+  }, [resetAutoRotationIdle]);
+
+  useEffect(() => {
+    if (phase !== "intro") return;
+
+    const handleIntroKeyDown = (event: KeyboardEvent) => {
+      if (event.repeat || (event.key !== "Enter" && event.key !== " ")) {
+        return;
+      }
+      event.preventDefault();
+      startExit();
+    };
+
+    window.addEventListener("keydown", handleIntroKeyDown);
+    return () => window.removeEventListener("keydown", handleIntroKeyDown);
+  }, [phase, startExit]);
+
+  useEffect(() => {
+    if (initialFiltersApplied.current) return;
+    initialFiltersApplied.current = true;
+
+    if (
+      initialFilters?.yearStart !== undefined &&
+      initialFilters.yearEnd !== undefined
+    ) {
+      setYearRange(initialFilters.yearStart, initialFilters.yearEnd);
+    }
+    if (initialFilters?.countryCode !== undefined) {
+      setCountry(initialFilters.countryCode);
+    }
+    if (initialFilters?.genreId !== undefined) {
+      setGenre(initialFilters.genreId);
+    }
+  }, [initialFilters, setCountry, setGenre, setYearRange]);
 
   const yearRangeLabel = formatYearRange(yearStart, yearEnd);
 
@@ -82,11 +195,64 @@ export function MapHomeClient({ films }: MapHomeClientProps) {
     [films, yearStart, yearEnd, selectedCountryCode, selectedGenreId]
   );
 
+  const drawerFilms = useMemo(
+    () =>
+      filterFilms(films, {
+        yearStart,
+        yearEnd,
+        countryCode: visibleDrawerCode,
+        genreId: selectedGenreId,
+      }),
+    [films, yearStart, yearEnd, visibleDrawerCode, selectedGenreId]
+  );
+
   const selectedFilm = useMemo(() => {
     if (!selectedFilmId) return null;
     const film = films.find((item) => item.id === selectedFilmId);
     return film ? buildFilmWithRelations(film) ?? null : null;
   }, [films, selectedFilmId]);
+
+  const mapQuery = buildMapQueryParams({
+    yearStart,
+    yearEnd,
+    selectedCountryCode,
+    selectedGenreId,
+  });
+  const selectedGenreLabel = selectedGenreId
+    ? getGenre(selectedGenreId)?.nameZh ?? null
+    : null;
+
+  const clearFilmPreview = useCallback(() => {
+    selectFilm(null);
+    setPreviewSource(null);
+    setListPreviewAnchor(null);
+    setGlobePreviewAnchor(null);
+  }, [selectFilm]);
+
+  const cancelCountryDrawerClose = useCallback(() => {
+    if (countryDrawerCloseTimer.current) {
+      clearTimeout(countryDrawerCloseTimer.current);
+      countryDrawerCloseTimer.current = null;
+    }
+  }, []);
+
+  const scheduleCountryDrawerClose = useCallback(() => {
+    if (pinnedDrawerCode) return;
+    cancelCountryDrawerClose();
+    countryDrawerCloseTimer.current = setTimeout(() => {
+      setHoveredDrawerCode(null);
+      if (previewSource === "country-list") clearFilmPreview();
+    }, COUNTRY_DRAWER_CLOSE_DELAY_MS);
+  }, [cancelCountryDrawerClose, clearFilmPreview, pinnedDrawerCode, previewSource]);
+
+  useEffect(
+    () => () => {
+      if (countryDrawerCloseTimer.current) {
+        clearTimeout(countryDrawerCloseTimer.current);
+      }
+    },
+    []
+  );
 
   const cancelTimelineClose = useCallback(() => {
     if (timelineCloseTimer.current) {
@@ -114,82 +280,146 @@ export function MapHomeClient({ films }: MapHomeClientProps) {
 
   const handleCountrySelect = useCallback(
     (code: string | null) => {
+      cancelCountryDrawerClose();
       setCountry(code);
+      setPinnedDrawerCode(code);
+      setHoveredDrawerCode(null);
+      clearFilmPreview();
     },
-    [setCountry]
+    [cancelCountryDrawerClose, clearFilmPreview, setCountry]
   );
 
   const handleCountryHover = useCallback(
     (code: string | null) => {
-      if (code && selectedCountryCode && code !== selectedCountryCode) {
-        setCountry(null);
+      if (pinnedDrawerCode) return;
+      if (!code) {
+        scheduleCountryDrawerClose();
+        return;
       }
-      setHoveredCountryCode(code);
+
+      cancelCountryDrawerClose();
+      if (code !== hoveredDrawerCode) clearFilmPreview();
+      setHoveredDrawerCode(code);
     },
-    [selectedCountryCode, setCountry]
+    [
+      cancelCountryDrawerClose,
+      clearFilmPreview,
+      hoveredDrawerCode,
+      pinnedDrawerCode,
+      scheduleCountryDrawerClose,
+    ]
   );
 
-  const handleBackgroundClick = useCallback(() => {
-    selectFilm(null);
-    setCountry(null);
-  }, [selectFilm, setCountry]);
+  const handleGenreSelect = useCallback(
+    (genreId: string | null) => {
+      setGenre(genreId);
+      clearFilmPreview();
+    },
+    [clearFilmPreview, setGenre]
+  );
 
-  // Hover takes priority for overlay; fall back to click-selected country
-  const overlayCountryCode = hoveredCountryCode ?? selectedCountryCode;
-  const countryInfo = overlayCountryCode
-    ? getCountry(overlayCountryCode)
-    : null;
-  const countryFilmCount = overlayCountryCode
-    ? countFilmsByCountry(films, yearStart, yearEnd, overlayCountryCode)
-    : 0;
+  const handleYearRangeChange = useCallback(
+    (start: number, end: number) => {
+      setYearRange(start, end);
+      clearFilmPreview();
+    },
+    [clearFilmPreview, setYearRange]
+  );
+
+  const handleClearFilters = useCallback(() => {
+    clearFilters();
+    cancelCountryDrawerClose();
+    setPinnedDrawerCode(null);
+    setHoveredDrawerCode(null);
+    clearFilmPreview();
+  }, [cancelCountryDrawerClose, clearFilmPreview, clearFilters]);
+
+  const handleGlobeFilmSelect = useCallback(
+    (filmId: string, anchor: FilmPreviewAnchor) => {
+      selectFilm(filmId);
+      setPreviewSource("globe");
+      setGlobePreviewAnchor(anchor);
+      setListPreviewAnchor(null);
+    },
+    [selectFilm]
+  );
+
+  const handleDrawerFilmSelect = useCallback(
+    (filmId: string, anchor: FilmPreviewAnchor) => {
+      selectFilm(filmId);
+      setPreviewSource("country-list");
+      setListPreviewAnchor(anchor);
+      setGlobePreviewAnchor(null);
+    },
+    [selectFilm]
+  );
+
+  const handleGlobeInteractionStart = useCallback(() => {
+    resetAutoRotationIdle();
+    if (previewSource === "globe") clearFilmPreview();
+  }, [clearFilmPreview, previewSource, resetAutoRotationIdle]);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (previewSource === "globe") clearFilmPreview();
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [clearFilmPreview, previewSource]);
+
+  const handleCloseDrawer = useCallback(() => {
+    cancelCountryDrawerClose();
+    setPinnedDrawerCode(null);
+    setHoveredDrawerCode(null);
+    if (previewSource === "country-list") {
+      clearFilmPreview();
+    }
+  }, [cancelCountryDrawerClose, clearFilmPreview, previewSource]);
+
+  const handleBackgroundClick = useCallback(() => {
+    cancelCountryDrawerClose();
+    setCountry(null);
+    setPinnedDrawerCode(null);
+    setHoveredDrawerCode(null);
+    clearFilmPreview();
+  }, [cancelCountryDrawerClose, clearFilmPreview, setCountry]);
 
   return (
-    <div className="flex flex-1 flex-col overflow-hidden">
+    <div
+      className="flex flex-1 flex-col overflow-hidden text-[var(--ink)]"
+      data-globe-auto-rotate={autoRotateGlobe ? "true" : "false"}
+    >
       <div className="flex flex-1 overflow-hidden">
         {/* Main map area — full width; filters via edge panel */}
         <div className="relative flex flex-1 flex-col overflow-hidden">
-          <EdgeFilterPanel />
+          <motion.div
+            initial={false}
+            animate={{ opacity: uiReady ? 1 : 0, y: uiReady ? 0 : 8 }}
+            transition={{ duration: prefersReducedMotion ? 0.01 : 0.4 }}
+            className={uiReady ? "" : "pointer-events-none"}
+            aria-hidden={!uiReady}
+          >
+            <EdgeFilterPanel
+              onCountrySelect={handleCountrySelect}
+              onGenreSelect={handleGenreSelect}
+              onClearFilters={handleClearFilters}
+            />
+          </motion.div>
 
           {/* Mobile filter button */}
           <button
             type="button"
             onClick={() => setFilterOpen(true)}
-            className="absolute left-3 top-3 z-20 rounded-full border border-[var(--border-soft)] bg-[var(--paper-translucent)] px-3 py-1.5 text-xs text-[var(--ink-muted)] backdrop-blur-md md:hidden"
+            className={`glass-control absolute left-3 top-3 z-20 rounded-full border px-3 py-1.5 text-xs transition-opacity duration-300 md:hidden ${
+              uiReady ? "opacity-100" : "pointer-events-none opacity-0"
+            }`}
+            aria-hidden={!uiReady}
           >
             筛选
           </button>
 
-          {/* Country info overlay */}
-          {countryInfo && (
-            <div className="absolute left-1/2 top-3 z-20 -translate-x-1/2 rounded-xl border border-[var(--border-soft)] bg-[var(--paper-translucent)] px-4 py-3 text-center shadow-[var(--panel-shadow)] backdrop-blur-md">
-              <p className="text-sm font-medium text-[var(--ink)]">
-                {countryInfo.nameZh}
-              </p>
-              <p className="text-xs text-[var(--ink-muted)]">
-                {countryFilmCount} 部影片
-              </p>
-              <div className="mt-2 flex justify-center gap-2">
-                <Link
-                  href={`/country/${countryInfo.code}`}
-                  className="rounded-full bg-[rgba(58,143,183,0.16)] px-3 py-1 text-xs text-[var(--ocean-deep)] ring-1 ring-[rgba(47,111,158,0.4)]"
-                >
-                  进入国家页
-                </Link>
-                {selectedCountryCode && (
-                  <button
-                    type="button"
-                    onClick={() => setCountry(null)}
-                    className="rounded-full border border-[var(--border-soft)] px-3 py-1 text-xs text-[var(--ink-muted)]"
-                  >
-                    取消选中
-                  </button>
-                )}
-              </div>
-            </div>
-          )}
-
           <div className="relative flex-1">
-            {filteredFilms.length === 0 && (
+            {uiReady && filteredFilms.length === 0 && (
               <div className="pointer-events-none absolute inset-0 z-10 flex items-center justify-center p-8">
                 <EmptyState
                   title={`${yearRangeLabel} 暂无符合条件的影片`}
@@ -197,23 +427,56 @@ export function MapHomeClient({ films }: MapHomeClientProps) {
                 />
               </div>
             )}
-            <CinemaGlobe
-              films={filteredFilms}
-              selectedFilmId={selectedFilmId}
-              highlightedCountryCode={selectedCountryCode}
-              posterScale={posterScale}
-              yearStart={yearStart}
-              yearEnd={yearEnd}
-              genreId={selectedGenreId}
-              onSelectFilm={selectFilm}
-              onSelectCountry={handleCountrySelect}
-              onHoverCountry={handleCountryHover}
-              onBackgroundClick={handleBackgroundClick}
-            />
+            <AnimatePresence>
+              {phase !== "ready" && (
+                <IntroBrandTitle
+                  phase={phase}
+                  reducedMotion={prefersReducedMotion}
+                />
+              )}
+            </AnimatePresence>
+
+            <div className="absolute inset-0 z-10">
+              <CinemaGlobe
+                films={filteredFilms}
+                selectedFilmId={selectedFilmId}
+                highlightedCountryCode={selectedCountryCode}
+                posterScale={posterScale}
+                yearStart={yearStart}
+                yearEnd={yearEnd}
+                genreId={selectedGenreId}
+                experiencePhase={phase}
+                autoRotate={autoRotateGlobe}
+                onSelectFilm={handleGlobeFilmSelect}
+                onSelectCountry={handleCountrySelect}
+                onHoverCountry={handleCountryHover}
+                onBackgroundClick={handleBackgroundClick}
+                onInteractionStart={handleGlobeInteractionStart}
+                onExperienceReady={completeExit}
+              />
+            </div>
+
+            {phase !== "ready" && (
+              <button
+                type="button"
+                onClick={startExit}
+                className={`fixed inset-0 z-[70] bg-transparent focus-visible:outline-none ${
+                  phase === "intro" ? "cursor-pointer" : "cursor-wait"
+                }`}
+                aria-label={
+                  phase === "intro" ? "点击进入影迹" : "正在进入影迹"
+                }
+              />
+            )}
 
             {/* Bottom timeline: collapsed trigger + hover/tap expand */}
             <div
-              className="absolute inset-x-0 bottom-0 z-30"
+              className={`absolute bottom-[max(32px,env(safe-area-inset-bottom))] left-1/2 z-30 w-[calc(100%-1.5rem)] -translate-x-1/2 transition-all duration-300 md:w-3/5 lg:w-1/3 ${
+                uiReady
+                  ? "translate-y-0 opacity-100"
+                  : "pointer-events-none translate-y-3 opacity-0"
+              }`}
+              aria-hidden={!uiReady}
               onMouseEnter={openTimeline}
               onMouseLeave={scheduleTimelineClose}
             >
@@ -226,7 +489,7 @@ export function MapHomeClient({ films }: MapHomeClientProps) {
                 aria-label="展开时间轴"
               >
                 <span
-                  className="mb-1 h-px w-16 rounded-full bg-[rgba(58,143,183,0.45)]"
+                  className="mb-1 h-px w-16 rounded-full bg-white/40"
                   aria-hidden
                 />
               </button>
@@ -238,53 +501,89 @@ export function MapHomeClient({ films }: MapHomeClientProps) {
                     animate={{ y: 0, opacity: 1 }}
                     exit={{ y: 24, opacity: 0 }}
                     transition={{ duration: 0.22, ease: "easeOut" }}
-                    className="motion-reduce:transition-none border-t border-[var(--border-soft)] bg-[var(--paper-translucent)] backdrop-blur-md"
+                    className="timeline-glass glass-bar overflow-hidden rounded-t-2xl motion-reduce:transition-none"
                     onMouseEnter={cancelTimelineClose}
                   >
                     <YearRangeSlider
                       yearStart={yearStart}
                       yearEnd={yearEnd}
-                      onChange={setYearRange}
-                      filmCount={filteredFilms.length}
+                      onChange={handleYearRangeChange}
                     />
                   </motion.div>
                 )}
               </AnimatePresence>
             </div>
+
+            <CountryFilmDrawer
+              countryCode={uiReady ? visibleDrawerCode : null}
+              films={drawerFilms}
+              yearRangeLabel={yearRangeLabel}
+              genreLabel={selectedGenreLabel}
+              mapQuery={mapQuery}
+              selectedFilmId={
+                previewSource === "country-list" ? selectedFilmId : null
+              }
+              onSelectFilm={handleDrawerFilmSelect}
+              onAnchorChange={setListPreviewAnchor}
+              onClose={handleCloseDrawer}
+              onPointerEnter={cancelCountryDrawerClose}
+              onPointerLeave={scheduleCountryDrawerClose}
+            />
           </div>
         </div>
 
-        {/* Desktop preview card — right side */}
-        <FilmPreviewCard
-          film={selectedFilm ?? null}
-          onClose={() => selectFilm(null)}
-        />
       </div>
 
       {/* Mobile filter drawer */}
-      {filterOpen && (
+      {uiReady && filterOpen && (
         <div className="fixed inset-0 z-50 md:hidden">
           <button
             type="button"
-            className="absolute inset-0 bg-black/60"
+            className="absolute inset-0 bg-[rgba(0,7,20,0.56)] backdrop-blur-[2px]"
             onClick={() => setFilterOpen(false)}
             aria-label="关闭筛选"
           />
-          <div className="absolute bottom-0 left-0 right-0 max-h-[80vh] overflow-y-auto rounded-t-2xl border-t border-[var(--border-soft)] bg-[var(--paper)] p-5 text-[var(--ink)]">
+          <div className="glass-panel absolute bottom-0 left-0 right-0 max-h-[80vh] overflow-y-auto rounded-t-2xl p-5 text-[var(--ink)]">
             <div className="mb-4 flex items-center justify-between">
               <h2 className="text-sm font-medium text-[var(--ink)]">筛选</h2>
               <button
                 type="button"
                 onClick={() => setFilterOpen(false)}
-                className="text-[var(--ink-muted)]"
+                className="glass-icon-button rounded-full px-2 py-1"
               >
                 ✕
               </button>
             </div>
-            <FilterPanel onClose={() => setFilterOpen(false)} />
+            <FilterPanel
+              onClose={() => setFilterOpen(false)}
+              onCountrySelect={handleCountrySelect}
+              onGenreSelect={handleGenreSelect}
+              onClearFilters={handleClearFilters}
+            />
           </div>
         </div>
       )}
+
+      <AnchoredFilmPreviewCard
+        film={
+          uiReady && previewSource === "country-list" ? selectedFilm : null
+        }
+        anchor={uiReady ? listPreviewAnchor : null}
+        query={mapQuery}
+        onClose={clearFilmPreview}
+        onPointerEnter={cancelCountryDrawerClose}
+        onPointerLeave={scheduleCountryDrawerClose}
+      />
+
+      <FilmPreviewCard
+        film={uiReady && previewSource === "globe" ? selectedFilm : null}
+        anchor={uiReady ? globePreviewAnchor : null}
+        query={mapQuery}
+        drawerVisible={visibleDrawerCode !== null}
+        onClose={clearFilmPreview}
+        onPointerEnter={cancelCountryDrawerClose}
+        onPointerLeave={scheduleCountryDrawerClose}
+      />
     </div>
   );
 }

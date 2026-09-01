@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" role="img" aria-label="人物头像占位图">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#10262a"/>
+      <stop offset="0.55" stop-color="#0b0d12"/>
+      <stop offset="1" stop-color="#1d1324"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="50%" cy="34%" r="45%">
+      <stop offset="0" stop-color="#35c8b4" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#35c8b4" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="600" height="800" fill="url(#bg)"/>
+  <rect width="600" height="800" fill="url(#halo)"/>
+  <circle cx="300" cy="292" r="112" fill="#d8e9e6" fill-opacity=".12"/>
+  <path d="M112 706c19-151 88-230 188-230s169 79 188 230" fill="#d8e9e6" fill-opacity=".1"/>
+  <path d="M92 728h416" stroke="#d6b25e" stroke-opacity=".18"/>
+</svg>

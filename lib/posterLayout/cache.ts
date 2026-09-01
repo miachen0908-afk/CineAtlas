@@ -1,6 +1,7 @@
 import type { CountryPosterLayoutResult, LayoutRequest } from "./types";
 
 const cache = new Map<string, CountryPosterLayoutResult>();
+const LAYOUT_VERSION = "all-films-fit-v1";
 
 export function layoutCacheKey(req: LayoutRequest): string {
   const scaleBucket = Math.round(req.posterScale * 20) / 20;
@@ -11,6 +12,7 @@ export function layoutCacheKey(req: LayoutRequest): string {
     h = (Math.imul(31, h) + ids.charCodeAt(i)) | 0;
   }
   return [
+    LAYOUT_VERSION,
     req.countryCode,
     req.tier,
     scaleBucket,

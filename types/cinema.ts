@@ -41,6 +41,8 @@ export type Person = {
   summary: string;
   representativeFilmIds: string[];
   portraitUrl?: string;
+  portraitSourceName?: string;
+  portraitSourceUrl?: string;
   likeCount: number;
 };
 
@@ -88,4 +90,110 @@ export type FilmWithRelations = Film & {
 export type PersonWithRelations = Person & {
   representativeFilms: Film[];
   countries: Country[];
+};
+
+export type CinemaHistoryEventType =
+  | "movement"
+  | "industry"
+  | "technology"
+  | "institution"
+  | "film"
+  | "person"
+  | "historical";
+
+export type CinemaHistorySource = {
+  label: string;
+  url?: string;
+};
+
+export type CinemaHistoryCredit = {
+  role: string;
+  name: string;
+};
+
+export type CinemaHistoryArchiveFilm = {
+  id: string;
+  title: string;
+  genre?: string;
+  credits: CinemaHistoryCredit[];
+  synopsis: string;
+  significance: string;
+};
+
+export type CinemaHistoryEvent = {
+  id: string;
+  year: number;
+  endYear?: number;
+  title: string;
+  description: string;
+  type?: CinemaHistoryEventType;
+  filmIds?: string[];
+  personIds?: string[];
+  archiveFilms?: CinemaHistoryArchiveFilm[];
+  sources?: CinemaHistorySource[];
+};
+
+export type CinemaHistoryEditableStage = {
+  stageId: string;
+  summary?: string;
+  events: CinemaHistoryEvent[];
+  subStages?: CinemaHistoryEditableSubStage[];
+};
+
+export type CinemaHistoryEditableSubStage = {
+  subStageId: string;
+  summary?: string;
+  events: CinemaHistoryEvent[];
+};
+
+export type CountryCinemaHistoryEditableContent = {
+  stages: CinemaHistoryEditableStage[];
+};
+
+export type CountryCinemaHistoryRevisionSummary = {
+  id: number;
+  version: number;
+  createdAt: string;
+};
+
+export type CountryCinemaHistoryEditorState = {
+  content: CountryCinemaHistoryEditableContent;
+  version: number;
+  updatedAt: string | null;
+  revisions: CountryCinemaHistoryRevisionSummary[];
+};
+
+export type CinemaHistoryStage = {
+  id: string;
+  title: string;
+  shortTitle: string;
+  yearStart: number;
+  yearEnd: number | null;
+  yearLabel?: string;
+  summary?: string;
+  subStages?: CinemaHistorySubStage[];
+  events: CinemaHistoryEvent[];
+  representativeFilmIds: string[];
+  representativePersonIds: string[];
+};
+
+export type CinemaHistorySubStage = {
+  id: string;
+  title: string;
+  shortTitle: string;
+  yearStart: number;
+  yearEnd: number | null;
+  yearLabel?: string;
+  summary?: string;
+  events?: CinemaHistoryEvent[];
+  representativeFilmIds?: string[];
+  representativePersonIds?: string[];
+};
+
+export type CountryCinemaHistory = {
+  countryCode: string;
+  introduction: string;
+  contentStatus: "demo" | "curated";
+  contentNotice?: string;
+  stages: CinemaHistoryStage[];
 };

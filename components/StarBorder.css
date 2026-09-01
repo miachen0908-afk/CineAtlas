@@ -1,0 +1,212 @@
+.star-border-container {
+  display: inline-block;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.border-gradient-bottom {
+  position: absolute;
+  width: 300%;
+  height: 50%;
+  opacity: 0.7;
+  bottom: -12px;
+  right: -250%;
+  border-radius: 50%;
+  animation: star-movement-bottom linear infinite alternate;
+  z-index: 0;
+}
+
+.border-gradient-top {
+  position: absolute;
+  opacity: 0.7;
+  width: 300%;
+  height: 50%;
+  top: -12px;
+  left: -250%;
+  border-radius: 50%;
+  animation: star-movement-top linear infinite alternate;
+  z-index: 0;
+}
+
+.inner-content {
+  position: relative;
+  border: 1px solid #222;
+  background: #000;
+  color: white;
+  font-size: 16px;
+  text-align: center;
+  padding: 16px 26px;
+  border-radius: 20px;
+  z-index: 1;
+}
+
+@keyframes star-movement-bottom {
+  0% {
+    transform: translate(0%, 0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-100%, 0%);
+    opacity: 0;
+  }
+}
+
+@keyframes star-movement-top {
+  0% {
+    transform: translate(0%, 0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(100%, 0%);
+    opacity: 0;
+  }
+}
+
+/* Shared CineAtlas treatment: the React Bits StarBorder movement is applied
+   without adding wrapper elements, so existing controls keep their layout and
+   native interaction semantics. */
+.glass-home :is(
+  .glass-panel,
+  .panel-surface,
+  .glass-bar,
+  .glass-control,
+  .glass-chip,
+  .glass-icon-button,
+  .glass-primary-action,
+  .like-button
+),
+.brand-header:is(.glass-bar),
+.brand-header :is(.glass-control, .glass-icon-button) {
+  isolation: isolate;
+}
+
+/* Only establish a containing block for otherwise statically positioned
+   controls. Fixed/absolute/sticky panels must retain their layout position. */
+.glass-home :is(
+  .glass-panel,
+  .panel-surface,
+  .glass-bar,
+  .glass-control,
+  .glass-chip,
+  .glass-icon-button,
+  .glass-primary-action,
+  .like-button
+):not(.fixed):not(.absolute):not(.sticky),
+.brand-header :is(.glass-control, .glass-icon-button):not(.fixed):not(.absolute):not(.sticky) {
+  position: relative;
+}
+
+.glass-home :is(
+  .glass-panel,
+  .panel-surface,
+  .glass-bar,
+  .glass-control,
+  .glass-chip,
+  .glass-icon-button,
+  .glass-primary-action,
+  .like-button
+)::before,
+.glass-home :is(
+  .glass-panel,
+  .panel-surface,
+  .glass-bar,
+  .glass-control,
+  .glass-chip,
+  .glass-icon-button,
+  .glass-primary-action,
+  .like-button
+)::after,
+.brand-header:is(.glass-bar)::before,
+.brand-header:is(.glass-bar)::after,
+.brand-header :is(.glass-control, .glass-icon-button)::before,
+.brand-header :is(.glass-control, .glass-icon-button)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  padding: 1px;
+  border-radius: inherit;
+  pointer-events: none;
+  background-repeat: no-repeat;
+  background-size: 46% 100%;
+  opacity: 0.78;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.glass-home :is(
+  .glass-panel,
+  .panel-surface,
+  .glass-bar,
+  .glass-control,
+  .glass-chip,
+  .glass-icon-button,
+  .glass-primary-action,
+  .like-button
+)::before,
+.brand-header:is(.glass-bar)::before,
+.brand-header :is(.glass-control, .glass-icon-button)::before {
+  background-image: radial-gradient(circle, cyan 0 5%, transparent 30%);
+  animation: cineatlas-star-border-bottom 5s linear infinite alternate;
+}
+
+.glass-home :is(
+  .glass-panel,
+  .panel-surface,
+  .glass-bar,
+  .glass-control,
+  .glass-chip,
+  .glass-icon-button,
+  .glass-primary-action,
+  .like-button
+)::after,
+.brand-header:is(.glass-bar)::after,
+.brand-header :is(.glass-control, .glass-icon-button)::after {
+  background-image: radial-gradient(circle, cyan 0 5%, transparent 30%);
+  animation: cineatlas-star-border-top 5s linear infinite alternate;
+}
+
+@keyframes cineatlas-star-border-bottom {
+  from { background-position: 125% 100%; opacity: 0.9; }
+  to { background-position: -25% 100%; opacity: 0.25; }
+}
+
+@keyframes cineatlas-star-border-top {
+  from { background-position: -25% 0%; opacity: 0.25; }
+  to { background-position: 125% 0%; opacity: 0.9; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glass-home :is(
+    .glass-panel,
+    .panel-surface,
+    .glass-bar,
+    .glass-control,
+    .glass-chip,
+    .glass-icon-button,
+    .glass-primary-action,
+    .like-button
+  )::before,
+  .glass-home :is(
+    .glass-panel,
+    .panel-surface,
+    .glass-bar,
+    .glass-control,
+    .glass-chip,
+    .glass-icon-button,
+    .glass-primary-action,
+    .like-button
+  )::after,
+  .brand-header::before,
+  .brand-header::after,
+  .brand-header :is(.glass-control, .glass-icon-button)::before,
+  .brand-header :is(.glass-control, .glass-icon-button)::after {
+    animation: none;
+    background-position: 50% 50%;
+    opacity: 0.55;
+  }
+}

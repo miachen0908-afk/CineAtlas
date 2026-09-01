@@ -255,6 +255,77 @@ export function rectCornersInSafeZone(
   );
 }
 
+function pointOnLocalSegment(point: Vec2, start: Vec2, end: Vec2): boolean {
+  const lengthSquared =
+    (end.x - start.x) ** 2 + (end.y - start.y) ** 2;
+  if (lengthSquared < 0.000001) {
+    return Math.hypot(point.x - start.x, point.y - start.y) <= 0.001;
+  }
+
+  const cross =
+    (point.y - start.y) * (end.x - start.x) -
+    (point.x - start.x) * (end.y - start.y);
+  if (Math.abs(cross) > 0.001) return false;
+
+  const dot =
+    (point.x - start.x) * (end.x - start.x) +
+    (point.y - start.y) * (end.y - start.y);
+  if (dot < 0) return false;
+
+  return dot <= lengthSquared;
+}
+
+function pointInLocalRing(point: Vec2, ring: Vec2[]): boolean {
+  let inside = false;
+  for (let index = 0, previous = ring.length - 1; index < ring.length; previous = index++) {
+    const currentPoint = ring[index]!;
+    const previousPoint = ring[previous]!;
+    if (pointOnLocalSegment(point, previousPoint, currentPoint)) return true;
+
+    const crosses =
+      currentPoint.y > point.y !== previousPoint.y > point.y &&
+      point.x <
+        ((previousPoint.x - currentPoint.x) * (point.y - currentPoint.y)) /
+          (previousPoint.y - currentPoint.y) +
+          currentPoint.x;
+    if (crosses) inside = !inside;
+  }
+  return inside;
+}
+
+/** Fast point-in-polygon test against already projected local rings. */
+export function pointInLocalSafeZone(
+  x: number,
+  y: number,
+  safeZoneLocalRings: Vec2[][]
+): boolean {
+  const outer = safeZoneLocalRings[0];
+  if (!outer || !pointInLocalRing({ x, y }, outer)) return false;
+  return !safeZoneLocalRings
+    .slice(1)
+    .some((hole) => pointInLocalRing({ x, y }, hole));
+}
+
+/** Fast rectangle containment test used by the adaptive layout search. */
+export function rectCornersInLocalSafeZone(
+  cx: number,
+  cy: number,
+  widthM: number,
+  heightM: number,
+  safeZoneLocalRings: Vec2[][]
+): boolean {
+  const halfWidth = widthM / 2;
+  const halfHeight = heightM / 2;
+  return [
+    { x: cx - halfWidth, y: cy - halfHeight },
+    { x: cx + halfWidth, y: cy - halfHeight },
+    { x: cx + halfWidth, y: cy + halfHeight },
+    { x: cx - halfWidth, y: cy + halfHeight },
+  ].every((corner) =>
+    pointInLocalSafeZone(corner.x, corner.y, safeZoneLocalRings)
+  );
+}
+
 /** Approximate distance to safe-zone boundary (negative = outside). */
 export function signedDistanceToSafeBoundary(
   x: number,

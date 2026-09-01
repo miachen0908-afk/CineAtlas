@@ -18,9 +18,9 @@ export function LikeButton({ filmId, baseCount, size = "md" }: LikeButtonProps) 
     <button
       type="button"
       onClick={() => toggleLike(filmId)}
-      className={`flex items-center gap-1.5 rounded-full border transition-colors ${
+      className={`like-button flex items-center gap-1.5 rounded-full border transition-colors ${
         isLiked
-          ? "border-[rgba(232,197,71,0.65)] bg-[rgba(232,197,71,0.18)] text-[var(--ink)]"
+          ? "is-liked border-[rgba(232,197,71,0.65)] bg-[rgba(232,197,71,0.18)] text-[var(--ink)]"
           : "border-[var(--border-soft)] bg-white/50 text-[var(--ink-muted)] hover:border-[rgba(58,143,183,0.4)]"
       } ${size === "sm" ? "px-2.5 py-1 text-xs" : "px-4 py-2 text-sm"}`}
       aria-pressed={isLiked}

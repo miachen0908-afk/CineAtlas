@@ -5,12 +5,22 @@
     "nameOriginal": "Akira Kurosawa",
     "birthYear": 1910,
     "deathYear": 1998,
-    "countryCodes": ["jp"],
-    "profession": ["导演"],
+    "countryCodes": [
+      "jp"
+    ],
+    "profession": [
+      "导演"
+    ],
     "timelineYear": 1950,
     "summary": "日本电影巨匠，以《七武士》《罗生门》等作品将日本电影推向世界，影响全球导演创作。",
-    "representativeFilmIds": ["film-seven-samurai", "film-rashomon"],
-    "likeCount": 8920
+    "representativeFilmIds": [
+      "film-seven-samurai",
+      "film-rashomon"
+    ],
+    "likeCount": 8920,
+    "portraitUrl": "/people/portraits/person-kurosawa.jpg",
+    "portraitSourceName": "TMDB",
+    "portraitSourceUrl": "https://www.themoviedb.org/person/5026"
   },
   {
     "id": "person-ozu",
@@ -18,48 +28,86 @@
     "nameOriginal": "Yasujirō Ozu",
     "birthYear": 1903,
     "deathYear": 1963,
-    "countryCodes": ["jp"],
-    "profession": ["导演"],
+    "countryCodes": [
+      "jp"
+    ],
+    "profession": [
+      "导演"
+    ],
     "timelineYear": 1953,
     "summary": "以低机位固定镜头与家庭伦理题材著称，代表作《东京物语》被誉为电影史上最伟大的作品之一。",
-    "representativeFilmIds": ["film-tokyo-story"],
-    "likeCount": 6540
+    "representativeFilmIds": [
+      "film-tokyo-story"
+    ],
+    "likeCount": 6540,
+    "portraitUrl": "/people/portraits/person-ozu.jpg",
+    "portraitSourceName": "TMDB",
+    "portraitSourceUrl": "https://www.themoviedb.org/person/95501"
   },
   {
     "id": "person-miyazaki",
     "nameZh": "宫崎骏",
     "nameOriginal": "Hayao Miyazaki",
     "birthYear": 1941,
-    "countryCodes": ["jp"],
-    "profession": ["导演", "动画师"],
+    "countryCodes": [
+      "jp"
+    ],
+    "profession": [
+      "导演",
+      "动画师"
+    ],
     "timelineYear": 2001,
     "summary": "吉卜力工作室创始人，以《千与千寻》等动画电影融合奇幻叙事与人文关怀，享誉世界。",
-    "representativeFilmIds": ["film-spirited-away"],
-    "likeCount": 12400
+    "representativeFilmIds": [
+      "film-spirited-away"
+    ],
+    "likeCount": 12400,
+    "portraitUrl": "/people/portraits/person-miyazaki.jpg",
+    "portraitSourceName": "TMDB",
+    "portraitSourceUrl": "https://www.themoviedb.org/person/608"
   },
   {
     "id": "person-zhang",
     "nameZh": "张艺谋",
     "nameOriginal": "Zhang Yimou",
     "birthYear": 1950,
-    "countryCodes": ["cn"],
-    "profession": ["导演"],
+    "countryCodes": [
+      "cn"
+    ],
+    "profession": [
+      "导演"
+    ],
     "timelineYear": 1987,
     "summary": "第五代导演代表人物，以强烈的视觉风格与历史叙事，开启当代中国电影的国际视野。",
-    "representativeFilmIds": ["film-red-sorghum", "film-hero"],
-    "likeCount": 7800
+    "representativeFilmIds": [
+      "film-red-sorghum",
+      "film-hero"
+    ],
+    "likeCount": 7800,
+    "portraitUrl": "/people/portraits/person-zhang.jpg",
+    "portraitSourceName": "TMDB",
+    "portraitSourceUrl": "https://www.themoviedb.org/person/607"
   },
   {
     "id": "person-chen",
     "nameZh": "陈凯歌",
     "nameOriginal": "Chen Kaige",
     "birthYear": 1952,
-    "countryCodes": ["cn"],
-    "profession": ["导演"],
+    "countryCodes": [
+      "cn"
+    ],
+    "profession": [
+      "导演"
+    ],
     "timelineYear": 1993,
     "summary": "以《霸王别姬》等作品探索中国历史与个体命运，是华语电影走向世界的重要导演。",
-    "representativeFilmIds": ["film-farewell-concubine"],
-    "likeCount": 7100
+    "representativeFilmIds": [
+      "film-farewell-concubine"
+    ],
+    "likeCount": 7100,
+    "portraitUrl": "/people/portraits/person-chen.jpg",
+    "portraitSourceName": "TMDB",
+    "portraitSourceUrl": "https://www.themoviedb.org/person/20640"
   },
   {
     "id": "person-godard",
@@ -67,12 +115,21 @@
     "nameOriginal": "Jean-Luc Godard",
     "birthYear": 1930,
     "deathYear": 2022,
-    "countryCodes": ["fr"],
-    "profession": ["导演"],
+    "countryCodes": [
+      "fr"
+    ],
+    "profession": [
+      "导演"
+    ],
     "timelineYear": 1960,
     "summary": "法国新浪潮核心人物，《筋疲力尽》打破传统叙事规则，重新定义现代电影语言。",
-    "representativeFilmIds": ["film-breathless"],
-    "likeCount": 5600
+    "representativeFilmIds": [
+      "film-breathless"
+    ],
+    "likeCount": 5600,
+    "portraitUrl": "/people/portraits/person-godard.jpg",
+    "portraitSourceName": "TMDB",
+    "portraitSourceUrl": "https://www.themoviedb.org/person/3776"
   },
   {
     "id": "person-fellini",
@@ -80,12 +137,22 @@
     "nameOriginal": "Federico Fellini",
     "birthYear": 1920,
     "deathYear": 1993,
-    "countryCodes": ["it"],
-    "profession": ["导演"],
+    "countryCodes": [
+      "it"
+    ],
+    "profession": [
+      "导演"
+    ],
     "timelineYear": 1960,
     "summary": "以梦幻般的影像与自传式叙事著称，《甜蜜的生活》是意大利电影黄金时代的标志。",
-    "representativeFilmIds": ["film-la-dolce-vita", "film-cinema-paradiso"],
-    "likeCount": 6200
+    "representativeFilmIds": [
+      "film-la-dolce-vita",
+      "film-cinema-paradiso"
+    ],
+    "likeCount": 6200,
+    "portraitUrl": "/people/portraits/person-fellini.jpg",
+    "portraitSourceName": "TMDB",
+    "portraitSourceUrl": "https://www.themoviedb.org/person/4415"
   },
   {
     "id": "person-hitchcock",
@@ -93,12 +160,21 @@
     "nameOriginal": "Alfred Hitchcock",
     "birthYear": 1899,
     "deathYear": 1980,
-    "countryCodes": ["us"],
-    "profession": ["导演"],
+    "countryCodes": [
+      "us"
+    ],
+    "profession": [
+      "导演"
+    ],
     "timelineYear": 1960,
     "summary": "悬念大师，以《惊魂记》等作品建立现代惊悚类型范式，深刻影响好莱坞叙事结构。",
-    "representativeFilmIds": ["film-psycho"],
-    "likeCount": 9100
+    "representativeFilmIds": [
+      "film-psycho"
+    ],
+    "likeCount": 9100,
+    "portraitUrl": "/people/portraits/person-hitchcock.jpg",
+    "portraitSourceName": "TMDB",
+    "portraitSourceUrl": "https://www.themoviedb.org/person/2636"
   },
   {
     "id": "person-kubrick",
@@ -106,12 +182,22 @@
     "nameOriginal": "Stanley Kubrick",
     "birthYear": 1928,
     "deathYear": 1999,
-    "countryCodes": ["us"],
-    "profession": ["导演"],
+    "countryCodes": [
+      "us"
+    ],
+    "profession": [
+      "导演"
+    ],
     "timelineYear": 1968,
     "summary": "以极致的视觉控制与哲学深度著称，《2001太空漫游》拓展了科幻电影的边界。",
-    "representativeFilmIds": ["film-2001", "film-shining"],
-    "likeCount": 9800
+    "representativeFilmIds": [
+      "film-2001",
+      "film-shining"
+    ],
+    "likeCount": 9800,
+    "portraitUrl": "/people/portraits/person-kubrick.jpg",
+    "portraitSourceName": "TMDB",
+    "portraitSourceUrl": "https://www.themoviedb.org/person/240"
   },
   {
     "id": "person-chaplin",
@@ -119,12 +205,22 @@
     "nameOriginal": "Charlie Chaplin",
     "birthYear": 1889,
     "deathYear": 1977,
-    "countryCodes": ["us"],
-    "profession": ["演员", "导演"],
+    "countryCodes": [
+      "us"
+    ],
+    "profession": [
+      "演员",
+      "导演"
+    ],
     "timelineYear": 1921,
     "summary": "默片时代最具国际影响力的喜剧演员与导演，《城市之光》等作品跨越语言与文化障碍。",
-    "representativeFilmIds": ["film-city-lights"],
-    "likeCount": 8500
+    "representativeFilmIds": [
+      "film-city-lights"
+    ],
+    "likeCount": 8500,
+    "portraitUrl": "/people/portraits/person-chaplin.jpg",
+    "portraitSourceName": "TMDB",
+    "portraitSourceUrl": "https://www.themoviedb.org/person/13848"
   },
   {
     "id": "person-ray",
@@ -132,12 +228,21 @@
     "nameOriginal": "Satyajit Ray",
     "birthYear": 1921,
     "deathYear": 1992,
-    "countryCodes": ["in"],
-    "profession": ["导演"],
+    "countryCodes": [
+      "in"
+    ],
+    "profession": [
+      "导演"
+    ],
     "timelineYear": 1955,
     "summary": "印度电影巨匠，《大地之歌》以诗意现实主义展现孟加拉乡村生活，获戛纳最佳人文特别奖。",
-    "representativeFilmIds": ["film-pather-panchali"],
-    "likeCount": 4800
+    "representativeFilmIds": [
+      "film-pather-panchali"
+    ],
+    "likeCount": 4800,
+    "portraitUrl": "/people/portraits/person-ray.jpg",
+    "portraitSourceName": "TMDB",
+    "portraitSourceUrl": "https://www.themoviedb.org/person/12160"
   },
   {
     "id": "person-truffaut",
@@ -145,11 +250,22 @@
     "nameOriginal": "François Truffaut",
     "birthYear": 1932,
     "deathYear": 1984,
-    "countryCodes": ["fr"],
-    "profession": ["导演", "演员"],
+    "countryCodes": [
+      "fr"
+    ],
+    "profession": [
+      "导演",
+      "演员"
+    ],
     "timelineYear": 1959,
     "summary": "法国新浪潮代表人物，《四百击》以半自传式叙事开启青春电影新范式。",
-    "representativeFilmIds": ["film-400-blows", "film-amélie"],
-    "likeCount": 5200
+    "representativeFilmIds": [
+      "film-400-blows",
+      "film-amélie"
+    ],
+    "likeCount": 5200,
+    "portraitUrl": "/people/portraits/person-truffaut.jpg",
+    "portraitSourceName": "TMDB",
+    "portraitSourceUrl": "https://www.themoviedb.org/person/1650"
   }
 ]

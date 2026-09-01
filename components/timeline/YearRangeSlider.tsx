@@ -7,14 +7,12 @@ type YearRangeSliderProps = {
   yearStart: number;
   yearEnd: number;
   onChange: (start: number, end: number) => void;
-  filmCount: number;
 };
 
 export function YearRangeSlider({
   yearStart,
   yearEnd,
   onChange,
-  filmCount,
 }: YearRangeSliderProps) {
   const rangeSpan = MAX_YEAR - MIN_YEAR;
   const startPct = ((yearStart - MIN_YEAR) / rangeSpan) * 100;
@@ -29,25 +27,21 @@ export function YearRangeSlider({
   };
 
   return (
-    <div className="flex flex-col gap-1 px-3 py-2 md:px-5">
-      <div className="flex items-center justify-between gap-3">
-        <span className="text-[10px] text-[var(--ink-muted)]">时间段</span>
-        <span className="font-mono text-sm font-medium tabular-nums text-[var(--ocean-deep)] md:text-base">
+    <div className="timeline-content flex flex-col gap-1 px-3 py-2 md:px-5">
+      <div className="relative flex min-h-5 items-center justify-center">
+        <span className="pointer-events-none absolute left-1/2 -translate-x-1/2 whitespace-nowrap font-mono text-sm font-medium tabular-nums text-[var(--timeline-gold)] md:text-base">
           {yearStart === yearEnd ? yearStart : `${yearStart} — ${yearEnd}`}
-        </span>
-        <span className="text-[10px] text-[var(--ink-muted)]">
-          {filmCount > 0 ? `${filmCount} 部影片` : "暂无影片"}
         </span>
       </div>
 
       <div className="train-timeline relative h-9 touch-none md:h-10">
         {/* Station buffers */}
         <div
-          className="pointer-events-none absolute left-0 top-1/2 z-[1] h-5 w-1 -translate-y-1/2 rounded-sm bg-[var(--ocean-deep)]/80"
+          className="timeline-buffer pointer-events-none absolute left-0 top-1/2 z-[1] h-5 w-1 -translate-y-1/2 rounded-sm"
           aria-hidden
         />
         <div
-          className="pointer-events-none absolute right-0 top-1/2 z-[1] h-5 w-1 -translate-y-1/2 rounded-sm bg-[var(--ocean-deep)]/80"
+          className="timeline-buffer pointer-events-none absolute right-0 top-1/2 z-[1] h-5 w-1 -translate-y-1/2 rounded-sm"
           aria-hidden
         />
 
@@ -98,11 +92,6 @@ export function YearRangeSlider({
         />
       </div>
 
-      <div className="flex justify-between px-1 text-[9px] text-white/30">
-        <span>{MIN_YEAR}</span>
-        <span className="text-white/20">铁轨时光</span>
-        <span>{MAX_YEAR}</span>
-      </div>
     </div>
   );
 }

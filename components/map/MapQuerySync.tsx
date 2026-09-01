@@ -4,12 +4,13 @@ import { useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import { applyMapQueryParams, useMapStore } from "@/store/useMapStore";
 
-export function FilmQuerySync() {
+export function MapQuerySync() {
   const searchParams = useSearchParams();
 
   useEffect(() => {
     const updates = applyMapQueryParams(searchParams);
     const store = useMapStore.getState();
+
     if (updates.yearStart !== undefined && updates.yearEnd !== undefined) {
       store.setYearRange(updates.yearStart, updates.yearEnd);
     }

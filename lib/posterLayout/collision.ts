@@ -26,7 +26,7 @@ export function collidesAny(
   return placed.some((r) => rectsOverlap(candidate, r, padding));
 }
 
-/** Fixed geographic poster sizes — never shrink to force-fit all films. */
+/** Desired geographic poster size before a country-specific fit is applied. */
 export function posterSizeMeters(
   tier: ZoomTier,
   posterScale: number,

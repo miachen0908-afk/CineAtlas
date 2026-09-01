@@ -7,7 +7,9 @@ export const COUNTRY_ISO_NUMERIC: Record<string, string> = {
   in: "356",
   th: "764",
   vn: "704",
+  sg: "702",
   tw: "158",
+  hk: "344",
   au: "036",
   nz: "554",
   fr: "250",
@@ -26,7 +28,7 @@ export const COUNTRY_ISO_NUMERIC: Record<string, string> = {
   br: "076",
 };
 
-/** Regions without polygons in countries-110m — use center hotspots for hover. */
+/** Regions without usable polygons in the 110m layout data — use center hotspots for posters. */
 export const COUNTRY_HOTSPOT_CODES = ["sg", "hk"] as const;
 
 export type CountryHotspotCode = (typeof COUNTRY_HOTSPOT_CODES)[number];

@@ -47,6 +47,10 @@ public/cesium/
 # vercel
 .vercel
 
+# Local agent integration metadata
+.agents/
+skills-lock.json
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

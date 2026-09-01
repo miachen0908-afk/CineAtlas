@@ -10,9 +10,17 @@ import { getActiveFilterLabels } from "@/utils/filmFilters";
 
 type FilterPanelProps = {
   onClose?: () => void;
+  onCountrySelect?: (countryCode: string | null) => void;
+  onGenreSelect?: (genreId: string | null) => void;
+  onClearFilters?: () => void;
 };
 
-export function FilterPanel({ onClose }: FilterPanelProps) {
+export function FilterPanel({
+  onClose,
+  onCountrySelect,
+  onGenreSelect,
+  onClearFilters,
+}: FilterPanelProps) {
   const selectedCountryCode = useMapStore((s) => s.selectedCountryCode);
   const selectedGenreId = useMapStore((s) => s.selectedGenreId);
   const posterScale = useMapStore((s) => s.posterScale);
@@ -51,6 +59,9 @@ export function FilterPanel({ onClose }: FilterPanelProps) {
             {posterScale.toFixed(2)}
           </span>
         </div>
+        <p className="mt-2 text-[10px] leading-relaxed text-[var(--ink-muted)]">
+          空间不足时会按国家自动缩小，以显示全部影片。
+        </p>
       </div>
 
       <div>
@@ -63,9 +74,13 @@ export function FilterPanel({ onClose }: FilterPanelProps) {
               key={country.code}
               type="button"
               onClick={() => {
-                setCountry(
-                  selectedCountryCode === country.code ? null : country.code
-                );
+                const nextCountryCode =
+                  selectedCountryCode === country.code ? null : country.code;
+                if (onCountrySelect) {
+                  onCountrySelect(nextCountryCode);
+                } else {
+                  setCountry(nextCountryCode);
+                }
                 onClose?.();
               }}
               className={`rounded-full px-3 py-1 text-xs transition-colors ${
@@ -90,7 +105,13 @@ export function FilterPanel({ onClose }: FilterPanelProps) {
               key={genre.id}
               type="button"
               onClick={() => {
-                setGenre(selectedGenreId === genre.id ? null : genre.id);
+                const nextGenreId =
+                  selectedGenreId === genre.id ? null : genre.id;
+                if (onGenreSelect) {
+                  onGenreSelect(nextGenreId);
+                } else {
+                  setGenre(nextGenreId);
+                }
                 onClose?.();
               }}
               className={`rounded-full px-3 py-1 text-xs transition-colors ${
@@ -104,7 +125,7 @@ export function FilterPanel({ onClose }: FilterPanelProps) {
       </div>
 
       {activeLabels.length > 0 && (
-        <div className="rounded-lg border border-[var(--border-soft)] bg-white/60 px-3 py-2">
+        <div className="glass-control rounded-lg border px-3 py-2">
           <p className="mb-1 text-xs text-[var(--ink-muted)]">当前筛选</p>
           <p className="text-xs text-[var(--ink)]">{activeLabels.join(" · ")}</p>
         </div>
@@ -114,10 +135,14 @@ export function FilterPanel({ onClose }: FilterPanelProps) {
         <button
           type="button"
           onClick={() => {
-            clearFilters();
+            if (onClearFilters) {
+              onClearFilters();
+            } else {
+              clearFilters();
+            }
             onClose?.();
           }}
-          className="rounded-lg border border-[var(--border-soft)] py-2 text-xs text-[var(--ink-muted)] transition-colors hover:bg-white/50"
+          className="glass-control rounded-lg border py-2 text-xs transition-colors"
         >
           清除筛选
         </button>

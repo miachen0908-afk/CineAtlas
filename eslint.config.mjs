@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Generated third-party runtime copied from the Cesium package.
+    "public/cesium/**",
   ]),
 ]);
 

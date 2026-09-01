@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Header } from "@/components/layout/Header";
+import { HomeExperienceProvider } from "@/components/home/HomeExperienceContext";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -29,8 +30,10 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-[var(--bg-deep)] text-[var(--cloud)]">
-        <Header />
-        <main className="flex flex-1 flex-col">{children}</main>
+        <HomeExperienceProvider>
+          <Header />
+          <main className="flex flex-1 flex-col">{children}</main>
+        </HomeExperienceProvider>
       </body>
     </html>
   );

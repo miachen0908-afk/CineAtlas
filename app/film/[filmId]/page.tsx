@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { FilmDetail } from "@/components/film/FilmDetail";
-import { FilmQuerySync } from "@/components/film/FilmQuerySync";
+import { MapQuerySync } from "@/components/map/MapQuerySync";
 import { getFilmWithRelations } from "@/lib/repositories/films";
 
 type Props = {
@@ -30,7 +30,7 @@ export default async function FilmPage({ params, searchParams }: Props) {
   return (
     <div className="starfield-bg flex-1">
       <Suspense fallback={null}>
-        <FilmQuerySync />
+        <MapQuerySync />
       </Suspense>
       <FilmDetail film={film} backHref={backHref} />
     </div>

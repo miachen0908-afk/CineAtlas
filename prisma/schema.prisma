@@ -31,3 +31,23 @@ model Film {
   importedAt               DateTime?
   updatedAt                DateTime  @updatedAt
 }
+
+model CountryCinemaHistoryContent {
+  countryCode String   @id
+  content     Json
+  version     Int      @default(1)
+  updatedAt   DateTime @updatedAt
+  revisions   CountryCinemaHistoryRevision[]
+}
+
+model CountryCinemaHistoryRevision {
+  id          Int      @id @default(autoincrement())
+  countryCode String
+  version     Int
+  content     Json
+  createdAt   DateTime @default(now())
+  history     CountryCinemaHistoryContent @relation(fields: [countryCode], references: [countryCode], onDelete: Cascade)
+
+  @@unique([countryCode, version])
+  @@index([countryCode, createdAt])
+}
