@@ -2,18 +2,27 @@ import { Suspense } from "react";
 import { CountryPageClient } from "@/components/country/CountryPageClient";
 import { CountryArchiveBackground } from "@/components/country/CountryArchiveBackground";
 import { MapQuerySync } from "@/components/map/MapQuerySync";
-import { getAllFilms } from "@/lib/repositories/films";
-import { getCountryCinemaHistoryPageData } from "@/lib/repositories/countryCinemaHistory";
+import {
+  getSiteCountryHistoryPageData,
+  getSiteFilms,
+  getStaticCountryParams,
+} from "@/lib/siteData";
 
 type Props = {
   params: Promise<{ countryCode: string }>;
 };
 
+export function generateStaticParams() {
+  return getStaticCountryParams();
+}
+
+export const dynamicParams = false;
+
 export default async function CountryPage({ params }: Props) {
   const { countryCode } = await params;
   const [allFilms, historyData] = await Promise.all([
-    getAllFilms(),
-    getCountryCinemaHistoryPageData(countryCode),
+    getSiteFilms(),
+    getSiteCountryHistoryPageData(countryCode),
   ]);
 
   return (

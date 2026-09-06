@@ -2,37 +2,35 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { FilmDetail } from "@/components/film/FilmDetail";
 import { MapQuerySync } from "@/components/map/MapQuerySync";
-import { getFilmWithRelations } from "@/lib/repositories/films";
+import {
+  getSiteFilmWithRelations,
+  getStaticFilmParams,
+} from "@/lib/siteData";
 
 type Props = {
   params: Promise<{ filmId: string }>;
-  searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
-export default async function FilmPage({ params, searchParams }: Props) {
+export function generateStaticParams() {
+  return getStaticFilmParams();
+}
+
+export const dynamicParams = false;
+
+export default async function FilmPage({ params }: Props) {
   const { filmId } = await params;
-  const query = await searchParams;
-  const film = await getFilmWithRelations(filmId);
+  const film = await getSiteFilmWithRelations(filmId);
 
   if (!film) notFound();
-
-  const backParams = new URLSearchParams();
-  if (query.yearStart) backParams.set("yearStart", String(query.yearStart));
-  if (query.yearEnd) backParams.set("yearEnd", String(query.yearEnd));
-  if (query.year && !query.yearStart) {
-    backParams.set("yearStart", String(query.year));
-    backParams.set("yearEnd", String(query.year));
-  }
-  if (query.country) backParams.set("country", String(query.country));
-  if (query.genre) backParams.set("genre", String(query.genre));
-  const backHref = backParams.toString() ? `/?${backParams}` : "/";
 
   return (
     <div className="starfield-bg flex-1">
       <Suspense fallback={null}>
         <MapQuerySync />
       </Suspense>
-      <FilmDetail film={film} backHref={backHref} />
+      <Suspense fallback={null}>
+        <FilmDetail film={film} />
+      </Suspense>
     </div>
   );
 }

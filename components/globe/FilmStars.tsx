@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, Suspense } from "react";
+import { useEffect, useMemo, Suspense } from "react";
 import { useLoader } from "@react-three/fiber";
 import { Billboard } from "@react-three/drei";
 import * as THREE from "three";
@@ -65,8 +65,15 @@ function PosterBillboard({
   posterScale: number;
   onSelect: () => void;
 }) {
-  const texture = useLoader(THREE.TextureLoader, film.posterUrl!);
-  texture.colorSpace = THREE.SRGBColorSpace;
+  const sourceTexture = useLoader(THREE.TextureLoader, film.posterUrl!);
+  const texture = useMemo(() => {
+    const nextTexture = sourceTexture.clone();
+    nextTexture.colorSpace = THREE.SRGBColorSpace;
+    nextTexture.needsUpdate = true;
+    return nextTexture;
+  }, [sourceTexture]);
+
+  useEffect(() => () => texture.dispose(), [texture]);
 
   const scale = posterScale * (isSelected ? 1.35 : 1);
   const w = BASE_WIDTH * scale;

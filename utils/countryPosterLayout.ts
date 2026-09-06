@@ -1,4 +1,3 @@
-import * as THREE from "three";
 import type { Country, Film } from "@/types/cinema";
 import { getEarthRadius, latLngToVector3, type FilmPosition } from "@/utils/geo";
 

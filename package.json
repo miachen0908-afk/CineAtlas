@@ -11,6 +11,7 @@
     "dev": "next dev --webpack --hostname 127.0.0.1 --port 3000",
     "prebuild": "npm run copy-cesium && npm run posters:atlas",
     "build": "prisma generate && next build",
+    "build:public": "npm run copy-cesium && npm run posters:atlas && CINEATLAS_BUILD_MODE=static next build --webpack",
     "postinstall": "prisma generate",
     "start": "next start",
     "lint": "eslint",
@@ -19,6 +20,7 @@
     "db:import": "tsx scripts/import-tmdb.ts",
     "db:import:countries": "tsx scripts/import-tmdb-countries.ts",
     "db:sync:turso": "node --env-file=.env.local scripts/sync-sqlite-to-turso.mjs",
+    "snapshot:public": "node --env-file=.env.local --import tsx scripts/generate-public-snapshot.ts",
     "db:validate": "tsx scripts/validate-films.ts"
   },
   "dependencies": {

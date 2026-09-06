@@ -2,25 +2,26 @@ import { Suspense } from "react";
 import { MapQuerySync } from "@/components/map/MapQuerySync";
 import { CountryPeoplePageClient } from "@/components/country/CountryPeoplePageClient";
 import { CountryArchiveBackground } from "@/components/country/CountryArchiveBackground";
+import { getStaticCountryParams } from "@/lib/siteData";
 
 type Props = {
   params: Promise<{ countryCode: string }>;
-  searchParams: Promise<Record<string, string | string[] | undefined>>;
 };
 
-function firstValue(value: string | string[] | undefined): string | null {
-  return Array.isArray(value) ? value[0] ?? null : value ?? null;
+export function generateStaticParams() {
+  return getStaticCountryParams();
 }
 
-export default async function CountryPeoplePage({ params, searchParams }: Props) {
-  const [{ countryCode }, query] = await Promise.all([params, searchParams]);
+export const dynamicParams = false;
+
+export default async function CountryPeoplePage({ params }: Props) {
+  const { countryCode } = await params;
   return (
     <CountryArchiveBackground showAurora={false}>
       <Suspense fallback={null}><MapQuerySync /></Suspense>
-      <CountryPeoplePageClient
-        countryCode={countryCode}
-        selectedPersonId={firstValue(query.person)}
-      />
+      <Suspense fallback={null}>
+        <CountryPeoplePageClient countryCode={countryCode} />
+      </Suspense>
     </CountryArchiveBackground>
   );
 }

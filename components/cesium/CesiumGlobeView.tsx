@@ -68,8 +68,13 @@ export function CesiumGlobeView({
   const selectedRef = useRef(selectedCityId);
   const citiesRef = useRef(cities);
 
-  selectedRef.current = selectedCityId;
-  citiesRef.current = cities;
+  useEffect(() => {
+    selectedRef.current = selectedCityId;
+  }, [selectedCityId]);
+
+  useEffect(() => {
+    citiesRef.current = cities;
+  }, [cities]);
 
   useDayNightTransition(layersRef, mode);
 

@@ -1,16 +1,28 @@
 "use client";
 
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { markMapReturnPending } from "@/components/home/mapReturnNavigation";
 import type { FilmWithRelations } from "@/types/cinema";
 import { LikeButton } from "./LikeButton";
 
 type FilmDetailProps = {
   film: FilmWithRelations;
-  backHref: string;
 };
 
-export function FilmDetail({ film, backHref }: FilmDetailProps) {
+export function FilmDetail({ film }: FilmDetailProps) {
+  const query = useSearchParams();
+  const backParams = new URLSearchParams();
+  for (const key of ["yearStart", "yearEnd", "country", "genre"]) {
+    const value = query.get(key);
+    if (value) backParams.set(key, value);
+  }
+  const legacyYear = query.get("year");
+  if (legacyYear && !backParams.has("yearStart")) {
+    backParams.set("yearStart", legacyYear);
+    backParams.set("yearEnd", legacyYear);
+  }
+  const backHref = backParams.size ? `/?${backParams}` : "/";
   return (
     <article className="mx-auto max-w-3xl px-4 py-8 md:px-6">
       <Link

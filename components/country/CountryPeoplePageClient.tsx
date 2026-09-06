@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { getCountry, getFilm, getPeopleByCountry } from "@/lib/data";
 import { buildMapQueryParams, useMapStore } from "@/store/useMapStore";
 import { markMapReturnPending } from "@/components/home/mapReturnNavigation";
@@ -13,7 +13,9 @@ import { DriftWall, type DriftWallItem } from "./DriftWall";
 
 type AnchorRect = { left: number; right: number; top: number; width: number; height: number };
 
-export function CountryPeoplePageClient({ countryCode, selectedPersonId }: { countryCode: string; selectedPersonId: string | null }) {
+export function CountryPeoplePageClient({ countryCode }: { countryCode: string }) {
+  const searchParams = useSearchParams();
+  const selectedPersonId = searchParams.get("person");
   const country = getCountry(countryCode);
   const people = useMemo(() => getPeopleByCountry(countryCode), [countryCode]);
   const yearStart = useMapStore((state) => state.yearStart);
