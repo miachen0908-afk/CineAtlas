@@ -53,10 +53,12 @@ export function extractCountryCinemaHistoryEditableContent(
     stages: history.stages.map((stage) => ({
       stageId: stage.id,
       summary: stage.summary,
+      brief: stage.brief,
       events: sortEvents(stage.events).map(cloneEvent),
       subStages: stage.subStages?.map((subStage) => ({
         subStageId: subStage.id,
         summary: subStage.summary,
+        brief: subStage.brief,
         events: sortEvents(subStage.events ?? []).map(cloneEvent),
       })),
     })),
@@ -84,6 +86,9 @@ function mergeEditableSubStages(
       summary: hasPersistedSummary
         ? editableSubStage.summary?.trim() || undefined
         : subStage.summary,
+      brief: Object.prototype.hasOwnProperty.call(editableSubStage, "brief")
+        ? editableSubStage.brief?.trim() || undefined
+        : subStage.brief,
       events: editableSubStage.events.map(cloneEvent),
     });
   });
@@ -108,6 +113,9 @@ export function mergeCountryCinemaHistoryEditableContent(
         summary: hasPersistedSummary
           ? content.summary?.trim() || undefined
           : stage.summary,
+        brief: Object.prototype.hasOwnProperty.call(content, "brief")
+          ? content.brief?.trim() || undefined
+          : stage.brief,
         events: content.events.map(cloneEvent),
         subStages: mergeEditableSubStages(stage, content),
       });
@@ -134,6 +142,12 @@ export function normalizeCountryCinemaHistoryEditableContent(
     ) {
       stage.summary = "";
     }
+    if (
+      Object.prototype.hasOwnProperty.call(inputStage, "brief") &&
+      !inputStage.brief?.trim()
+    ) {
+      stage.brief = "";
+    }
     const inputBySubStage = new Map(
       (inputStage.subStages ?? []).map((subStage) => [
         subStage.subStageId,
@@ -148,6 +162,13 @@ export function normalizeCountryCinemaHistoryEditableContent(
         !inputSubStage.summary?.trim()
       ) {
         subStage.summary = "";
+      }
+      if (
+        inputSubStage &&
+        Object.prototype.hasOwnProperty.call(inputSubStage, "brief") &&
+        !inputSubStage.brief?.trim()
+      ) {
+        subStage.brief = "";
       }
     }
   }

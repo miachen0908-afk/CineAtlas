@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useReducedMotion } from "framer-motion";
 import { genres, getCountry, getPeopleByCountry, getPerson } from "@/lib/data";
 import type { CinemaHistoryArchiveFilm, CinemaHistoryEvent, CinemaHistoryEventType, CinemaHistoryStage, CinemaHistorySubStage, CountryCinemaHistory, CountryCinemaHistoryEditorState, Film, Person } from "@/types/cinema";
@@ -15,17 +15,26 @@ import { CountryHistoryEditor } from "./CountryHistoryEditor";
 import { verifyCountryHistoryEditorAction } from "@/app/country/[countryCode]/history-actions";
 
 type Props = { countryCode: string; allFilms: Film[]; history: CountryCinemaHistory | null; editorState: CountryCinemaHistoryEditorState | null };
+type ReadingMode = "quick" | "course";
 const EVENT_TYPE_LABELS: Record<CinemaHistoryEventType, string> = { movement: "电影运动", industry: "产业", technology: "技术", institution: "机构", film: "影片", person: "人物", historical: "历史背景" };
+const EVENT_TYPE_STYLES: Record<CinemaHistoryEventType, { glyph: string; line: string; text: string }> = {
+  film: { glyph: "bg-[#f07b72] shadow-[0_0_14px_rgba(240,123,114,0.55)]", line: "from-[#f07b72]/75 via-[#f07b72]/30", text: "text-[#f4a39d]" },
+  person: { glyph: "bg-[#f07b72] shadow-[0_0_14px_rgba(240,123,114,0.55)]", line: "from-[#f07b72]/75 via-[#f07b72]/30", text: "text-[#f4a39d]" },
+  technology: { glyph: "bg-[#8d8cff] ring-1 ring-[#b8b7ff]/60 shadow-[0_0_14px_rgba(141,140,255,0.5)]", line: "from-[#8d8cff]/75 via-[#8d8cff]/30", text: "text-[#b8b7ff]" },
+  industry: { glyph: "bg-[#d6a94f] shadow-[0_0_14px_rgba(214,169,79,0.5)]", line: "from-[#d6a94f]/75 via-[#d6a94f]/30", text: "text-[#e8c77e]" },
+  institution: { glyph: "bg-[#d6a94f] shadow-[0_0_14px_rgba(214,169,79,0.5)]", line: "from-[#d6a94f]/75 via-[#d6a94f]/30", text: "text-[#e8c77e]" },
+  historical: { glyph: "bg-[#35c8b4] shadow-[0_0_14px_rgba(53,200,180,0.55)]", line: "from-[#35c8b4]/75 via-[#35c8b4]/30", text: "text-[#83dfd2]" },
+  movement: { glyph: "bg-[#35c8b4] shadow-[0_0_14px_rgba(53,200,180,0.55)]", line: "from-[#35c8b4]/75 via-[#35c8b4]/30", text: "text-[#83dfd2]" },
+};
 const ACT_LABELS = ["第一幕", "第二幕", "第三幕", "第四幕", "第五幕", "第六幕", "第七幕", "第八幕", "第九幕", "第十幕"];
+
+type ResolvedHistoryFilm =
+  | { key: string; kind: "poster"; film: Film }
+  | { key: string; kind: "linked-text"; film: Film }
+  | { key: string; kind: "archive-text"; film: CinemaHistoryArchiveFilm };
 
 function periodLabel(period: { yearStart: number; yearEnd: number | null; yearLabel?: string }) {
   return period.yearLabel ?? `${period.yearStart}—${period.yearEnd ?? "至今"}`;
-}
-
-function personHref(countryCode: string, mapQuery: string, personId?: string) {
-  const params = new URLSearchParams(mapQuery);
-  if (personId) params.set("person", personId);
-  return `/country/${countryCode}/people?${params.toString()}`;
 }
 
 export function CountryPageClient({ countryCode, allFilms, history, editorState }: Props) {
@@ -40,6 +49,7 @@ export function CountryPageClient({ countryCode, allFilms, history, editorState 
   const [editorSecret, setEditorSecret] = useState("");
   const [editorMessage, setEditorMessage] = useState<string | null>(null);
   const [unlockingEditor, setUnlockingEditor] = useState(false);
+  const [readingMode, setReadingMode] = useState<ReadingMode>("quick");
 
   useEffect(() => setCountry(countryCode), [countryCode, setCountry]);
   useEffect(() => {
@@ -120,26 +130,23 @@ export function CountryPageClient({ countryCode, allFilms, history, editorState 
             <p className="text-[0.9rem] uppercase tracking-[0.24em] text-[#d6b25e]/75">国家电影档案</p>
             <h1 className="mt-3 text-4xl font-light tracking-tight text-white md:text-6xl">{country.nameZh}</h1>
             <p className="mt-2 text-[1.05rem] tracking-[0.12em] text-white/40">{country.nameEn}</p>
-            <p className="mt-6 text-[1.05rem] leading-8 text-white/65 md:text-[1.2rem] md:leading-9">{history?.introduction ?? country.summary}</p>
           </div>
-          <div className="flex w-full flex-wrap items-center justify-end gap-3 sm:ml-auto sm:w-auto sm:shrink-0"><CountrySectionNav countryCode={countryCode} mapQuery={mapQuery} active="history" />{history && editorState && <button type="button" onClick={toggleEditor} disabled={unlockingEditor} className="inline-flex items-center gap-1.5 rounded-md px-1.5 py-2 text-[0.9rem] text-white/35 outline-none transition-colors hover:text-white/75 focus-visible:ring-2 focus-visible:ring-[#8be2d5]/70 disabled:opacity-40"><span aria-hidden="true">✎</span>{unlockingEditor ? "验证中…" : editing ? "退出编辑" : "编辑"}</button>}{editorMessage && <p className="w-full text-right text-[0.8rem] text-red-200/65">{editorMessage}</p>}</div>
+          <div className="flex w-full flex-wrap items-center justify-end gap-3 sm:ml-auto sm:w-auto sm:shrink-0"><ReadingModeSwitch value={readingMode} onChange={setReadingMode} />{history && editorState && <button type="button" onClick={toggleEditor} disabled={unlockingEditor} className="inline-flex items-center gap-1.5 rounded-md px-1.5 py-2 text-[0.9rem] text-white/35 outline-none transition-colors hover:text-white/75 focus-visible:ring-2 focus-visible:ring-[#8be2d5]/70 disabled:opacity-40"><span aria-hidden="true">✎</span>{unlockingEditor ? "验证中…" : editing ? "退出编辑" : "编辑"}</button>}{editorMessage && <p className="w-full text-right text-[0.8rem] text-red-200/65">{editorMessage}</p>}</div>
         </div>
       </header>
-
-      {history?.contentNotice && <div className="mx-auto mb-8 w-full max-w-[1520px] rounded-2xl bg-[#d6b25e]/[0.07] px-5 py-4 text-[0.9rem] leading-7 text-[#ead59b]/80"><span className="mr-2 font-medium text-[#ead59b]">{history.contentStatus === "demo" ? "模板演示" : "分期说明"}</span>{history.contentNotice}</div>}
 
       {editing && history && editorState && <div className="mx-auto w-full max-w-[1520px]"><CountryHistoryEditor countryCode={countryCode} history={history} editorState={editorState} editorSecret={editorSecret} onClose={() => { setEditing(false); setEditorSecret(""); }} /></div>}
 
       {history?.stages.length ? <>
         <CountryStageNavigation stages={history.stages} activeStageId={activeStageId} onSelectStage={scrollToStage} />
         <div className="relative mx-auto mt-8 w-full max-w-[1520px] md:mt-12">
-          {history.stages.map((stage, index) => <HistoryStageSection key={stage.id} stage={stage} index={index} countryCode={countryCode} mapQuery={mapQuery} filmMap={filmMap} peopleMap={peopleMap} showPeopleEntry={index === Math.floor(history.stages.length / 2)} />)}
+          {history.stages.map((stage, index) => <VisualHistoryStageSection key={stage.id} stage={stage} index={index} readingMode={readingMode} countryCode={countryCode} mapQuery={mapQuery} filmMap={filmMap} peopleMap={peopleMap} />)}
         </div>
-      </> : <section className="mx-auto w-full max-w-[1520px] rounded-3xl bg-gradient-to-br from-white/[0.05] to-transparent px-5 py-14 text-center [&_.glass-panel>p]:text-[0.9rem] [&_.glass-panel>p.font-medium]:text-[1.05rem] md:px-8 md:py-16"><EmptyState title="该国电影史内容正在整理" description="正式阶段和历史事件将在课程团队完成校订后发布，现有影片档案仍可在下方查看。" /><Link href={personHref(countryCode, mapQuery)} className="mt-6 inline-flex text-[1.05rem] text-[#8be2d5]/80 hover:text-[#8be2d5]">探索该国电影创作者 →</Link></section>}
+      </> : <section className="mx-auto w-full max-w-[1520px] rounded-3xl bg-gradient-to-br from-white/[0.05] to-transparent px-5 py-14 text-center [&_.glass-panel>p]:text-[0.9rem] [&_.glass-panel>p.font-medium]:text-[1.05rem] md:px-8 md:py-16"><EmptyState title="该国电影史内容正在整理" description="正式阶段和历史事件将在课程团队完成校订后发布，现有影片档案仍可在下方查看。" /></section>}
 
       <div className="mx-auto mt-12 w-full max-w-[1520px] space-y-3 md:mt-16">
         <details className="group rounded-2xl bg-black/45 px-4 py-1 backdrop-blur-md md:px-5">
-          <summary className="cursor-pointer list-none py-4 text-[1.05rem] text-white/70 marker:hidden"><span className="flex items-center justify-between gap-4"><span>影片档案 · {yearRangeLabel}</span><span className="text-[0.9rem] text-white/35 group-open:rotate-45">＋</span></span></summary>
+          <summary className="cursor-pointer list-none py-4 text-[1.05rem] text-white/70 marker:hidden"><span className="flex items-center justify-between gap-4"><span>影片档案 · <span className="font-mono text-base text-[#d6b25e]/75">{yearRangeLabel}</span></span><span className="text-[0.9rem] text-white/35 group-open:rotate-45">＋</span></span></summary>
           <div className="pb-6">{filteredCountryFilms.length ? <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6">{filteredCountryFilms.map((film) => <FilmArchiveCard key={film.id} film={film} mapQuery={mapQuery} />)}</div> : <p className="py-8 text-center text-[1.05rem] text-white/40">当前筛选范围暂无影片档案</p>}</div>
         </details>
         <details className="group rounded-2xl bg-black/45 px-4 py-1 backdrop-blur-md md:px-5">
@@ -151,12 +158,143 @@ export function CountryPageClient({ countryCode, allFilms, history, editorState 
   );
 }
 
-export function CountrySectionNav({ countryCode, mapQuery, active }: { countryCode: string; mapQuery: string; active: "history" | "people" }) {
-  const links = [{ id: "history", label: "电影史", href: `/country/${countryCode}?${mapQuery}` }, { id: "people", label: "影人墙", href: personHref(countryCode, mapQuery) }] as const;
-  return <nav className="flex shrink-0 rounded-full bg-black/55 p-1" aria-label="国家档案栏目">{links.map((link) => <Link key={link.id} href={link.href} className={`rounded-full px-5 py-2.5 text-[1.05rem] transition-colors ${active === link.id ? "bg-white/10 text-white" : "text-white/45 hover:text-white/75"}`} aria-current={active === link.id ? "page" : undefined}>{link.label}</Link>)}</nav>;
+function ReadingModeSwitch({ value, onChange }: { value: ReadingMode; onChange: (mode: ReadingMode) => void }) {
+  return <div className="flex rounded-full bg-white/[0.045] p-1" role="group" aria-label="阅读模式">
+    {([{ id: "quick", label: "快速浏览" }, { id: "course", label: "课程学习" }] as const).map((mode) => <button key={mode.id} type="button" aria-pressed={value === mode.id} onClick={() => onChange(mode.id)} className={`rounded-full px-4 py-2 text-sm outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[#8be2d5]/70 ${value === mode.id ? "bg-[#35c8b4]/14 text-[#a5eee3]" : "text-white/40 hover:text-white/70"}`}>{mode.label}</button>)}
+  </div>;
 }
 
-function HistoryStageSection({ stage, index, countryCode, mapQuery, filmMap, peopleMap, showPeopleEntry }: { stage: CinemaHistoryStage; index: number; countryCode: string; mapQuery: string; filmMap: Map<string, Film>; peopleMap: Map<string, Person>; showPeopleEntry: boolean }) {
+function firstSentence(text?: string) {
+  const value = text?.trim();
+  if (!value) return "";
+  const match = value.match(/^.*?[。！？!?](?:[”’」』])?/);
+  return match?.[0] ?? value;
+}
+
+function normalizeCopy(text?: string) {
+  return (text ?? "").normalize("NFKC").replace(/[\s，。！？!?、；;：:“”‘’「」『』（）()《》·—–-]/g, "").toLocaleLowerCase("zh-CN");
+}
+
+function eventHasExtraDetail(event: CinemaHistoryEvent) {
+  const description = event.description?.trim() ?? "";
+  if (!description) return false;
+  const summary = event.brief?.trim() || firstSentence(description);
+  const normalizedDescription = normalizeCopy(description);
+  const normalizedSummary = normalizeCopy(summary);
+  return Boolean(normalizedSummary && normalizedDescription !== normalizedSummary && normalizedDescription.length > normalizedSummary.length);
+}
+
+function normalizeFilmTitle(title: string) {
+  return title.normalize("NFKC").replace(/[\s《》〈〉「」『』·:：!！?？,，.。'“”\"\-—–_]/g, "").toLocaleLowerCase("zh-CN");
+}
+
+function resolveHistoryFilms(event: CinemaHistoryEvent, filmMap: Map<string, Film>, countryCode: string): ResolvedHistoryFilm[] {
+  const results: ResolvedHistoryFilm[] = [];
+  const seenIds = new Set<string>();
+  const seenTitles = new Set<string>();
+  const allFilms = Array.from(filmMap.values());
+  const addOfficialFilm = (film: Film) => {
+    const title = normalizeFilmTitle(film.titleZh);
+    if (seenIds.has(film.id) || seenTitles.has(title)) return;
+    seenIds.add(film.id);
+    seenTitles.add(title);
+    results.push({ key: `film-${film.id}`, kind: film.posterUrl ? "poster" : "linked-text", film });
+  };
+
+  for (const id of event.filmIds ?? []) {
+    const film = filmMap.get(id);
+    if (film) addOfficialFilm(film);
+  }
+  for (const archiveFilm of event.archiveFilms ?? []) {
+    const normalizedTitle = normalizeFilmTitle(archiveFilm.title);
+    if (seenTitles.has(normalizedTitle)) continue;
+    const candidates = allFilms.filter((film) => normalizeFilmTitle(film.titleZh) === normalizedTitle || normalizeFilmTitle(film.titleOriginal) === normalizedTitle);
+    const matched = candidates.sort((a, b) => {
+      const score = (film: Film) => Number(film.primaryProductionCountry === countryCode) * 2 + Number(film.year === event.year);
+      return score(b) - score(a);
+    })[0];
+    if (matched) addOfficialFilm(matched);
+    else {
+      seenTitles.add(normalizedTitle);
+      results.push({ key: `archive-${archiveFilm.id}`, kind: "archive-text", film: archiveFilm });
+    }
+  }
+  return results;
+}
+
+function CollapsibleCopy({ text, openByDefault, label, compact = false }: { text?: string; openByDefault: boolean; label: string; compact?: boolean }) {
+  const [openOverride, setOpenOverride] = useState<boolean | null>(null);
+  const open = openOverride ?? openByDefault;
+  if (!text) return null;
+  return <div className={compact ? "mt-3" : "mt-5"}>
+    <button type="button" onClick={() => setOpenOverride(!open)} aria-expanded={open} className={`inline-flex items-center gap-2 text-[#8be2d5]/70 hover:text-[#b9f4eb] focus-visible:outline-2 focus-visible:outline-[#8be2d5] ${compact ? "text-[13px]" : "text-sm"}`}><span aria-hidden>{open ? "−" : "＋"}</span>{open ? `收起${label}` : `展开${label}`}</button>
+    {open && <div className={`max-w-[88ch] whitespace-pre-line text-white/58 ${compact ? "mt-3 text-base leading-7 md:text-[1.05rem] md:leading-8" : "mt-4 text-[1.05rem] leading-8 md:text-[1.15rem] md:leading-9"}`}>{text}</div>}
+  </div>;
+}
+
+function VisualHistoryStageSection({ stage, index, readingMode, countryCode, mapQuery, filmMap, peopleMap }: { stage: CinemaHistoryStage; index: number; readingMode: ReadingMode; countryCode: string; mapQuery: string; filmMap: Map<string, Film>; peopleMap: Map<string, Person> }) {
+  const brief = stage.brief || firstSentence(stage.summary);
+  const films = stage.representativeFilmIds.map((id) => filmMap.get(id)).filter((film): film is Film => !!film);
+  const people = stage.representativePersonIds.map((id) => peopleMap.get(id) ?? getPerson(id)).filter((person): person is Person => !!person);
+  return <section id={`history-stage-${stage.id}`} data-stage-id={stage.id} className="scroll-mt-28 pb-14 md:pb-20">
+    <header className="relative overflow-hidden rounded-[2rem] border border-white/[0.055] bg-gradient-to-br from-white/[0.07] via-[#080b0d]/90 to-[#35c8b4]/[0.04] px-5 py-6 md:px-8 md:py-8">
+      <span className="text-[13px] uppercase tracking-[0.26em] text-[#d6b25e]/70">{ACT_LABELS[index] ?? `第${index + 1}幕`}</span>
+      <div className="mt-4 grid gap-3 md:grid-cols-[160px_minmax(0,1fr)] md:gap-7">
+        <p className="font-mono text-xl font-medium leading-7 text-[#e0bb63] md:text-[1.35rem]">{periodLabel(stage)}</p>
+        <div><h2 className="text-[1.75rem] font-light leading-tight text-white md:text-[2.5rem]">{stage.title}</h2>{brief && <p className="mt-3 max-w-[72ch] text-base leading-7 text-white/70 md:text-lg md:leading-7">{brief}</p>}<CollapsibleCopy text={stage.summary} openByDefault={readingMode === "course"} label="时代背景" compact /></div>
+      </div>
+    </header>
+    {stage.events.length ? <EventTimeline events={stage.events} readingMode={readingMode} countryCode={countryCode} mapQuery={mapQuery} filmMap={filmMap} peopleMap={peopleMap} /> : !stage.subStages?.length ? <HistoryContentPending label="本阶段内容正在整理" /> : null}
+    {stage.subStages?.length ? <div className="mt-8 space-y-8">{stage.subStages.map((subStage) => <VisualSubStage key={subStage.id} subStage={subStage} readingMode={readingMode} countryCode={countryCode} mapQuery={mapQuery} filmMap={filmMap} peopleMap={peopleMap} />)}</div> : null}
+    {films.length > 0 && <div className="mt-7 rounded-2xl bg-white/[0.025] p-5"><p className="mb-4 text-xs uppercase tracking-[0.2em] text-white/30">本幕代表档案</p><AssociatedArchives films={films} people={people} countryCode={countryCode} mapQuery={mapQuery} /></div>}
+  </section>;
+}
+
+function VisualSubStage({ subStage, readingMode, countryCode, mapQuery, filmMap, peopleMap }: { subStage: CinemaHistorySubStage; readingMode: ReadingMode; countryCode: string; mapQuery: string; filmMap: Map<string, Film>; peopleMap: Map<string, Person> }) {
+  const brief = subStage.brief || firstSentence(subStage.summary);
+  const films = (subStage.representativeFilmIds ?? []).map((id) => filmMap.get(id)).filter((film): film is Film => !!film);
+  const people = (subStage.representativePersonIds ?? []).map((id) => peopleMap.get(id) ?? getPerson(id)).filter((person): person is Person => !!person);
+  return <section className="rounded-[1.75rem] border border-white/[0.05] bg-white/[0.025] px-5 py-7 md:px-8 md:py-9">
+    <div className="grid gap-3 md:grid-cols-[180px_minmax(0,1fr)] md:gap-10"><p className="font-mono text-lg font-medium leading-7 text-[#dfbd69]/85">{periodLabel(subStage)}</p><div><h3 className="text-2xl font-light text-white/90 md:text-3xl">{subStage.title}</h3>{brief && <p className="mt-3 max-w-[72ch] text-base leading-7 text-white/60 md:text-lg">{brief}</p>}<CollapsibleCopy text={subStage.summary} openByDefault={readingMode === "course"} label="子阶段背景" /></div></div>
+    {subStage.events?.length ? <EventTimeline events={subStage.events} readingMode={readingMode} countryCode={countryCode} mapQuery={mapQuery} filmMap={filmMap} peopleMap={peopleMap} /> : <p className="mt-6 rounded-2xl bg-black/25 px-5 py-6 text-white/35">本子阶段内容正在整理</p>}
+    {films.length > 0 && <div className="mt-6"><AssociatedArchives films={films} people={people} countryCode={countryCode} mapQuery={mapQuery} /></div>}
+  </section>;
+}
+
+function EventTimeline({ events, readingMode, countryCode, mapQuery, filmMap }: { events: CinemaHistoryEvent[]; readingMode: ReadingMode; countryCode: string; mapQuery: string; filmMap: Map<string, Film>; peopleMap: Map<string, Person> }) {
+  return <div className="mt-8"><div className="mb-5 flex flex-wrap items-center gap-4 pl-0 text-xs text-white/30 md:pl-[178px]"><span>关键历史节点</span>{(["historical", "industry", "film", "technology"] as CinemaHistoryEventType[]).map((type) => <span key={type} className="inline-flex items-center gap-1.5"><EventGlyph type={type} />{EVENT_TYPE_LABELS[type]}</span>)}</div><div className="space-y-6">{events.map((event) => <VisualEventRow key={event.id} event={event} readingMode={readingMode} countryCode={countryCode} mapQuery={mapQuery} filmMap={filmMap} />)}</div></div>;
+}
+
+function EventGlyph({ type }: { type?: CinemaHistoryEventType }) {
+  const style = EVENT_TYPE_STYLES[type ?? "historical"];
+  const shape = type === "film" || type === "person" ? "rotate-45 rounded-[2px]" : type === "industry" || type === "institution" ? "rounded-sm" : "rounded-full";
+  return <span aria-hidden className={`inline-block h-2.5 w-2.5 ${style.glyph} ${shape}`} />;
+}
+
+function VisualEventRow({ event, readingMode, countryCode, mapQuery, filmMap }: { event: CinemaHistoryEvent; readingMode: ReadingMode; countryCode: string; mapQuery: string; filmMap: Map<string, Film> }) {
+  const year = event.endYear && event.endYear !== event.year ? `${event.year}—${event.endYear}` : String(event.year);
+  const [detailOverride, setDetailOverride] = useState<boolean | null>(null);
+  const hasExtraDetail = eventHasExtraDetail(event);
+  const detailOpen = hasExtraDetail && (detailOverride ?? readingMode === "course");
+  const summary = event.brief?.trim() || firstSentence(event.description);
+  const eventStyle = EVENT_TYPE_STYLES[event.type ?? "historical"];
+  const resolvedFilms = resolveHistoryFilms(event, filmMap, countryCode);
+  return <article id={`history-event-${event.id}`} className="relative mx-auto grid w-full max-w-[1360px] gap-3 md:grid-cols-[128px_1px_minmax(0,1fr)] md:gap-x-6">
+    <div className="whitespace-nowrap font-mono text-xl font-medium leading-7 text-[#e0bb63] md:pt-1 md:text-right md:text-[1.35rem]">{year}</div>
+    <div className={`relative hidden bg-gradient-to-b ${eventStyle.line} to-transparent md:block`}><span className="absolute left-1/2 top-2 -translate-x-1/2"><EventGlyph type={event.type} /></span></div>
+    <div className="min-w-0 rounded-2xl border border-white/[0.04] bg-black/35 p-5 transition-colors md:p-6">
+      <div className="flex flex-wrap items-center gap-3"><h3 className="text-xl font-medium leading-snug text-white md:text-2xl">{event.title}</h3>{event.type && <span className={`text-xs uppercase tracking-[0.14em] ${eventStyle.text}`}>{EVENT_TYPE_LABELS[event.type]}</span>}</div>
+      {!detailOpen && summary && <p className="mt-3 text-base leading-7 text-white/58 md:text-lg">{summary}</p>}
+      {detailOpen && <p className="mt-4 whitespace-pre-line text-base leading-8 text-white/62 md:text-lg">{event.description}</p>}
+      {hasExtraDetail && <button type="button" onClick={() => setDetailOverride(!detailOpen)} aria-expanded={detailOpen} className="mt-3 text-sm text-[#8be2d5]/65 hover:text-[#b9f4eb]">{detailOpen ? "收起详情" : "展开详情"}</button>}
+      {resolvedFilms.length > 0 && <HistoryFilmCollection films={resolvedFilms} mapQuery={mapQuery} />}
+      {event.sources?.length ? <div className="mt-5 flex flex-wrap gap-x-4 gap-y-2 text-xs text-white/30"><span>来源</span>{event.sources.map((source) => source.url ? <a key={`${source.label}-${source.url}`} href={source.url} target="_blank" rel="noreferrer" className="hover:text-white/60">{source.label} ↗</a> : <span key={source.label}>{source.label}</span>)}</div> : null}
+    </div>
+  </article>;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+function HistoryStageSection({ stage, index, countryCode, mapQuery, filmMap, peopleMap }: { stage: CinemaHistoryStage; index: number; countryCode: string; mapQuery: string; filmMap: Map<string, Film>; peopleMap: Map<string, Person> }) {
   const films = stage.representativeFilmIds.map((id) => filmMap.get(id)).filter((f): f is Film => !!f);
   const people = stage.representativePersonIds.map((id) => peopleMap.get(id) ?? getPerson(id)).filter((p): p is Person => !!p);
   const summaryLines = stage.summary?.split("\n") ?? [];
@@ -167,10 +305,9 @@ function HistoryStageSection({ stage, index, countryCode, mapQuery, filmMap, peo
     .filter(Boolean);
   return <section id={`history-stage-${stage.id}`} data-stage-id={stage.id} className="scroll-mt-20 pb-10 md:pb-14">
     <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-white/[0.065] via-black/45 to-[#35c8b4]/[0.025] px-5 py-7 shadow-[0_28px_80px_rgba(0,0,0,0.24)] md:px-6 md:py-9"><span className="absolute right-5 top-4 font-mono text-[0.9rem] text-white/15">{ACT_LABELS[index] ?? `第${index + 1}幕`}</span><div className="mx-auto max-w-[88ch]"><p className="font-mono text-[1.05rem] text-[#d6b25e]">{periodLabel(stage)}</p><h2 className="mt-2 text-[1.8rem] font-light leading-tight text-white md:text-[2.25rem]">{stage.title}</h2>{stage.summary && <div className="mt-4 space-y-3 text-[1.05rem] leading-8 text-white/55 md:text-[1.2rem] md:leading-9">{summaryHeading && <p className="font-medium text-white/75">{summaryHeading}</p>}{summaryParagraphs.map((paragraph, paragraphIndex) => <p key={`${stage.id}-summary-${paragraphIndex}`}>{paragraph}</p>)}</div>}</div></div>
-    {stage.events.length > 0 ? <div className="mt-6 space-y-6 md:mt-8">{stage.events.map((event) => <HistoryEventRow key={event.id} event={event} countryCode={countryCode} mapQuery={mapQuery} filmMap={filmMap} peopleMap={peopleMap} />)}</div> : !stage.subStages?.length ? <div className="mt-6 space-y-6 md:mt-8"><HistoryContentPending label="本阶段内容正在整理" /></div> : null}
+    {stage.events.length > 0 ? <div className="mt-6 space-y-6 md:mt-8">{stage.events.map((event) => <HistoryEventRow key={event.id} event={event} countryCode={countryCode} mapQuery={mapQuery} filmMap={filmMap} />)}</div> : !stage.subStages?.length ? <div className="mt-6 space-y-6 md:mt-8"><HistoryContentPending label="本阶段内容正在整理" /></div> : null}
     {stage.subStages?.length ? <div className="mx-auto mt-7 max-w-[1360px] space-y-5 md:pl-[161px]">{stage.subStages.map((subStage) => <HistorySubStageSection key={subStage.id} subStage={subStage} countryCode={countryCode} mapQuery={mapQuery} filmMap={filmMap} peopleMap={peopleMap} />)}</div> : null}
-    {(films.length > 0 || people.length > 0) && <div className="mx-auto mt-7 max-w-[1360px] rounded-2xl bg-white/[0.025] p-5 md:pl-[161px] md:pr-5"><p className="mb-4 text-[0.825rem] uppercase tracking-[0.2em] text-white/30">本幕代表档案</p><AssociatedArchives films={films} people={people} countryCode={countryCode} mapQuery={mapQuery} /></div>}
-    {showPeopleEntry && <div className="mx-auto mt-8 max-w-[1360px] md:pl-[161px]"><Link href={personHref(countryCode, mapQuery)} className="inline-flex items-center gap-2 text-[1.05rem] text-[#8be2d5]/75 hover:text-[#8be2d5]">探索该国电影创作者 →</Link></div>}
+    {films.length > 0 && <div className="mx-auto mt-7 max-w-[1360px] rounded-2xl bg-white/[0.025] p-5 md:pl-[161px] md:pr-5"><p className="mb-4 text-[0.825rem] uppercase tracking-[0.2em] text-white/30">本幕代表档案</p><AssociatedArchives films={films} people={people} countryCode={countryCode} mapQuery={mapQuery} /></div>}
   </section>;
 }
 
@@ -181,8 +318,8 @@ function HistorySubStageSection({ subStage, countryCode, mapQuery, filmMap, peop
     <p className="font-mono text-[0.9rem] text-[#d6b25e]/80">{periodLabel(subStage)}</p>
     <h3 id={`sub-stage-${subStage.id}`} className="mt-2 text-[1.35rem] font-light text-white/85 md:text-[1.5rem]">{subStage.title}</h3>
     {subStage.summary && <p className="mt-3 text-[1.05rem] leading-8 text-white/50">{subStage.summary}</p>}
-    <div className="mt-5 space-y-4">{subStage.events?.length ? subStage.events.map((event) => <HistoryEventRow key={event.id} event={event} countryCode={countryCode} mapQuery={mapQuery} filmMap={filmMap} peopleMap={peopleMap} />) : <p className="rounded-xl bg-black/25 px-4 py-5 text-[1.05rem] text-white/35">本子阶段内容正在整理</p>}</div>
-    {(films.length > 0 || people.length > 0) && <div className="mt-5"><AssociatedArchives films={films} people={people} countryCode={countryCode} mapQuery={mapQuery} /></div>}
+    <div className="mt-5 space-y-4">{subStage.events?.length ? subStage.events.map((event) => <HistoryEventRow key={event.id} event={event} countryCode={countryCode} mapQuery={mapQuery} filmMap={filmMap} />) : <p className="rounded-xl bg-black/25 px-4 py-5 text-[1.05rem] text-white/35">本子阶段内容正在整理</p>}</div>
+    {films.length > 0 && <div className="mt-5"><AssociatedArchives films={films} people={people} countryCode={countryCode} mapQuery={mapQuery} /></div>}
   </section>;
 }
 
@@ -190,9 +327,9 @@ function HistoryContentPending({ label }: { label: string }) {
   return <div className="mx-auto max-w-[1360px] rounded-2xl bg-black/25 px-5 py-8 text-center text-[1.05rem] text-white/35 md:pl-[161px]">{label}</div>;
 }
 
-function HistoryEventRow({ event, countryCode, mapQuery, filmMap, peopleMap }: { event: CinemaHistoryEvent; countryCode: string; mapQuery: string; filmMap: Map<string, Film>; peopleMap: Map<string, Person> }) {
+function HistoryEventRow({ event, countryCode, mapQuery, filmMap }: { event: CinemaHistoryEvent; countryCode: string; mapQuery: string; filmMap: Map<string, Film> }) {
   const films = (event.filmIds ?? []).map((id) => filmMap.get(id)).filter((f): f is Film => !!f);
-  const people = (event.personIds ?? []).map((id) => peopleMap.get(id) ?? getPerson(id)).filter((p): p is Person => !!p);
+  const people: Person[] = [];
   const year = event.endYear && event.endYear !== event.year ? `${event.year} — ${event.endYear}` : String(event.year);
   const [archiveFilm, setArchiveFilm] = useState<CinemaHistoryArchiveFilm | null>(null);
   const [anchor, setAnchor] = useState<{ left: number; right: number; top: number; height: number } | null>(null);
@@ -217,16 +354,55 @@ function ArchiveFilmFloatingCard({ film, anchor, onClose }: { film: CinemaHistor
   return <aside role="dialog" aria-modal="false" aria-label={`《${film.title}》影片档案`} style={position} className={`fixed z-50 max-h-[calc(100vh-24px)] w-[min(390px,calc(100vw-24px))] overflow-y-auto rounded-3xl bg-black/92 p-6 shadow-[0_28px_90px_rgba(0,0,0,0.72)] backdrop-blur-2xl ${position ? "" : "bottom-3 left-1/2 -translate-x-1/2"}`}><button type="button" onClick={onClose} aria-label="关闭影片档案" className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-white/[0.07] text-[1.2rem] text-white/50 hover:text-white">×</button><p className="pr-10 text-[0.9rem] uppercase tracking-[0.2em] text-[#d6b25e]/65">历史影片档案</p><h4 className="mt-2 pr-10 text-[1.5rem] font-light text-white">《{film.title}》</h4>{film.genre && <p className="mt-2 text-[0.9rem] text-[#8be2d5]/65">{film.genre}</p>}{film.credits.length > 0 && <dl className="mt-5 grid grid-cols-[65px_minmax(0,1fr)] gap-x-3 gap-y-2 text-[0.9rem]">{film.credits.map((credit, index) => <div key={`${credit.role}-${index}`} className="contents"><dt className="text-white/30">{credit.role}</dt><dd className="text-white/65">{credit.name}</dd></div>)}</dl>}<div className="mt-5 space-y-5"><section><h5 className="text-[0.9rem] text-white/35">剧情简介</h5><p className="mt-2 text-[1.05rem] leading-7 text-white/65">{film.synopsis}</p></section><section><h5 className="text-[0.9rem] text-white/35">价值意义</h5><p className="mt-2 text-[1.05rem] leading-7 text-white/65">{film.significance}</p></section></div></aside>;
 }
 
-function AssociatedArchives({ films, people, countryCode, mapQuery }: { films: Film[]; people: Person[]; countryCode: string; mapQuery: string }) {
-  return <div className="grid gap-4 lg:grid-cols-2">{films.length > 0 && <div className="flex min-w-0 gap-3 overflow-x-auto pb-1">{films.map((film) => <FilmArchiveCard key={film.id} film={film} mapQuery={mapQuery} compact />)}</div>}{people.length > 0 && <div className="flex min-w-0 gap-3 overflow-x-auto pb-1">{people.map((person) => <PersonArchiveCard key={person.id} person={person} href={personHref(countryCode, mapQuery, person.id)} />)}</div>}</div>;
+function HistoryFilmCollection({ films, mapQuery }: { films: ResolvedHistoryFilm[]; mapQuery: string }) {
+  const posterFilms = films.filter((item): item is Extract<ResolvedHistoryFilm, { kind: "poster" }> => item.kind === "poster");
+  const textFilms = films.filter((item) => item.kind !== "poster");
+  return <div className="mt-6">
+    <p className="mb-3 text-xs uppercase tracking-[0.18em] text-white/28">代表影片</p>
+    {posterFilms.length > 0 && <div className="flex min-w-0 gap-3 overflow-x-auto pb-1">{posterFilms.map((item) => <FilmArchiveCard key={item.key} film={item.film} mapQuery={mapQuery} compact />)}</div>}
+    {textFilms.length > 0 && <div className={`flex flex-wrap items-center gap-x-4 gap-y-2 ${posterFilms.length ? "mt-4" : ""}`}>{textFilms.map((item) => item.kind === "linked-text" ? <Link key={item.key} href={`/film/${item.film.id}?${mapQuery}`} className="text-[#8be2d5]/78 underline decoration-[#35c8b4]/30 underline-offset-4 hover:text-[#b9f4eb]">《{item.film.titleZh}》</Link> : <ArchiveFilmTextTrigger key={item.key} film={item.film} />)}</div>}
+  </div>;
+}
+
+function ArchiveFilmTextTrigger({ film }: { film: CinemaHistoryArchiveFilm }) {
+  const containerRef = useRef<HTMLSpanElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const [open, setOpen] = useState(false);
+  const [pinned, setPinned] = useState(false);
+  const [anchor, setAnchor] = useState<{ left: number; right: number; top: number; height: number } | null>(null);
+  const show = () => {
+    const rect = triggerRef.current?.getBoundingClientRect();
+    if (rect) setAnchor({ left: rect.left, right: rect.right, top: rect.top, height: rect.height });
+    setOpen(true);
+  };
+  const close = () => { setOpen(false); setPinned(false); setAnchor(null); };
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (event: KeyboardEvent) => { if (event.key === "Escape") close(); };
+    const onPointerDown = (event: PointerEvent) => { if (!containerRef.current?.contains(event.target as Node)) close(); };
+    const onResize = () => close();
+    document.addEventListener("pointerdown", onPointerDown);
+    window.addEventListener("keydown", onKeyDown);
+    window.addEventListener("resize", onResize);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("resize", onResize);
+    };
+  }, [open]);
+  return <span ref={containerRef} className="relative inline-flex" onMouseEnter={show} onMouseLeave={() => { if (!pinned) setOpen(false); }} onFocus={show} onBlur={(event) => { if (!pinned && !event.currentTarget.contains(event.relatedTarget)) setOpen(false); }}>
+    <button ref={triggerRef} type="button" aria-expanded={open} onClick={() => { if (pinned) close(); else { show(); setPinned(true); } }} className="text-[#8be2d5]/78 underline decoration-[#35c8b4]/30 underline-offset-4 hover:text-[#b9f4eb] focus-visible:outline-2 focus-visible:outline-[#8be2d5]">《{film.title}》</button>
+    {open && <ArchiveFilmFloatingCard film={film} anchor={anchor} onClose={close} />}
+  </span>;
+}
+
+function AssociatedArchives({ films, mapQuery }: { films: Film[]; people: Person[]; countryCode: string; mapQuery: string }) {
+  return <div>{films.length > 0 && <div className="flex min-w-0 gap-3 overflow-x-auto pb-1">{films.map((film) => <FilmArchiveCard key={film.id} film={film} mapQuery={mapQuery} compact />)}</div>}</div>;
 }
 
 function FilmArchiveCard({ film, mapQuery, compact = false }: { film: Film; mapQuery: string; compact?: boolean }) {
-  return <Link href={`/film/${film.id}?${mapQuery}`} className={`${compact ? "w-24 shrink-0" : "min-w-0"} group block`}><div className="aspect-[2/3] overflow-hidden rounded-lg bg-[#15191f] bg-cover bg-center shadow-lg transition-transform duration-300 group-hover:-translate-y-1" style={{ backgroundColor: film.posterColor ?? "#15191f", backgroundImage: film.posterUrl ? `url(${JSON.stringify(film.posterUrl)})` : undefined }}>{!film.posterUrl && <div className="flex h-full items-end bg-gradient-to-t from-black/80 to-transparent p-2 text-[0.9rem] text-white/70">{film.titleZh}</div>}</div><p className="mt-2 line-clamp-2 text-[0.9rem] leading-6 text-white/70">{film.titleZh}</p><p className="font-mono text-[0.9rem] text-white/30">{film.year}</p></Link>;
-}
-
-function PersonArchiveCard({ person, href }: { person: Person; href: string }) {
-  return <Link href={href} className="flex w-48 shrink-0 items-center gap-3 rounded-xl bg-white/[0.035] p-3 transition-colors hover:bg-white/[0.07]"><div className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-[#15252a] to-[#15121f] text-[1.05rem] text-[#8be2d5]/65" style={person.portraitUrl ? { backgroundImage: `url(${JSON.stringify(person.portraitUrl)})`, backgroundSize: "cover", backgroundPosition: "center" } : undefined}>{!person.portraitUrl && person.nameZh.slice(0, 1)}</div><div className="min-w-0"><p className="truncate text-[1.05rem] text-white/75">{person.nameZh}</p><p className="mt-1 truncate text-[0.9rem] text-white/35">{person.profession.join("、")}</p></div></Link>;
+  if (!film.posterUrl) return <Link href={`/film/${film.id}?${mapQuery}`} className="inline-flex text-[#8be2d5]/78 underline decoration-[#35c8b4]/30 underline-offset-4 hover:text-[#b9f4eb]">《{film.titleZh}》</Link>;
+  return <Link href={`/film/${film.id}?${mapQuery}`} className={`${compact ? "w-24 shrink-0" : "min-w-0"} group block`}><div className="aspect-[2/3] overflow-hidden rounded-lg bg-[#15191f] bg-cover bg-center shadow-lg transition-transform duration-300 group-hover:-translate-y-1" style={{ backgroundColor: film.posterColor ?? "#15191f", backgroundImage: `url(${JSON.stringify(film.posterUrl)})` }} aria-label={`${film.titleZh}海报`} /><p className="mt-2 line-clamp-2 text-[0.9rem] leading-6 text-white/70">{film.titleZh}</p><p className="font-mono text-base leading-6 text-white/42">{film.year}</p></Link>;
 }
 
 function OverviewList({ title, items }: { title: string; items: string[] }) {

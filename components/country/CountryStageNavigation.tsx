@@ -71,13 +71,14 @@ export function CountryStageNavigation({
 
   return (
     <nav
-      className="sticky top-0 z-30 mx-auto w-full max-w-[1520px] bg-black/80 py-3 backdrop-blur-xl"
-      aria-label="电影史阶段导航"
+      className="sticky top-0 z-30 mx-auto w-full max-w-[1520px] border-y border-white/[0.04] bg-black/82 py-3.5 backdrop-blur-xl"
+      aria-label="光影长河阶段导航"
     >
       <div className="relative w-full">
+        <p className="mb-2 px-11 text-sm font-medium tracking-[0.2em] text-[#e2c574]/75">光影长河</p>
         <div
           ref={trackRef}
-          className="stage-navigation-track flex cursor-grab snap-x snap-mandatory gap-2.5 overflow-x-auto overscroll-x-contain px-9 active:cursor-grabbing md:px-11"
+          className="stage-navigation-track relative flex cursor-grab snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain px-9 pb-1 active:cursor-grabbing md:px-11"
           style={{ scrollbarWidth: "none", WebkitOverflowScrolling: "touch" }}
           onScroll={updateEdges}
           onWheel={(event) => {
@@ -121,6 +122,7 @@ export function CountryStageNavigation({
             dragState.current.active = false;
           }}
         >
+          <span className="pointer-events-none absolute left-9 right-9 top-[27px] h-px bg-gradient-to-r from-[#d6b25e]/20 via-[#d6b25e]/55 to-[#35c8b4]/25 md:left-11 md:right-11" aria-hidden />
           {stages.map((stage, index) => {
             const active = activeStageId === stage.id;
             const year = stage.yearLabel ?? `${stage.yearStart}—${stage.yearEnd ?? "至今"}`;
@@ -149,15 +151,16 @@ export function CountryStageNavigation({
                     selectByIndex(stages.length - 1);
                   }
                 }}
-                className={`relative shrink-0 snap-center whitespace-nowrap rounded-full px-5 py-3 text-[1.05rem] outline-none transition-colors focus-visible:ring-2 focus-visible:ring-[#8be2d5]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-black motion-reduce:transition-none ${
+                className={`relative z-[1] min-w-32 shrink-0 snap-center whitespace-nowrap rounded-xl px-4 py-2.5 text-left outline-none transition-all focus-visible:ring-2 focus-visible:ring-[#8be2d5]/70 focus-visible:ring-offset-2 focus-visible:ring-offset-black motion-reduce:transition-none ${
                   active
-                    ? "bg-[#35c8b4]/12 text-[#8be2d5]"
-                    : "bg-white/[0.035] text-white/55 hover:text-white/80"
+                    ? "bg-[#0d2424] text-[#a5eee3] shadow-[0_0_24px_rgba(53,200,180,0.14)]"
+                    : "bg-[#0b0c0e] text-white/68 hover:bg-white/[0.06] hover:text-white/90"
                 }`}
                 aria-current={active ? "true" : undefined}
                 aria-label={`${stage.shortTitle}，${stage.title}，${year}`}
               >
-                {stage.shortTitle}
+                <span className="block text-base leading-6">{stage.shortTitle}</span>
+                <span className="mt-1 block font-mono text-[13px] leading-5 text-[#dfbd69]/72">{year}</span>
                 <span
                   className={`absolute inset-x-4 bottom-0 h-px origin-center bg-[#8be2d5] transition-transform duration-300 motion-reduce:transition-none ${
                     active ? "scale-x-100" : "scale-x-0"
@@ -171,8 +174,8 @@ export function CountryStageNavigation({
 
         <div className={`pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-black via-black/80 to-transparent transition-opacity ${canScrollLeft ? "opacity-100" : "opacity-0"}`} aria-hidden />
         <div className={`pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-black via-black/80 to-transparent transition-opacity ${canScrollRight ? "opacity-100" : "opacity-0"}`} aria-hidden />
-        {canScrollLeft && <button type="button" onClick={() => scrollPage(-1)} className="absolute left-0 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-black/75 text-[1.05rem] text-white/65 outline-none backdrop-blur focus-visible:ring-2 focus-visible:ring-[#8be2d5]/70" aria-label="向左浏览更多电影史阶段">‹</button>}
-        {canScrollRight && <button type="button" onClick={() => scrollPage(1)} className="absolute right-0 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-black/75 text-[1.05rem] text-white/65 outline-none backdrop-blur focus-visible:ring-2 focus-visible:ring-[#8be2d5]/70" aria-label="向右浏览更多电影史阶段">›</button>}
+        {canScrollLeft && <button type="button" onClick={() => scrollPage(-1)} className="absolute left-0 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-black/75 text-[1.05rem] text-white/65 outline-none backdrop-blur focus-visible:ring-2 focus-visible:ring-[#8be2d5]/70" aria-label="向左浏览更多光影长河阶段">‹</button>}
+        {canScrollRight && <button type="button" onClick={() => scrollPage(1)} className="absolute right-0 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-black/75 text-[1.05rem] text-white/65 outline-none backdrop-blur focus-visible:ring-2 focus-visible:ring-[#8be2d5]/70" aria-label="向右浏览更多光影长河阶段">›</button>}
       </div>
     </nav>
   );

@@ -118,6 +118,8 @@ export type CinemaHistoryArchiveFilm = {
   credits: CinemaHistoryCredit[];
   synopsis: string;
   significance: string;
+  brief?: string;
+  posterUrl?: string;
 };
 
 export type CinemaHistoryEvent = {
@@ -126,6 +128,7 @@ export type CinemaHistoryEvent = {
   endYear?: number;
   title: string;
   description: string;
+  brief?: string;
   type?: CinemaHistoryEventType;
   filmIds?: string[];
   personIds?: string[];
@@ -136,6 +139,7 @@ export type CinemaHistoryEvent = {
 export type CinemaHistoryEditableStage = {
   stageId: string;
   summary?: string;
+  brief?: string;
   events: CinemaHistoryEvent[];
   subStages?: CinemaHistoryEditableSubStage[];
 };
@@ -143,6 +147,7 @@ export type CinemaHistoryEditableStage = {
 export type CinemaHistoryEditableSubStage = {
   subStageId: string;
   summary?: string;
+  brief?: string;
   events: CinemaHistoryEvent[];
 };
 
@@ -171,6 +176,7 @@ export type CinemaHistoryStage = {
   yearEnd: number | null;
   yearLabel?: string;
   summary?: string;
+  brief?: string;
   subStages?: CinemaHistorySubStage[];
   events: CinemaHistoryEvent[];
   representativeFilmIds: string[];
@@ -185,6 +191,7 @@ export type CinemaHistorySubStage = {
   yearEnd: number | null;
   yearLabel?: string;
   summary?: string;
+  brief?: string;
   events?: CinemaHistoryEvent[];
   representativeFilmIds?: string[];
   representativePersonIds?: string[];
