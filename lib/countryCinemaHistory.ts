@@ -1,4 +1,5 @@
 import { chinaCinemaHistory } from "@/data/countryCinemaHistory/cn";
+import { japanCinemaHistory } from "@/data/countryCinemaHistory/jp";
 import type {
   CinemaHistoryEvent,
   CinemaHistoryStage,
@@ -10,6 +11,7 @@ import { getPerson } from "@/lib/data";
 
 const histories = new Map<string, CountryCinemaHistory>([
   [chinaCinemaHistory.countryCode, chinaCinemaHistory],
+  [japanCinemaHistory.countryCode, japanCinemaHistory],
 ]);
 
 function sortEvents(events: CinemaHistoryEvent[]): CinemaHistoryEvent[] {

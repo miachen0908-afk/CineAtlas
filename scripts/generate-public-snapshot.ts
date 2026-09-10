@@ -1,12 +1,19 @@
 import { mkdir, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
-import { countries } from "../lib/data";
+import { countries, films as curatedFilms } from "../lib/data";
 import { getCountryCinemaHistoryPageData } from "../lib/repositories/countryCinemaHistory";
 import { getAllFilms } from "../lib/repositories/films";
 import type { CountryCinemaHistory } from "../types/cinema";
 
 async function main() {
-  const films = await getAllFilms();
+  const databaseFilms = await getAllFilms();
+  const filmsById = new Map(databaseFilms.map((film) => [film.id, film]));
+  for (const film of curatedFilms) {
+    if (!filmsById.has(film.id)) filmsById.set(film.id, film);
+  }
+  const films = [...filmsById.values()].sort(
+    (a, b) => a.year - b.year || a.id.localeCompare(b.id),
+  );
   const histories: Record<string, CountryCinemaHistory> = {};
 
   for (const country of countries) {
