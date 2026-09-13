@@ -1,5 +1,6 @@
 import { chinaCinemaHistory } from "@/data/countryCinemaHistory/cn";
 import { franceCinemaHistory } from "@/data/countryCinemaHistory/fr";
+import { indiaCinemaHistory } from "@/data/countryCinemaHistory/in";
 import { japanCinemaHistory } from "@/data/countryCinemaHistory/jp";
 import { italyCinemaHistory } from "@/data/countryCinemaHistory/it";
 import { unitedStatesCinemaHistory } from "@/data/countryCinemaHistory/us";
@@ -15,6 +16,7 @@ import { getPerson } from "@/lib/data";
 const histories = new Map<string, CountryCinemaHistory>([
   [chinaCinemaHistory.countryCode, chinaCinemaHistory],
   [franceCinemaHistory.countryCode, franceCinemaHistory],
+  [indiaCinemaHistory.countryCode, indiaCinemaHistory],
   [japanCinemaHistory.countryCode, japanCinemaHistory],
   [italyCinemaHistory.countryCode, italyCinemaHistory],
   [unitedStatesCinemaHistory.countryCode, unitedStatesCinemaHistory],
