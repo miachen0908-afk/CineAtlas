@@ -11,6 +11,8 @@ import { EmptyState } from "@/components/layout/EmptyState";
 type CountryFilmDrawerProps = {
   countryCode: string | null;
   films: Film[];
+  countryYearRangeLabel: string | null;
+  countryFilmCount: number;
   yearRangeLabel: string;
   genreLabel: string | null;
   mapQuery: string;
@@ -37,6 +39,8 @@ function readAnchor(element: HTMLElement): FilmPreviewAnchor {
 export function CountryFilmDrawer({
   countryCode,
   films,
+  countryYearRangeLabel,
+  countryFilmCount,
   yearRangeLabel,
   genreLabel,
   mapQuery,
@@ -99,7 +103,12 @@ export function CountryFilmDrawer({
                   {country.nameZh}
                 </h2>
                 <p className="mt-1 text-xs text-[var(--ink-muted)]">
-                  {yearRangeLabel}
+                  {countryYearRangeLabel
+                    ? `影片年代 ${countryYearRangeLabel} · 共 ${countryFilmCount} 部`
+                    : "暂无影片年代数据"}
+                </p>
+                <p className="mt-1 text-[11px] text-[var(--ink-muted)]/75">
+                  当前筛选 {yearRangeLabel}
                   {genreLabel ? ` · ${genreLabel}` : " · 全部类型"}
                   {` · ${sortedFilms.length} 部`}
                 </p>

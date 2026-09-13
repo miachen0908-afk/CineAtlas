@@ -21,7 +21,7 @@
     "db:import:countries": "tsx scripts/import-tmdb-countries.ts",
     "db:sync:turso": "node --env-file=.env.local scripts/sync-sqlite-to-turso.mjs",
     "snapshot:public": "node --env-file=.env.local --import tsx scripts/generate-public-snapshot.ts",
-    "db:validate": "tsx scripts/validate-films.ts"
+    "db:validate": "node --env-file=.env.local --import tsx scripts/validate-films.ts"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",

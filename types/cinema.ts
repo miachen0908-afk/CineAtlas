@@ -111,6 +111,20 @@ export type CinemaHistoryCredit = {
   name: string;
 };
 
+export type CinemaHistoryMediaBase = {
+  id: string;
+  title: string;
+  url: string;
+  description?: string;
+  sourceName?: string;
+  sourceUrl?: string;
+  role?: "full-film" | "clip" | "trailer" | "analysis";
+};
+
+export type CinemaHistoryMedia =
+  | (CinemaHistoryMediaBase & { kind: "image"; thumbnailUrl?: string })
+  | (CinemaHistoryMediaBase & { kind: "video"; thumbnailUrl: string });
+
 export type CinemaHistoryArchiveFilm = {
   id: string;
   title: string;
@@ -120,6 +134,7 @@ export type CinemaHistoryArchiveFilm = {
   significance: string;
   brief?: string;
   posterUrl?: string;
+  media?: CinemaHistoryMedia[];
 };
 
 export type CinemaHistoryEvent = {
@@ -134,6 +149,7 @@ export type CinemaHistoryEvent = {
   personIds?: string[];
   archiveFilms?: CinemaHistoryArchiveFilm[];
   sources?: CinemaHistorySource[];
+  media?: CinemaHistoryMedia[];
 };
 
 export type CinemaHistoryEditableStage = {

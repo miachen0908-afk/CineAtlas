@@ -1,5 +1,7 @@
 import { chinaCinemaHistory } from "@/data/countryCinemaHistory/cn";
+import { franceCinemaHistory } from "@/data/countryCinemaHistory/fr";
 import { japanCinemaHistory } from "@/data/countryCinemaHistory/jp";
+import { italyCinemaHistory } from "@/data/countryCinemaHistory/it";
 import { unitedStatesCinemaHistory } from "@/data/countryCinemaHistory/us";
 import type {
   CinemaHistoryEvent,
@@ -12,7 +14,9 @@ import { getPerson } from "@/lib/data";
 
 const histories = new Map<string, CountryCinemaHistory>([
   [chinaCinemaHistory.countryCode, chinaCinemaHistory],
+  [franceCinemaHistory.countryCode, franceCinemaHistory],
   [japanCinemaHistory.countryCode, japanCinemaHistory],
+  [italyCinemaHistory.countryCode, italyCinemaHistory],
   [unitedStatesCinemaHistory.countryCode, unitedStatesCinemaHistory],
 ]);
 
@@ -31,9 +35,11 @@ function cloneEvent(event: CinemaHistoryEvent): CinemaHistoryEvent {
     filmIds: event.filmIds ? [...event.filmIds] : undefined,
     personIds: event.personIds ? [...event.personIds] : undefined,
     sources: event.sources?.map((source) => ({ ...source })),
+    media: event.media?.map((media) => ({ ...media })),
     archiveFilms: event.archiveFilms?.map((film) => ({
       ...film,
       credits: film.credits.map((credit) => ({ ...credit })),
+      media: film.media?.map((media) => ({ ...media })),
     })),
   };
 }

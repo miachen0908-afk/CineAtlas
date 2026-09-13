@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { markMapReturnPending } from "@/components/home/mapReturnNavigation";
+import { getCountry } from "@/lib/data";
 import type { FilmWithRelations } from "@/types/cinema";
 import { LikeButton } from "./LikeButton";
 
@@ -22,15 +23,21 @@ export function FilmDetail({ film }: FilmDetailProps) {
     backParams.set("yearStart", legacyYear);
     backParams.set("yearEnd", legacyYear);
   }
-  const backHref = backParams.size ? `/?${backParams}` : "/";
+  const sourceCountry = getCountry(query.get("fromCountry")?.toLowerCase() ?? "");
+  const sourceEvent = query.get("fromEvent");
+  const safeEvent = sourceEvent && /^[a-z0-9-]+$/i.test(sourceEvent) ? sourceEvent : null;
+  const backHref = sourceCountry
+    ? `/country/${sourceCountry.code}${backParams.size ? `?${backParams}` : ""}${safeEvent ? `#history-event-${safeEvent}` : ""}`
+    : backParams.size ? `/?${backParams}` : "/";
+  const backLabel = sourceCountry ? `返回${sourceCountry.nameZh}电影史` : "返回地图";
   return (
     <article className="mx-auto max-w-3xl px-4 py-8 md:px-6">
       <Link
         href={backHref}
-        onClick={markMapReturnPending}
+        onClick={sourceCountry ? undefined : markMapReturnPending}
         className="mb-6 inline-flex items-center gap-2 text-sm text-white/50 transition-colors hover:text-[var(--cloud)]"
       >
-        ← 返回地图
+        ← {backLabel}
       </Link>
 
       <div className="flex flex-col gap-8 md:flex-row">

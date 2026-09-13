@@ -1,6 +1,7 @@
 import "dotenv/config";
 import { config } from "dotenv";
 import { resolve } from "path";
+import { mkdir, writeFile } from "fs/promises";
 import { Prisma } from "@prisma/client";
 import countriesData from "@/data/countries.json";
 import type { Country } from "@/types/cinema";
@@ -9,6 +10,7 @@ import {
   checkTmdbConnectivity,
   discoverMovies,
   downloadPoster,
+  searchMovie,
   type TmdbSearchResult,
 } from "./lib/tmdb-client";
 import { COUNTRY_TO_ISO } from "./lib/matcher";
@@ -18,9 +20,19 @@ import { logError, logInfo, logWarn } from "./lib/logger";
 config({ path: resolve(process.cwd(), ".env.local") });
 config({ path: resolve(process.cwd(), ".env") });
 
-const FILMS_PER_COUNTRY = 30;
+import { getCountryCinemaHistory } from "@/lib/countryCinemaHistory";
+
+const DEFAULT_TARGET = 80;
+const DEFAULT_COUNTRIES = ["cn", "jp", "us", "fr", "it"];
 const VOTE_THRESHOLDS = [80, 40, 20, 5, 1];
-const MAX_PAGES = 5;
+const MAX_PAGES = 15;
+
+const countryArg = process.argv.find((arg) => arg.startsWith("--countries="));
+const targetArg = process.argv.find((arg) => arg.startsWith("--target="));
+const selectedCodes = new Set((countryArg?.split("=")[1]?.split(",") ?? DEFAULT_COUNTRIES).map((code) => code.trim().toLowerCase()).filter(Boolean));
+const targetPerCountry = Math.max(1, Number(targetArg?.split("=")[1] ?? DEFAULT_TARGET));
+const dryRun = process.argv.includes("--dry-run");
+const reviewRows: Array<Record<string, unknown>> = [];
 
 const countries = countriesData as Country[];
 
@@ -79,7 +91,7 @@ async function upsertDiscoverFilm(
   center: Country["center"]
 ): Promise<"created" | "updated" | "skipped"> {
   const year = releaseYear(movie.release_date);
-  if (!year || !movie.poster_path) return "skipped";
+  if (!year || !movie.poster_path || !movie.overview?.trim()) return "skipped";
 
   const filmKey = posterFileId(movie.id);
   const existingByTmdb = await prisma.film.findUnique({
@@ -100,8 +112,10 @@ async function upsertDiscoverFilm(
     `${filmKey}.jpg`
   );
 
+  if (dryRun) return existingByTmdb ? "updated" : "created";
+
   try {
-    await downloadPoster(movie.poster_path, destPath, "w185");
+    await downloadPoster(movie.poster_path, destPath, "w500");
   } catch (error) {
     logWarn("Poster download failed", {
       tmdbId: movie.id,
@@ -171,6 +185,56 @@ async function upsertDiscoverFilm(
   return existingByTmdb ? "updated" : "created";
 }
 
+function normalizeTitle(value: string): string {
+  return value.normalize("NFKC").toLowerCase().replace(/[\s《》〈〉「」『』·:：!！?？,，.。'“”"\-—–_]/g, "");
+}
+
+function historyCandidates(countryCode: string): Array<{ title: string; year: number }> {
+  const history = getCountryCinemaHistory(countryCode);
+  if (!history) return [];
+  const rows: Array<{ title: string; year: number }> = [];
+  const seen = new Set<string>();
+  const addEvents = (events: typeof history.stages[number]["events"]) => {
+    for (const event of events) {
+      for (const film of event.archiveFilms ?? []) {
+        const key = `${normalizeTitle(film.title)}-${event.year}`;
+        if (!seen.has(key)) { seen.add(key); rows.push({ title: film.title, year: event.year }); }
+      }
+    }
+  };
+  for (const stage of history.stages) {
+    addEvents(stage.events);
+    for (const subStage of stage.subStages ?? []) addEvents(subStage.events ?? []);
+  }
+  return rows;
+}
+
+async function importHistoryCandidates(country: Country, needed: number): Promise<number> {
+  const iso = COUNTRY_TO_ISO[country.code];
+  if (!iso || needed <= 0) return 0;
+  let accepted = 0;
+  for (const candidate of historyCandidates(country.code)) {
+    if (accepted >= needed) break;
+    const existing = await prisma.film.findFirst({ where: { primaryProductionCountry: country.code, year: candidate.year, OR: [{ titleZh: candidate.title }, { titleOriginal: candidate.title }], importStatus: "confirmed" } });
+    if (existing) continue;
+    const results = await searchMovie(candidate.title, candidate.year);
+    const normalized = normalizeTitle(candidate.title);
+    const match = results.find((movie) => {
+      const year = releaseYear(movie.release_date);
+      const titleMatches = normalizeTitle(movie.title) === normalized || normalizeTitle(movie.original_title) === normalized;
+      const countryMatches = !movie.origin_country?.length || movie.origin_country.includes(iso);
+      return year === candidate.year && titleMatches && countryMatches && movie.poster_path && movie.overview?.trim();
+    });
+    if (!match) {
+      reviewRows.push({ countryCode: country.code, title: candidate.title, year: candidate.year, reason: "no-exact-tmdb-match" });
+      continue;
+    }
+    const result = await upsertDiscoverFilm(match, country.code, country.center);
+    if (result === "created" || result === "updated") accepted += 1;
+  }
+  return accepted;
+}
+
 async function importCountry(country: Country): Promise<void> {
   const iso = COUNTRY_TO_ISO[country.code];
   if (!iso) {
@@ -187,7 +251,7 @@ async function importCountry(country: Country): Promise<void> {
   });
 
   const have = existing.length;
-  const need = Math.max(0, FILMS_PER_COUNTRY - have);
+  const need = Math.max(0, targetPerCountry - have);
   logInfo("Country quota", {
     code: country.code,
     iso,
@@ -200,6 +264,8 @@ async function importCountry(country: Country): Promise<void> {
     return;
   }
 
+  const importedFromHistory = await importHistoryCandidates(country, need);
+  const remainingNeed = Math.max(0, need - importedFromHistory);
   const knownTmdb = await prisma.film.findMany({
     where: { tmdbId: { not: null } },
     select: { tmdbId: true },
@@ -210,7 +276,7 @@ async function importCountry(country: Country): Promise<void> {
       .filter((id): id is number => typeof id === "number")
   );
 
-  const candidates = await collectDiscoverResults(iso, need, skipIds);
+  const candidates = await collectDiscoverResults(iso, remainingNeed, skipIds);
   logInfo("Discover candidates", {
     code: country.code,
     count: candidates.length,
@@ -247,11 +313,12 @@ async function importCountry(country: Country): Promise<void> {
 async function main(): Promise<void> {
   await checkTmdbConnectivity();
   logInfo("Starting country discover import", {
-    countries: countries.length,
-    perCountry: FILMS_PER_COUNTRY,
+    countries: [...selectedCodes],
+    perCountry: targetPerCountry,
+    dryRun,
   });
 
-  for (const country of countries) {
+  for (const country of countries.filter((country) => selectedCodes.has(country.code))) {
     try {
       await importCountry(country);
     } catch (error) {
@@ -266,6 +333,10 @@ async function main(): Promise<void> {
     where: { importStatus: "confirmed" },
   });
   logInfo("Import finished", { confirmedTotal: confirmed });
+  const reportPath = resolve(process.cwd(), "data", "tmdb-country-import-review.json");
+  await mkdir(resolve(process.cwd(), "data"), { recursive: true });
+  await writeFile(reportPath, `${JSON.stringify({ generatedAt: new Date().toISOString(), dryRun, targetPerCountry, countries: [...selectedCodes], rows: reviewRows }, null, 2)}\n`);
+  logInfo("Review report written", { reportPath, count: reviewRows.length });
 }
 
 main()

@@ -1,0 +1,404 @@
+{
+  "generatedAt": "2026-09-12T15:35:13.943Z",
+  "dryRun": false,
+  "targetPerCountry": 80,
+  "countries": [
+    "cn",
+    "jp",
+    "us",
+    "fr",
+    "it"
+  ],
+  "rows": [
+    {
+      "countryCode": "cn",
+      "title": "海誓",
+      "year": 1921,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "cn",
+      "title": "红粉骷髅",
+      "year": 1921,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "cn",
+      "title": "孤儿救祖记",
+      "year": 1923,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "cn",
+      "title": "梁祝痛史",
+      "year": 1925,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "cn",
+      "title": "火烧红莲寺",
+      "year": 1927,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "cn",
+      "title": "恋爱与义务",
+      "year": 1930,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "cn",
+      "title": "桃花泣血记",
+      "year": 1930,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "cn",
+      "title": "歌女红牡丹",
+      "year": 1931,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "cn",
+      "title": "狂流",
+      "year": 1933,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "cn",
+      "title": "八百壮士",
+      "year": 1938,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "cn",
+      "title": "保卫我们的土地",
+      "year": 1939,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "cn",
+      "title": "万世流芳",
+      "year": 1943,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "cn",
+      "title": "乌鸦与麻雀",
+      "year": 1948,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "cn",
+      "title": "五朵金花",
+      "year": 1960,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "cn",
+      "title": "小兵张嘎",
+      "year": 1964,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "cn",
+      "title": "舞台姐妹",
+      "year": 1965,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "cn",
+      "title": "红灯记",
+      "year": 1971,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "cn",
+      "title": "闪闪的红星",
+      "year": 1975,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "cn",
+      "title": "巴山夜雨",
+      "year": 1978,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "cn",
+      "title": "芙蓉镇",
+      "year": 1986,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "cn",
+      "title": "红高粱",
+      "year": 1987,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "cn",
+      "title": "本命年",
+      "year": 1989,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "cn",
+      "title": "一个都不能少",
+      "year": 1998,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "jp",
+      "title": "明治的日本",
+      "year": 1897,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "jp",
+      "title": "红叶狩",
+      "year": 1899,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "jp",
+      "title": "忠臣藏",
+      "year": 1910,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "jp",
+      "title": "钝刀",
+      "year": 1917,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "jp",
+      "title": "生之光",
+      "year": 1918,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "jp",
+      "title": "路上的灵魂",
+      "year": 1921,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "jp",
+      "title": "雄吕血",
+      "year": 1923,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "jp",
+      "title": "是什么使她变成这样",
+      "year": 1930,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "jp",
+      "title": "太太和妻子",
+      "year": 1931,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "jp",
+      "title": "浪华悲歌",
+      "year": 1934,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "jp",
+      "title": "战斗的士兵",
+      "year": 1938,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "jp",
+      "title": "桃太郎 海之神兵",
+      "year": 1942,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "jp",
+      "title": "陆军",
+      "year": 1944,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "jp",
+      "title": "微风",
+      "year": 1945,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "jp",
+      "title": "我于青春无悔",
+      "year": 1946,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "jp",
+      "title": "青春残酷物语",
+      "year": 1959,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "jp",
+      "title": "砂之女",
+      "year": 1962,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "jp",
+      "title": "东京奥运会",
+      "year": 1965,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "jp",
+      "title": "绞死刑",
+      "year": 1967,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "jp",
+      "title": "无人知晓",
+      "year": 2003,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "us",
+      "title": "弗雷德·奥特的喷嚏",
+      "year": 1894,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "us",
+      "title": "吻",
+      "year": 1895,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "us",
+      "title": "小麦囤积者",
+      "year": 1908,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "us",
+      "title": "悬念",
+      "year": 1913,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "us",
+      "title": "鞋子",
+      "year": 1916,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "us",
+      "title": "移民",
+      "year": 1916,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "us",
+      "title": "我们藩篱之内",
+      "year": 1920,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "us",
+      "title": "爵士歌手",
+      "year": 1927,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "us",
+      "title": "汽船威利号",
+      "year": 1928,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "us",
+      "title": "科学怪人",
+      "year": 1929,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "us",
+      "title": "白雪公主和七个小矮人",
+      "year": 1937,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "us",
+      "title": "卡萨布兰卡",
+      "year": 1942,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "us",
+      "title": "影子",
+      "year": 1959,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "us",
+      "title": "阳光下的葡萄干",
+      "year": 1959,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "us",
+      "title": "精神病患者",
+      "year": 1960,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "us",
+      "title": "邦妮和克莱德",
+      "year": 1967,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "us",
+      "title": "甜蜜甜蜜贝克的坏歌",
+      "year": 1970,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "us",
+      "title": "杀羊人",
+      "year": 1976,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "us",
+      "title": "星球大战",
+      "year": 1977,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "us",
+      "title": "E.T.外星人",
+      "year": 1981,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "us",
+      "title": "终结者2：审判日",
+      "year": 1990,
+      "reason": "no-exact-tmdb-match"
+    },
+    {
+      "countryCode": "us",
+      "title": "指环王：护戒使者",
+      "year": 2001,
+      "reason": "no-exact-tmdb-match"
+    }
+  ]
+}

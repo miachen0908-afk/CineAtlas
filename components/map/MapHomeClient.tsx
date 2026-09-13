@@ -206,6 +206,23 @@ export function MapHomeClient({ films, initialFilters }: MapHomeClientProps) {
     [films, yearStart, yearEnd, visibleDrawerCode, selectedGenreId]
   );
 
+  const countryFilmStats = useMemo(() => {
+    if (!visibleDrawerCode) return { yearRangeLabel: null, count: 0 };
+    const validFilms = films.filter(
+      (film) =>
+        film.primaryProductionCountry === visibleDrawerCode &&
+        Number.isInteger(film.year) &&
+        film.year >= 1895 &&
+        film.year <= new Date().getFullYear() + 1
+    );
+    if (validFilms.length === 0) return { yearRangeLabel: null, count: 0 };
+    const years = validFilms.map((film) => film.year);
+    return {
+      yearRangeLabel: `${Math.min(...years)}—${Math.max(...years)}`,
+      count: validFilms.length,
+    };
+  }, [films, visibleDrawerCode]);
+
   const selectedFilm = useMemo(() => {
     if (!selectedFilmId) return null;
     const film = films.find((item) => item.id === selectedFilmId);
@@ -517,6 +534,8 @@ export function MapHomeClient({ films, initialFilters }: MapHomeClientProps) {
             <CountryFilmDrawer
               countryCode={uiReady ? visibleDrawerCode : null}
               films={drawerFilms}
+              countryYearRangeLabel={countryFilmStats.yearRangeLabel}
+              countryFilmCount={countryFilmStats.count}
               yearRangeLabel={yearRangeLabel}
               genreLabel={selectedGenreLabel}
               mapQuery={mapQuery}
