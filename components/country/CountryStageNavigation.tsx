@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type ReactNode, type Ref } from "react";
 import { useReducedMotion } from "framer-motion";
 import type { CinemaHistoryStage } from "@/types/cinema";
 
@@ -8,6 +8,8 @@ type Props = {
   stages: CinemaHistoryStage[];
   activeStageId: string;
   onSelectStage: (stageId: string) => void;
+  controls: ReactNode;
+  ref: Ref<HTMLElement>;
 };
 
 const EDGE_EPSILON = 2;
@@ -16,6 +18,8 @@ export function CountryStageNavigation({
   stages,
   activeStageId,
   onSelectStage,
+  controls,
+  ref,
 }: Props) {
   const trackRef = useRef<HTMLDivElement>(null);
   const buttonRefs = useRef(new Map<string, HTMLButtonElement>());
@@ -71,11 +75,15 @@ export function CountryStageNavigation({
 
   return (
     <nav
-      className="sticky top-0 z-30 mx-auto w-full max-w-[1520px] border-y border-white/[0.04] bg-black/82 py-3.5 backdrop-blur-xl"
+      ref={ref}
+      className="sticky top-0 z-30 mx-auto w-full max-w-[1520px] border-y border-white/[0.04] bg-black/82 py-2.5 backdrop-blur-xl"
       aria-label="光影长河阶段导航"
     >
-      <div className="relative w-full">
-        <p className="mb-2 px-11 text-sm font-medium tracking-[0.2em] text-[#e2c574]/75">光影长河</p>
+      <div className="flex items-center justify-between gap-2 px-3 md:px-11">
+        <p className="text-sm font-medium tracking-[0.12em] text-[#e2c574]/75 md:tracking-[0.2em]">光影长河</p>
+        {controls}
+      </div>
+      {stages.length > 0 && <div className="relative mt-2 w-full">
         <div
           ref={trackRef}
           className="stage-navigation-track relative flex cursor-grab snap-x snap-mandatory gap-4 overflow-x-auto overscroll-x-contain px-9 pb-1 active:cursor-grabbing md:px-11"
@@ -176,7 +184,7 @@ export function CountryStageNavigation({
         <div className={`pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-black via-black/80 to-transparent transition-opacity ${canScrollRight ? "opacity-100" : "opacity-0"}`} aria-hidden />
         {canScrollLeft && <button type="button" onClick={() => scrollPage(-1)} className="absolute left-0 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-black/75 text-[1.05rem] text-white/65 outline-none backdrop-blur focus-visible:ring-2 focus-visible:ring-[#8be2d5]/70" aria-label="向左浏览更多光影长河阶段">‹</button>}
         {canScrollRight && <button type="button" onClick={() => scrollPage(1)} className="absolute right-0 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full bg-black/75 text-[1.05rem] text-white/65 outline-none backdrop-blur focus-visible:ring-2 focus-visible:ring-[#8be2d5]/70" aria-label="向右浏览更多光影长河阶段">›</button>}
-      </div>
+      </div>}
     </nav>
   );
 }

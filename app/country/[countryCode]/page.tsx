@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import { CountryPageClient } from "@/components/country/CountryPageClient";
 import { CountryArchiveBackground } from "@/components/country/CountryArchiveBackground";
 import { MapQuerySync } from "@/components/map/MapQuerySync";
+import { getCountryHistoryVideos } from "@/lib/countryHistoryVideos";
 import {
   getSiteCountryHistoryPageData,
   getSiteFilms,
@@ -35,6 +36,7 @@ export default async function CountryPage({ params }: Props) {
         allFilms={allFilms}
         history={historyData.history}
         editorState={historyData.editorState}
+        videos={getCountryHistoryVideos(countryCode, historyData.history, allFilms)}
       />
     </CountryArchiveBackground>
   );

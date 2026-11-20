@@ -125,6 +125,19 @@ export type CinemaHistoryMedia =
   | (CinemaHistoryMediaBase & { kind: "image"; thumbnailUrl?: string })
   | (CinemaHistoryMediaBase & { kind: "video"; thumbnailUrl: string });
 
+export type CountryHistoryVideo = {
+  stageId: string;
+  eventId: string;
+  filmId?: string;
+  filmTitle: string;
+  year: number;
+  title: string;
+  kind: "full-film" | "clip" | "analysis" | "trailer" | "interview" | "historical";
+  url: string;
+  coverUrl?: string;
+  posterUrl?: string;
+};
+
 export type CinemaHistoryArchiveFilm = {
   id: string;
   title: string;
