@@ -13,6 +13,28 @@
     },
     {
       "stageId": "introduction-and-early-exploration",
+      "eventId": "independent-filmmaking-begins-1905",
+      "filmId": "ding-jun-shan-1905",
+      "filmTitle": "定军山",
+      "year": 1905,
+      "title": "中国第一部电影《定军山》",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1eM4y1o7eb/",
+      "coverUrl": "https://i1.hdslb.com/bfs/archive/61b766b3e03df7a7c4a55d0e6141bfe9c4ce4a1d.jpg"
+    },
+    {
+      "stageId": "introduction-and-early-exploration",
+      "eventId": "story-short-films-emerge-1913",
+      "filmId": "the-difficult-couple-1913",
+      "filmTitle": "难夫难妻",
+      "year": 1913,
+      "title": "《难夫难妻》——讲述故事片的故事",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1No4y167Gz/",
+      "coverUrl": "https://i1.hdslb.com/bfs/archive/b11dcad56004a9a8e31fa2914f3be8d23d0597b2.jpg"
+    },
+    {
+      "stageId": "introduction-and-early-exploration",
       "eventId": "mingxing-film-company-founded-1922",
       "filmId": "labourers-love-1922",
       "filmTitle": "劳工之爱情",
@@ -35,6 +57,17 @@
     },
     {
       "stageId": "rise-of-national-film-industry",
+      "eventId": "orphan-rescues-ancestor-1923",
+      "filmId": "archive-orphan-rescues-ancestor-1923",
+      "filmTitle": "孤儿救祖记",
+      "year": 1923,
+      "title": "《孤儿救祖记》——力挽狂澜",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1cSHNehEPK/",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/e5b3d9e9440ee198853489e89312aa4f0063471a.jpg"
+    },
+    {
+      "stageId": "rise-of-national-film-industry",
       "eventId": "martial-arts-supernatural-rise-1927-1928",
       "filmTitle": "盘丝洞",
       "year": 1927,
@@ -42,6 +75,37 @@
       "kind": "clip",
       "url": "https://www.bilibili.com/video/BV1nQ4y197uG/",
       "coverUrl": "https://i2.hdslb.com/bfs/archive/64674b1558c42cf2c6481aaf1a3bf2807daba10e.png"
+    },
+    {
+      "stageId": "rise-of-national-film-industry",
+      "eventId": "martial-arts-supernatural-rise-1927-1928",
+      "filmTitle": "盘丝洞",
+      "year": 1927,
+      "title": "百年前就拍这么野？揭秘第一部西游IP电影因何神秘消失【盘丝洞（1927）】",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1hFLUzrE8N/",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/3102784f0a579d114497be86936492c83cbe6603.jpg"
+    },
+    {
+      "stageId": "rise-of-national-film-industry",
+      "eventId": "martial-arts-supernatural-rise-1927-1928",
+      "filmId": "burning-red-lotus-temple-1928",
+      "filmTitle": "火烧红莲寺",
+      "year": 1928,
+      "title": "【食目】【武海拾遗】【《火烧红莲寺》】",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1nx411u7ys/",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/d156345c540eb78c1087cd5d849612c03da10a6a.jpg"
+    },
+    {
+      "stageId": "rise-of-national-film-industry",
+      "eventId": "urban-social-turn-1930-1931",
+      "filmTitle": "野草闲花",
+      "year": 1930,
+      "title": "《野草闲花》上映，中国第一首电影插曲由此诞生！【公版考古 vol.0】",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1dJ411q7Vy/",
+      "coverUrl": "https://i1.hdslb.com/bfs/archive/443a8dc30f7e3ae6de300b96929f48b18dacb123.jpg"
     },
     {
       "stageId": "rise-of-national-film-industry",
@@ -66,6 +130,39 @@
       "coverUrl": "https://i2.hdslb.com/bfs/archive/454da615376d32ea3a85bb026db91d2f62f0f18c.jpg"
     },
     {
+      "stageId": "rise-of-national-film-industry",
+      "eventId": "urban-social-turn-1930-1931",
+      "filmId": "love-and-duty-1931",
+      "filmTitle": "恋爱与义务",
+      "year": 1931,
+      "title": "民国时期出轨是什么代价？——阮玲玉老电影《恋爱与义务》随感",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1fd4y1C7zh/",
+      "coverUrl": "https://i1.hdslb.com/bfs/archive/a55ff63ed707800a22c23f38321a3491beda152e.jpg"
+    },
+    {
+      "stageId": "rise-of-national-film-industry",
+      "eventId": "urban-social-turn-1930-1931",
+      "filmId": "peach-blossom-weeps-blood-1931",
+      "filmTitle": "桃花泣血记",
+      "year": 1931,
+      "title": "阮玲玉金焰：老电影桃花泣血记 爱情里是否要分穷富",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1mC41187Tv/",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/14b6f4fdf7c4844c3a138257c4bb2d3b01da0e44.jpg"
+    },
+    {
+      "stageId": "rise-of-national-film-industry",
+      "eventId": "chinese-sound-film-emerges-1931",
+      "filmId": "sing-song-girl-red-peony-1931",
+      "filmTitle": "歌女红牡丹",
+      "year": 1931,
+      "title": "【影视小知识】中国第一部有声电影—《歌女红牡丹》",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1V24y1M7KW/",
+      "coverUrl": "https://i1.hdslb.com/bfs/archive/bd5351e479f1fa74cfc81aaf69d57e5a1ed3ebd4.jpg"
+    },
+    {
       "stageId": "left-wing-film-and-sound-transition",
       "eventId": "left-wing-film-year-1933",
       "filmId": "spring-silkworm-1933",
@@ -85,6 +182,26 @@
       "title": "不褪色的胶片记忆——《春蚕》",
       "kind": "analysis",
       "url": "https://tv.cctv.com/2015/09/22/VIDE1442917992585326.shtml"
+    },
+    {
+      "stageId": "left-wing-film-and-sound-transition",
+      "eventId": "left-wing-film-year-1933",
+      "filmTitle": "小玩意",
+      "year": 1933,
+      "title": "《小玩意》· B站正片",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/bangumi/play/ep370346",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/300375f61290a12841be5958c463e0870250f7e8.jpg"
+    },
+    {
+      "stageId": "left-wing-film-and-sound-transition",
+      "eventId": "left-wing-film-year-1933",
+      "filmTitle": "小玩意",
+      "year": 1933,
+      "title": "《小玩意》· 北师大鉴赏",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1z5411p7W8/?p=2",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/cfb1e4c230378d9603ff19075b362abe01b29d62.jpg"
     },
     {
       "stageId": "left-wing-film-and-sound-transition",
@@ -121,6 +238,39 @@
     },
     {
       "stageId": "left-wing-film-and-sound-transition",
+      "eventId": "urban-underclass-films-1934",
+      "filmId": "fishermans-song-1934",
+      "filmTitle": "渔光曲",
+      "year": 1934,
+      "title": "《渔光曲》· B站正片",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/video/BV1tb411W73R/?p=20",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/e1589bf839cb05e553597811a8f7737af957d795.jpg"
+    },
+    {
+      "stageId": "left-wing-film-and-sound-transition",
+      "eventId": "urban-underclass-films-1934",
+      "filmId": "fishermans-song-1934",
+      "filmTitle": "渔光曲",
+      "year": 1934,
+      "title": "《渔光曲》· 北师大鉴赏",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1z5411p7W8/?p=4",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/cfb1e4c230378d9603ff19075b362abe01b29d62.jpg"
+    },
+    {
+      "stageId": "left-wing-film-and-sound-transition",
+      "eventId": "realism-matures-1935",
+      "filmId": "the-big-road-1935",
+      "filmTitle": "大路",
+      "year": 1934,
+      "title": "1934年 大路 4k 超清 小昕修复版",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/video/BV1uf4y1n74s/",
+      "coverUrl": "https://i1.hdslb.com/bfs/archive/d7a1611aeb46926dcb742f63b7585d1506176a45.jpg"
+    },
+    {
+      "stageId": "left-wing-film-and-sound-transition",
       "eventId": "realism-matures-1935",
       "filmId": "new-woman-1935",
       "filmTitle": "新女性",
@@ -129,6 +279,28 @@
       "kind": "full-film",
       "url": "https://www.bilibili.com/video/BV1DvcYzhEeB/",
       "coverUrl": "https://i2.hdslb.com/bfs/archive/f82daf1379dea51e1fd0a41781143f71396fced0.jpg"
+    },
+    {
+      "stageId": "left-wing-film-and-sound-transition",
+      "eventId": "realism-matures-1935",
+      "filmId": "children-of-troubled-times-1935",
+      "filmTitle": "风云儿女",
+      "year": 1935,
+      "title": "《风云儿女》· B站正片",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/bangumi/play/ep313073",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/9b41e7b1f7e4f66b7d8db091165c00453177bd92.jpg"
+    },
+    {
+      "stageId": "left-wing-film-and-sound-transition",
+      "eventId": "realism-matures-1935",
+      "filmId": "children-of-troubled-times-1935",
+      "filmTitle": "风云儿女",
+      "year": 1935,
+      "title": "【百部红色电影推荐】《风云儿女》：在战斗的号角中唱响《义勇军进行曲》",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1JA411P7qv/",
+      "coverUrl": "https://i1.hdslb.com/bfs/archive/45cbf92baf08ce15f9759b1d2208415bc6ad7918.jpg"
     },
     {
       "stageId": "left-wing-film-and-sound-transition",
@@ -164,6 +336,17 @@
       "coverUrl": "https://i0.hdslb.com/bfs/archive/f9d705d175cbb3c6117c75b23762e269d4927cdc.jpg"
     },
     {
+      "stageId": "left-wing-film-and-sound-transition",
+      "eventId": "urban-realism-peaks-1937",
+      "filmId": "crossroads-1937",
+      "filmTitle": "十字街头",
+      "year": 1937,
+      "title": "【剧情】十字街头 1937年【CCTV6高清720p】",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/video/BV18x411i7Qk/",
+      "coverUrl": "https://i1.hdslb.com/bfs/archive/eccec7888f55083fd35f22a520e41e60b3ef6406.png"
+    },
+    {
       "stageId": "wartime-film-and-regional-divergence",
       "eventId": "eight-hundred-heroes-1938",
       "filmId": "archive-eight-hundred-heroes-1938",
@@ -184,6 +367,17 @@
       "kind": "full-film",
       "url": "https://www.bilibili.com/video/BV1Eu411U7Sd/",
       "coverUrl": "https://i2.hdslb.com/bfs/archive/cbdfb0f2332e2ca5a79694f59ea33ff0b7a56aed.jpg"
+    },
+    {
+      "stageId": "wartime-film-and-regional-divergence",
+      "eventId": "light-of-east-asia-1940",
+      "filmId": "archive-light-of-east-asia-1940",
+      "filmTitle": "东亚之光",
+      "year": 1940,
+      "title": "东亚之光 (1940)【导演：何非光 主演: 郑君里 / 张瑞芳 / 王玨】",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/video/BV1e5411Y7gt/",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/88a36f049aff666a1ee517b2a26986b4a7208fa9.jpg"
     },
     {
       "stageId": "wartime-film-and-regional-divergence",
@@ -208,6 +402,28 @@
       "coverUrl": "https://i0.hdslb.com/bfs/archive/1e988f040f76e5843a25c111d5c2400bbd385ba6.jpg"
     },
     {
+      "stageId": "wartime-film-and-regional-divergence",
+      "eventId": "home-1941",
+      "filmId": "archive-home-1941",
+      "filmTitle": "家",
+      "year": 1941,
+      "title": "【经典/剧情】家 1941 （电影资料馆藏）",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/video/BV1Ls411B7D2/",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/a55350a8d3d1aff7a302230cf225cddc35df8ef5.jpg"
+    },
+    {
+      "stageId": "wartime-film-and-regional-divergence",
+      "eventId": "eternal-glory-1943",
+      "filmId": "archive-eternal-glory-1943",
+      "filmTitle": "万世流芳",
+      "year": 1943,
+      "title": "勿忘九一八——完整字幕版国语长片《万世流芳》（1943年）李香兰、高占非、陈云裳、王引等主演",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/video/BV1BxptzUE6H/",
+      "coverUrl": "https://i1.hdslb.com/bfs/archive/93396346674803ebd2ac60c21fd751eb59e6472f.jpg"
+    },
+    {
       "stageId": "postwar-revival-and-artistic-peak",
       "eventId": "spring-river-flows-east-1947",
       "filmId": "archive-spring-river-flows-east-1947",
@@ -228,6 +444,28 @@
       "kind": "analysis",
       "url": "https://www.bilibili.com/video/BV1x7411H7os/?p=5",
       "coverUrl": "https://i0.hdslb.com/bfs/archive/f33a6e836792c7f94a7d72ece388fce24fa0c5b7.jpg"
+    },
+    {
+      "stageId": "postwar-revival-and-artistic-peak",
+      "eventId": "eight-thousand-li-1947",
+      "filmId": "archive-eight-thousand-li-1947",
+      "filmTitle": "八千里路云和月",
+      "year": 1947,
+      "title": "《八千里路云和月》· B站正片",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/bangumi/play/ep338215",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/2173b81e1b2cc085b12d7c762747dc347a5777fc.jpg"
+    },
+    {
+      "stageId": "postwar-revival-and-artistic-peak",
+      "eventId": "phony-phoenix-1947",
+      "filmId": "archive-phony-phoenix-1947",
+      "filmTitle": "假凤虚凰",
+      "year": 1947,
+      "title": "【剧情/喜剧】假凤虚凰（1947）",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/video/BV1Zp4y1t7ML/",
+      "coverUrl": "https://i1.hdslb.com/bfs/archive/2691c35b1cc3b783a9c41c0ab0a0a6b3c0457003.jpg"
     },
     {
       "stageId": "postwar-revival-and-artistic-peak",
@@ -274,6 +512,39 @@
       "coverUrl": "https://i1.hdslb.com/bfs/archive/63c221693e014b0e8e3c23f6347a75f03acd85db.jpg"
     },
     {
+      "stageId": "postwar-revival-and-artistic-peak",
+      "eventId": "myriad-lights-1948",
+      "filmId": "archive-myriad-lights-1948",
+      "filmTitle": "万家灯火",
+      "year": 1948,
+      "title": "《万家灯火》· B站正片",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/bangumi/play/ep313031",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/0a350e90d445b5e45c5f591be15c65ed6eed4128.jpg"
+    },
+    {
+      "stageId": "postwar-revival-and-artistic-peak",
+      "eventId": "myriad-lights-1948",
+      "filmId": "archive-myriad-lights-1948",
+      "filmTitle": "万家灯火",
+      "year": 1948,
+      "title": "《万家灯火》· 北师大鉴赏",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1x7411H7os/?p=6",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/f33a6e836792c7f94a7d72ece388fce24fa0c5b7.jpg"
+    },
+    {
+      "stageId": "postwar-revival-and-artistic-peak",
+      "eventId": "the-bridge-1949",
+      "filmId": "archive-the-bridge-1949",
+      "filmTitle": "桥",
+      "year": 1949,
+      "title": "《桥》· B站正片",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/video/BV1tb411W73R/?p=73",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/e1589bf839cb05e553597811a8f7737af957d795.jpg"
+    },
+    {
       "stageId": "seventeen-years-cinema",
       "eventId": "this-life-of-mine-1950",
       "filmId": "archive-this-life-of-mine-1950",
@@ -297,6 +568,72 @@
     },
     {
       "stageId": "seventeen-years-cinema",
+      "eventId": "life-of-wu-xun-1951",
+      "filmId": "archive-life-of-wu-xun-1951",
+      "filmTitle": "武训传",
+      "year": 1951,
+      "title": "《武训传》· B站正片",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/bangumi/play/ep313068",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/2544f4a44db959b24b13c481fd0775abd675e219.png"
+    },
+    {
+      "stageId": "seventeen-years-cinema",
+      "eventId": "life-of-wu-xun-1951",
+      "filmId": "archive-life-of-wu-xun-1951",
+      "filmTitle": "武训传",
+      "year": 1951,
+      "title": "从贫农到“义学正”，为何教员坚决批判？深扒《武训传》历史背景",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1noXPBLEq3/",
+      "coverUrl": "https://i1.hdslb.com/bfs/archive/ab51db6e27577ffa182db6cc944ce31f9abdf7a3.jpg"
+    },
+    {
+      "stageId": "seventeen-years-cinema",
+      "eventId": "butterfly-lovers-1954",
+      "filmId": "archive-butterfly-lovers-1954",
+      "filmTitle": "梁山伯与祝英台",
+      "year": 1954,
+      "title": "《梁山伯与祝英台》· B站正片",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/bangumi/play/ep315566",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/963697358341eb781c9ef984f684d9b72185205b.jpg"
+    },
+    {
+      "stageId": "seventeen-years-cinema",
+      "eventId": "new-years-sacrifice-1956",
+      "filmId": "archive-new-years-sacrifice-1956",
+      "filmTitle": "祝福",
+      "year": 1956,
+      "title": "《祝福》· B站正片（会员）",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/bangumi/play/ep313066",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/a7f9679132b8672969d30a72fb42e1fc3b40d3a5.jpg"
+    },
+    {
+      "stageId": "seventeen-years-cinema",
+      "eventId": "new-years-sacrifice-1956",
+      "filmId": "archive-new-years-sacrifice-1956",
+      "filmTitle": "祝福",
+      "year": 1956,
+      "title": "《祝福》· 北师大鉴赏",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1z5411p7W8/?p=15",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/cfb1e4c230378d9603ff19075b362abe01b29d62.jpg"
+    },
+    {
+      "stageId": "seventeen-years-cinema",
+      "eventId": "woman-basketball-player-no-5-1957",
+      "filmId": "archive-woman-basketball-player-no-5-1957",
+      "filmTitle": "女篮五号",
+      "year": 1957,
+      "title": "《女篮五号》· B站正片",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/bangumi/play/ep314219",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/c1f6339fa695c988dc4f7ca3b0bcab78088439c5.jpg"
+    },
+    {
+      "stageId": "seventeen-years-cinema",
       "eventId": "shop-of-the-lin-family-1959",
       "filmId": "archive-shop-of-the-lin-family-1959",
       "filmTitle": "林家铺子",
@@ -316,6 +653,50 @@
       "kind": "analysis",
       "url": "https://www.bilibili.com/video/BV1z5411p7W8/?p=18",
       "coverUrl": "https://i2.hdslb.com/bfs/archive/cfb1e4c230378d9603ff19075b362abe01b29d62.jpg"
+    },
+    {
+      "stageId": "seventeen-years-cinema",
+      "eventId": "song-of-youth-1959",
+      "filmId": "archive-song-of-youth-1959",
+      "filmTitle": "青春之歌",
+      "year": 1959,
+      "title": "《青春之歌》· B站正片",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/bangumi/play/ep313051",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/6a8b5af6c3edfbac4b63dcef9f4ef8270ad6a5e8.jpg"
+    },
+    {
+      "stageId": "seventeen-years-cinema",
+      "eventId": "song-of-youth-1959",
+      "filmId": "archive-song-of-youth-1959",
+      "filmTitle": "青春之歌",
+      "year": 1959,
+      "title": "《青春之歌》· 北师大鉴赏",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1z5411p7W8/?p=19",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/cfb1e4c230378d9603ff19075b362abe01b29d62.jpg"
+    },
+    {
+      "stageId": "seventeen-years-cinema",
+      "eventId": "five-golden-flowers-1960",
+      "filmId": "archive-five-golden-flowers-1960",
+      "filmTitle": "五朵金花",
+      "year": 1959,
+      "title": "《五朵金花》· B站正片",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/bangumi/play/ep313064",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/79d2846cad145dd748c61ff0988777242bcf6571.png"
+    },
+    {
+      "stageId": "seventeen-years-cinema",
+      "eventId": "five-golden-flowers-1960",
+      "filmId": "archive-five-golden-flowers-1960",
+      "filmTitle": "五朵金花",
+      "year": 1959,
+      "title": "《五朵金花》· 北师大鉴赏",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1x7411H7os/?p=8",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/f33a6e836792c7f94a7d72ece388fce24fa0c5b7.jpg"
     },
     {
       "stageId": "seventeen-years-cinema",
@@ -362,6 +743,72 @@
       "coverUrl": "https://i1.hdslb.com/bfs/archive/20121c59bb15a5a6e1c93b15e5e20b14dc9c6f78.jpg"
     },
     {
+      "stageId": "seventeen-years-cinema",
+      "eventId": "early-spring-in-february-1963",
+      "filmId": "archive-early-spring-in-february-1963",
+      "filmTitle": "早春二月",
+      "year": 1963,
+      "title": "《早春二月》· B站正片",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/bangumi/play/ep364193",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/5f5cc8d3092fce8df9993ea97b8d2f03de53f186.jpg"
+    },
+    {
+      "stageId": "seventeen-years-cinema",
+      "eventId": "early-spring-in-february-1963",
+      "filmId": "archive-early-spring-in-february-1963",
+      "filmTitle": "早春二月",
+      "year": 1963,
+      "title": "《早春二月》· 北师大鉴赏",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1z5411p7W8/?p=23",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/cfb1e4c230378d9603ff19075b362abe01b29d62.jpg"
+    },
+    {
+      "stageId": "seventeen-years-cinema",
+      "eventId": "zhang-ga-the-soldier-boy-1964",
+      "filmId": "archive-zhang-ga-the-soldier-boy-1964",
+      "filmTitle": "小兵张嘎",
+      "year": 1963,
+      "title": "《小兵张嘎》· B站正片（会员）",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/bangumi/play/ep313033",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/e53b8f5bbe6e57cdbf10e85ff9808d060acf8422.png"
+    },
+    {
+      "stageId": "seventeen-years-cinema",
+      "eventId": "zhang-ga-the-soldier-boy-1964",
+      "filmId": "archive-zhang-ga-the-soldier-boy-1964",
+      "filmTitle": "小兵张嘎",
+      "year": 1963,
+      "title": "《小兵张嘎》1963年电影，调皮捣蛋的张嘎子成为抗日小英雄",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1Hv4y1n72Y/",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/736054295bf5b4f20311aa7dabf62149d4ea7029.jpg"
+    },
+    {
+      "stageId": "seventeen-years-cinema",
+      "eventId": "stage-sisters-1965",
+      "filmId": "archive-stage-sisters-1965",
+      "filmTitle": "舞台姐妹",
+      "year": 1965,
+      "title": "《舞台姐妹》· B站正片",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/bangumi/play/ep358504",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/a6a61d293c36c9491c3ee2a5bbe853848e8d03f1.jpg"
+    },
+    {
+      "stageId": "cultural-revolution-cinema",
+      "eventId": "taking-tiger-mountain-by-strategy-1970",
+      "filmId": "archive-taking-tiger-mountain-by-strategy-1970",
+      "filmTitle": "智取威虎山",
+      "year": 1970,
+      "title": "【4K修复】智取威虎山 Taking Tiger Mountain By Stategy（1970）",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/video/BV1zp1TYgEjH/",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/a6fb6ef722b537b6da99dd8c143e93f5bada6d50.jpg"
+    },
+    {
       "stageId": "cultural-revolution-cinema",
       "eventId": "1971-b-red-detachment-of-women-ballet",
       "filmId": "archive-red-detachment-of-women-ballet-1971",
@@ -371,6 +818,28 @@
       "kind": "full-film",
       "url": "https://www.bilibili.com/video/BV1Lb4y1872x/",
       "coverUrl": "https://i2.hdslb.com/bfs/archive/3137c8b54d56abd85b0b5294ce7b7c37c4f9a849.jpg"
+    },
+    {
+      "stageId": "cultural-revolution-cinema",
+      "eventId": "1971-a-red-lantern",
+      "filmId": "archive-red-lantern-1971",
+      "filmTitle": "红灯记",
+      "year": 1971,
+      "title": "【剧情/戏曲】红灯记 (1971) 修复版",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/video/BV1C34y1L7u7/",
+      "coverUrl": "https://i1.hdslb.com/bfs/archive/11dada029794f35eb5718767b331f7ea222a8984.png"
+    },
+    {
+      "stageId": "cultural-revolution-cinema",
+      "eventId": "1971-b-red-detachment-of-women-ballet",
+      "filmId": "archive-red-detachment-of-women-ballet-1971",
+      "filmTitle": "红色娘子军",
+      "year": 1971,
+      "title": "【舞蹈鉴赏】第五期——当代经典芭蕾舞剧《红色娘子军》",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV15V411d72F/",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/0c323efb47f069c4e7d2ce5f203e5f554316ffc1.jpg"
     },
     {
       "stageId": "cultural-revolution-cinema",
@@ -396,6 +865,27 @@
     },
     {
       "stageId": "cultural-revolution-cinema",
+      "eventId": "feature-production-resumes-1973",
+      "filmTitle": "海港",
+      "year": 1972,
+      "title": "【样板戏】《海港 (1972)》彩色高清修复戏曲片 革命现代京剧电影版 码头工人题材舞台剧完整版免费观看老电影",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/video/BV1TC4y1w7nF/",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/3f1a6fca2cb6d748bc9ecf7a6a49c4efa5cffebb.jpg"
+    },
+    {
+      "stageId": "cultural-revolution-cinema",
+      "eventId": "pioneers-1974",
+      "filmId": "archive-pioneers-1974",
+      "filmTitle": "创业",
+      "year": 1974,
+      "title": "【国产老电影】创业（1974）",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/video/BV1yW411j7WM/",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/5c980a2173cf796e5c5f0032422f7b04ce1c28d4.jpg"
+    },
+    {
+      "stageId": "cultural-revolution-cinema",
       "eventId": "1975-a-sparkling-red-star",
       "filmId": "archive-sparkling-red-star-1975",
       "filmTitle": "闪闪的红星",
@@ -415,6 +905,94 @@
       "kind": "analysis",
       "url": "https://www.bilibili.com/video/BV1Cr4y127Tz/",
       "coverUrl": "https://i1.hdslb.com/bfs/archive/0e20523784e1fa55b0c102d8a5b314020d35202d.jpg"
+    },
+    {
+      "stageId": "cultural-revolution-cinema",
+      "eventId": "1975-b-hai-xia",
+      "filmId": "archive-hai-xia-1975",
+      "filmTitle": "海霞",
+      "year": 1975,
+      "title": "《海霞》· B站正片（会员）",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/bangumi/play/ep825662",
+      "coverUrl": "https://i0.hdslb.com/bfs/bangumi/image/f6a0dc9e45dc942b7682e13fbd8d3beacf5362ba.png"
+    },
+    {
+      "stageId": "new-period-revival",
+      "eventId": "evening-rain-1978",
+      "filmId": "archive-evening-rain-1978",
+      "filmTitle": "巴山夜雨",
+      "year": 1980,
+      "title": "【高清修复】巴山夜雨 · 1980",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/video/BV15cDCBuE8C/",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/28d176299a8dffbaef0dcdfc08c863485da532d7.jpg"
+    },
+    {
+      "stageId": "new-period-revival",
+      "eventId": "evening-rain-1978",
+      "filmId": "archive-evening-rain-1978",
+      "filmTitle": "巴山夜雨",
+      "year": 1980,
+      "title": "《巴山夜雨》· 北师大鉴赏",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1x7411H7os/?p=10",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/f33a6e836792c7f94a7d72ece388fce24fa0c5b7.jpg"
+    },
+    {
+      "stageId": "new-period-revival",
+      "eventId": "1980-a-romance-on-lushan-mountain",
+      "filmId": "archive-romance-on-lushan-mountain-1980",
+      "filmTitle": "庐山恋",
+      "year": 1980,
+      "title": "《庐山恋》· 北师大鉴赏",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1z5411p7W8/?p=26",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/cfb1e4c230378d9603ff19075b362abe01b29d62.jpg"
+    },
+    {
+      "stageId": "new-period-revival",
+      "eventId": "1980-b-legend-of-tianyun-mountain",
+      "filmId": "archive-legend-of-tianyun-mountain-1980",
+      "filmTitle": "天云山传奇",
+      "year": 1980,
+      "title": "【剧情/战争】天云山传奇（1980）【谢晋】",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/video/BV1x7411q754/",
+      "coverUrl": "https://i1.hdslb.com/bfs/archive/bd4bd34bd0a50efe5fad17321ed3528c4bd220f1.png"
+    },
+    {
+      "stageId": "new-period-revival",
+      "eventId": "1980-b-legend-of-tianyun-mountain",
+      "filmId": "archive-legend-of-tianyun-mountain-1980",
+      "filmTitle": "天云山传奇",
+      "year": 1980,
+      "title": "《天云山传奇》· 北师大鉴赏",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1x7411H7os/?p=11",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/f33a6e836792c7f94a7d72ece388fce24fa0c5b7.jpg"
+    },
+    {
+      "stageId": "new-period-revival",
+      "eventId": "1982-a-rickshaw-boy",
+      "filmId": "archive-rickshaw-boy-1982",
+      "filmTitle": "骆驼祥子",
+      "year": 1982,
+      "title": "愚人的安慰只有自欺，万字解说骆驼祥子",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1Jycte6EDY/",
+      "coverUrl": "https://i1.hdslb.com/bfs/archive/fc78f9f847bc28bd785f10aeeeb64e3231a6b45b.jpg"
+    },
+    {
+      "stageId": "new-period-revival",
+      "eventId": "1982-b-the-herdsman",
+      "filmId": "archive-the-herdsman-1982",
+      "filmTitle": "牧马人",
+      "year": 1982,
+      "title": "《牧马人》· 北师大鉴赏",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1z5411p7W8/?p=29",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/cfb1e4c230378d9603ff19075b362abe01b29d62.jpg"
     },
     {
       "stageId": "new-period-revival",
@@ -461,6 +1039,39 @@
     },
     {
       "stageId": "new-period-revival",
+      "eventId": "black-cannon-incident-1985",
+      "filmId": "archive-black-cannon-incident-1985",
+      "filmTitle": "黑炮事件",
+      "year": 1985,
+      "title": "《黑炮事件》· 细读经典：30多年前的国产电影有多敢拍？",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1zv4y1a7o2/",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/198a8dfab4d7237df28baf5f94f530035338c37f.jpg"
+    },
+    {
+      "stageId": "new-period-revival",
+      "eventId": "hibiscus-town-1986",
+      "filmId": "archive-hibiscus-town-1986",
+      "filmTitle": "芙蓉镇",
+      "year": 1986,
+      "title": "芙蓉镇 蓝光国语中字 完整版",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/video/BV1QccjzSEdx/",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/af6f5b69471c98441ea53f478c0930aef5fee9ee.jpg"
+    },
+    {
+      "stageId": "new-period-revival",
+      "eventId": "hibiscus-town-1986",
+      "filmId": "archive-hibiscus-town-1986",
+      "filmTitle": "芙蓉镇",
+      "year": 1986,
+      "title": "“活下去，像牲口一样活下去！”国产殿堂级高分电影《芙蓉镇》",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1Cj411X7uZ/",
+      "coverUrl": "https://i1.hdslb.com/bfs/archive/46c725a8850cd93a95832e65cc6ef3173cb82320.jpg"
+    },
+    {
+      "stageId": "new-period-revival",
       "eventId": "red-sorghum-1987",
       "filmId": "archive-red-sorghum-1987",
       "filmTitle": "红高粱",
@@ -491,6 +1102,72 @@
       "kind": "analysis",
       "url": "https://www.bilibili.com/video/BV1Hi4y1V7vJ/",
       "coverUrl": "https://i1.hdslb.com/bfs/archive/dc38bf6837bb0b5bddd5d2414baacc1a4126bce7.jpg"
+    },
+    {
+      "stageId": "new-period-revival",
+      "eventId": "the-troubleshooters-1988",
+      "filmId": "archive-the-troubleshooters-1988",
+      "filmTitle": "顽主",
+      "year": 1988,
+      "title": "喜剧 顽主（1988）张国立/葛优/梁天/马晓晴/潘虹",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/video/BV1H1JczgEWL/",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/6a979f6fb8220b0b8bc8f13e76537014f12ec594.jpg"
+    },
+    {
+      "stageId": "new-period-revival",
+      "eventId": "the-troubleshooters-1988",
+      "filmId": "archive-the-troubleshooters-1988",
+      "filmTitle": "顽主",
+      "year": 1988,
+      "title": "内容相当“粗俗”！这部33年前的国产老片，现在导演拍不出来了《顽主》",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1N44y1575X/",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/acb89e82dab45f74a9fe2b6026649cba724dae45.jpg"
+    },
+    {
+      "stageId": "new-period-revival",
+      "eventId": "1989-a-black-snow",
+      "filmId": "archive-black-snow-1989",
+      "filmTitle": "本命年",
+      "year": 1989,
+      "title": "80年代中国电影的谢幕式《本命年》1990",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/video/BV1yh4y1m7oy/",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/917ac6927605679406e73eed7746d91764fec244.jpg"
+    },
+    {
+      "stageId": "new-period-revival",
+      "eventId": "1989-a-black-snow",
+      "filmId": "archive-black-snow-1989",
+      "filmTitle": "本命年",
+      "year": 1989,
+      "title": "《本命年》· 细读经典：最内敛的姜文，这部电影里藏着一代人的迷茫",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1D49SBxEsk/",
+      "coverUrl": "https://i1.hdslb.com/bfs/archive/247161295ec22112736306da8961b40fce1b121c.jpg"
+    },
+    {
+      "stageId": "market-transition-and-diversification",
+      "eventId": "ju-dou-1990",
+      "filmId": "archive-ju-dou-1990",
+      "filmTitle": "菊豆",
+      "year": 1990,
+      "title": "文化糟粕？这部顶级国产片，被误读了30年《菊豆》",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV13E411y7uk/",
+      "coverUrl": "https://i1.hdslb.com/bfs/archive/ed82704e4d84b21cb26c68b85cf0f7c49dd52c19.jpg"
+    },
+    {
+      "stageId": "market-transition-and-diversification",
+      "eventId": "raise-the-red-lantern-1991",
+      "filmId": "archive-raise-the-red-lantern-1991",
+      "filmTitle": "大红灯笼高高挂",
+      "year": 1991,
+      "title": "拉片细品：“吃人”的深宅大院，解读《大红灯笼高高挂》到底好在哪？",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1454y1U7EK/",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/07ea3a63c51d4a51cfb8e7a515a0e4b221b6bcb9.jpg"
     },
     {
       "stageId": "market-transition-and-diversification",
@@ -549,6 +1226,49 @@
     },
     {
       "stageId": "market-transition-and-diversification",
+      "eventId": "imported-blockbusters-1994",
+      "filmTitle": "亡命天涯",
+      "year": 1993,
+      "title": "《亡命天涯》· 原版（会员）",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/bangumi/play/ep3321344",
+      "coverUrl": "https://i0.hdslb.com/bfs/bangumi/image/786eb538e8a1948de58b37f618f4889156eab62f.png"
+    },
+    {
+      "stageId": "market-transition-and-diversification",
+      "eventId": "in-the-heat-of-the-sun-1994",
+      "filmId": "archive-in-the-heat-of-the-sun-1994",
+      "filmTitle": "阳光灿烂的日子",
+      "year": 1994,
+      "title": "【木鱼微剧场】《阳光灿烂的日子》姜文导演作品",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1zW411n7pD/",
+      "coverUrl": "https://i1.hdslb.com/bfs/archive/b84a33b208e3cc19fb8960902569f16dd78a7947.jpg"
+    },
+    {
+      "stageId": "market-transition-and-diversification",
+      "eventId": "to-live-1994",
+      "filmId": "archive-to-live-1994",
+      "filmTitle": "活着",
+      "year": 1994,
+      "title": "有些人只是活着，就用尽了全力！余华经典小说改编电影《活着》张艺谋导演！",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1o94y1H7cN/",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/2d860277235f8397b044ff16e223fe24160cd5fe.jpg"
+    },
+    {
+      "stageId": "market-transition-and-diversification",
+      "eventId": "red-cherry-1995",
+      "filmId": "archive-red-cherry-1995",
+      "filmTitle": "红樱桃",
+      "year": 1995,
+      "title": "从纹身视角重新解读童年阴影《红樱桃》",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1Ft42137Ai/",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/201c7899c79cadef7b30b42e87851c2d3dfa4ac2.jpg"
+    },
+    {
+      "stageId": "market-transition-and-diversification",
       "eventId": "the-dream-factory-1997",
       "filmId": "archive-the-dream-factory-1997",
       "filmTitle": "甲方乙方",
@@ -568,6 +1288,116 @@
       "kind": "analysis",
       "url": "https://www.bilibili.com/video/BV1uW421R78c/",
       "coverUrl": "https://i0.hdslb.com/bfs/archive/614e62bebf9ed4ef4e4513d753389ff26cf0ee83.jpg"
+    },
+    {
+      "stageId": "market-transition-and-diversification",
+      "eventId": "be-there-or-be-square-1998",
+      "filmId": "archive-be-there-or-be-square-1998",
+      "filmTitle": "不见不散",
+      "year": 1998,
+      "title": "《不见不散》· B站正片（会员）",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/bangumi/play/ep415492",
+      "coverUrl": "https://i0.hdslb.com/bfs/bangumi/image/5562df7c025855c5897dd5c1fb17907847eed694.png"
+    },
+    {
+      "stageId": "market-transition-and-diversification",
+      "eventId": "be-there-or-be-square-1998",
+      "filmId": "archive-be-there-or-be-square-1998",
+      "filmTitle": "不见不散",
+      "year": 1998,
+      "title": "我心目中最好的贺岁片，“接地气”的幽默，24年后看依旧经典！《不见不散》",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1Yd4y117ub/",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/0e8b53b68cf971877950ca5ff5a8a59ab4dcb659.jpg"
+    },
+    {
+      "stageId": "market-transition-and-diversification",
+      "eventId": "not-one-less-1998",
+      "filmId": "archive-not-one-less-1998",
+      "filmTitle": "一个都不能少",
+      "year": 1999,
+      "title": "13岁女孩成为老师，这部电影没一个专业演员，却感动无数人！《一个都不能少》",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1fAfiYXEF7/",
+      "coverUrl": "https://i1.hdslb.com/bfs/archive/a7127336b2f17c19d5fe63fb34fcce84f1f9ccc0.jpg"
+    },
+    {
+      "stageId": "market-transition-and-diversification",
+      "eventId": "the-road-home-1999",
+      "filmId": "archive-the-road-home-1999",
+      "filmTitle": "我的父亲母亲",
+      "year": 1999,
+      "title": "《我的父亲母亲》· 北师大鉴赏",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1z5411p7W8/?p=46",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/cfb1e4c230378d9603ff19075b362abe01b29d62.jpg"
+    },
+    {
+      "stageId": "market-transition-and-diversification",
+      "eventId": "not-one-less-1998",
+      "filmId": "archive-not-one-less-1998",
+      "filmTitle": "一个都不能少",
+      "year": 1999,
+      "title": "一个都不能少 1080p 字幕版",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/video/BV1mo4y1S74L/",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/19ae428f448aeeed05984dec5e1b93e50d7e2d4f.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "crouching-tiger-hidden-dragon-2000",
+      "filmId": "archive-crouching-tiger-hidden-dragon-2000",
+      "filmTitle": "卧虎藏龙",
+      "year": 2000,
+      "title": "《卧虎藏龙》· B站正片（会员）",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/bangumi/play/ep314577",
+      "coverUrl": "https://i0.hdslb.com/bfs/bangumi/image/df91719c1d3db8f0564e3d9ba5daa8515d18e74d.png"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "crouching-tiger-hidden-dragon-2000",
+      "filmId": "archive-crouching-tiger-hidden-dragon-2000",
+      "filmTitle": "卧虎藏龙",
+      "year": 2000,
+      "title": "【木鱼微剧场】《卧虎藏龙》李安导演作品，首部获奥斯卡最佳外语片的华语电影",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1Ht411S7yM/",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/27c473e4c8a9e053af2f4036fadc836f03f1a464.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "devils-on-the-doorstep-2000",
+      "filmId": "archive-devils-on-the-doorstep-2000",
+      "filmTitle": "鬼子来了",
+      "year": 2000,
+      "title": "【木鱼微剧场】《鬼子来了》姜文经典片",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1ps411x7UY/",
+      "coverUrl": "https://i1.hdslb.com/bfs/archive/122185e7ac7f7c2a9ecb671c21e7c1086a4eeb09.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "seventeen-years-bicycle-2001",
+      "filmId": "archive-seventeen-years-bicycle-2001",
+      "filmTitle": "十七岁的单车",
+      "year": 2001,
+      "title": "《十七岁的单车》· B站正片（会员）",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/bangumi/play/ep640707",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/03772f79667adafa43346138318620ce0e157579.png"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "seventeen-years-bicycle-2001",
+      "filmId": "archive-seventeen-years-bicycle-2001",
+      "filmTitle": "十七岁的单车",
+      "year": 2001,
+      "title": "深度解析王小帅经典影片《十七岁的单车》，青春期的懵懂与辛酸",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1j64y177Sr/",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/dfdfb803645c63f3f7bcc6435cec83e22fd6f94e.jpg"
     },
     {
       "stageId": "industrialization-and-digital-era",
@@ -593,6 +1423,303 @@
     },
     {
       "stageId": "industrialization-and-digital-era",
+      "eventId": "cell-phone-2003",
+      "filmId": "archive-cell-phone-2003",
+      "filmTitle": "手机",
+      "year": 2003,
+      "title": "《手机》· B站正片（会员）",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/bangumi/play/ep307705",
+      "coverUrl": "https://i0.hdslb.com/bfs/bangumi/image/dbf4ab9726dcba2c3dd78aa43e5f71812e0531e6.png"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "cell-phone-2003",
+      "filmId": "archive-cell-phone-2003",
+      "filmTitle": "手机",
+      "year": 2003,
+      "title": "这部电影太现实，很多人不敢看，把男人那点儿秘密都说出来了！《手机》",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1tL4y1A7cB/",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/6064a592b4bdf15bd209be5a60ce378f2ab88642.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "a-world-without-thieves-2004",
+      "filmId": "archive-a-world-without-thieves-2004",
+      "filmTitle": "天下无贼",
+      "year": 2004,
+      "title": "《天下无贼》· B站正片（会员）",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/bangumi/play/ep307707",
+      "coverUrl": "https://i0.hdslb.com/bfs/bangumi/image/18b1945c7af0faa0fb08892f575613ea197f165e.png"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "a-world-without-thieves-2004",
+      "filmId": "archive-a-world-without-thieves-2004",
+      "filmTitle": "天下无贼",
+      "year": 2004,
+      "title": "《天下无贼》· 北师大鉴赏",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1z5411p7W8/?p=50",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/cfb1e4c230378d9603ff19075b362abe01b29d62.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "kekexili-2004",
+      "filmId": "archive-kekexili-2004",
+      "filmTitle": "可可西里",
+      "year": 2004,
+      "title": "可可西里（2004）【陆川】",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/video/BV1D5411t7pR/",
+      "coverUrl": "https://i1.hdslb.com/bfs/archive/42d4794da3066450df70e8975771fd7b58bcf998.png"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "kekexili-2004",
+      "filmId": "archive-kekexili-2004",
+      "filmTitle": "可可西里",
+      "year": 2004,
+      "title": "真实事件改编，震惊全中国，无人区没有人性！8.9分国产电影《可可西里》",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1W34y177gp/",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/f1c7c118452ce54e41355e0a81bd7c979270e41d.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "the-promise-2005",
+      "filmId": "archive-the-promise-2005",
+      "filmTitle": "无极",
+      "year": 2005,
+      "title": "恶评如潮的烂片？还是没人看懂的神作？38分钟超全解析【无极】",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV15A4m157PJ/",
+      "coverUrl": "https://i1.hdslb.com/bfs/archive/353482f279abf53b0f42b136232b89d58df02b3b.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "crazy-stone-2006",
+      "filmId": "archive-crazy-stone-2006",
+      "filmTitle": "疯狂的石头",
+      "year": 2006,
+      "title": "18年来无人超越，细节爆表的国产最强喜剧——疯狂的石头完全复盘",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1VKpWeqEw6/",
+      "coverUrl": "https://i1.hdslb.com/bfs/archive/5271c4b0028c1efd1acaa5ccb71995bae5759905.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "still-life-2006",
+      "filmId": "archive-still-life-2006",
+      "filmTitle": "三峡好人",
+      "year": 2006,
+      "title": "《三峡好人》· 北师大鉴赏",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1x7411H7os/?p=19",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/f33a6e836792c7f94a7d72ece388fce24fa0c5b7.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "assembly-2007",
+      "filmId": "archive-assembly-2007",
+      "filmTitle": "集结号",
+      "year": 2007,
+      "title": "《集结号》· B站正片（会员）",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/bangumi/play/ep306996",
+      "coverUrl": "https://i0.hdslb.com/bfs/bangumi/image/bf098b69d8258c786dd18fb9aeda46f46af2eda9.png"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "assembly-2007",
+      "filmId": "archive-assembly-2007",
+      "filmTitle": "集结号",
+      "year": 2007,
+      "title": "《集结号》· 北师大鉴赏",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1x7411H7os/?p=22",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/f33a6e836792c7f94a7d72ece388fce24fa0c5b7.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "if-you-are-the-one-2008",
+      "filmId": "archive-if-you-are-the-one-2008",
+      "filmTitle": "非诚勿扰",
+      "year": 2008,
+      "title": "《非诚勿扰》· B站正片（会员）",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/bangumi/play/ep307717",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/d75be0c400f80b8f1e0c8e9a1fe1314e65ca6c29.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "if-you-are-the-one-2008",
+      "filmId": "archive-if-you-are-the-one-2008",
+      "filmTitle": "非诚勿扰",
+      "year": 2008,
+      "title": "2008年火遍全国的现象级电影？思维实在太超前了，国产喜剧《非诚勿扰》",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1QsL9zfEnY/",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/a16e803fe8175fe8e12f48dc3ee99f1210841092.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "the-foundation-of-a-republic-2009",
+      "filmId": "archive-the-foundation-of-a-republic-2009",
+      "filmTitle": "建国大业",
+      "year": 2009,
+      "title": "《建国大业》· B站正片（会员）",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/bangumi/play/ep205861",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/2e3c27e32c2210634eac37a4d2ae1ade126865a2.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "the-foundation-of-a-republic-2009",
+      "filmId": "archive-the-foundation-of-a-republic-2009",
+      "filmTitle": "建国大业",
+      "year": 2009,
+      "title": "《建国大业》· 剧情解说（分集）",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1pUXsB3EwW/?p=1",
+      "coverUrl": "https://i2.hdslb.com/bfs/storyff/_000014dunaf52k7ls2hh4yb89ghe5xb_firsti.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "let-the-bullets-fly-2010",
+      "filmId": "archive-let-the-bullets-fly-2010",
+      "filmTitle": "让子弹飞",
+      "year": 2010,
+      "title": "《让子弹飞》· 普通话（会员）",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/bangumi/play/ep199612",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/96a3cd3740536a5b36635f5e6a423f9f0365e698.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "let-the-bullets-fly-2010",
+      "filmId": "archive-let-the-bullets-fly-2010",
+      "filmTitle": "让子弹飞",
+      "year": 2010,
+      "title": "《让子弹飞》全面解读-第二集-从原著到剧本到电影全面讲解让子弹飞！",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1yU4y1s7w6/",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/89904c3fcbff3212958ca77f0316fe0ce104054d.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "lost-in-thailand-2012",
+      "filmId": "archive-lost-in-thailand-2012",
+      "filmTitle": "人再囧途之泰囧",
+      "year": 2012,
+      "title": "“徐峥：这是人妖吗。王宝强：不是，这是我女朋友。一口气看完《泰囧》：最强出差徐朗遇奇葩王宝，电梯里人妖误会毁三观，最后油霸变葱油饼成佛”",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1exLg6FE1R/",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/c6c1c7ccdfe94fbf34dd99ed7b35274715d2a5d5.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "journey-to-the-west-conquering-demons-2013",
+      "filmId": "archive-journey-to-the-west-conquering-demons-2013",
+      "filmTitle": "西游·降魔篇",
+      "year": 2013,
+      "title": "《西游·降魔篇》· 国语版（会员）",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/bangumi/play/ep3127240",
+      "coverUrl": "https://i0.hdslb.com/bfs/bangumi/image/70cbd90d335a845ddd3bb69550931ebf36a7a174.png"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "journey-to-the-west-conquering-demons-2013",
+      "filmId": "archive-journey-to-the-west-conquering-demons-2013",
+      "filmTitle": "西游·降魔篇",
+      "year": 2013,
+      "title": "《西游·降魔篇》· 30分钟万字解读《西游：降魔篇》，带你看懂星爷电影的悲剧内核",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1rW2SYYEZD/",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/72ce9c81294239d316a230d859cf2b325ee4a6a2.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "so-young-2013",
+      "filmId": "archive-so-young-2013",
+      "filmTitle": "致我们终将逝去的青春",
+      "year": 2013,
+      "title": "糊糊兔影视解说《致我们终将逝去的青春》我来找你是为了重新爱你",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1UU4y1a7MJ/",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/ce722b1be3f69a924e6beb4ffee9a9971b6dc817.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "breakup-buddies-2014",
+      "filmId": "archive-breakup-buddies-2014",
+      "filmTitle": "心花路放",
+      "year": 2014,
+      "title": "国产第二好看的公路片，一路爆笑，名场面无数——心花路放深度解析",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1xZEjzWEjg/",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/936b7340f110ea3ac0d8001ce6fbc04aaeced718.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "mojin-the-lost-legend-2015",
+      "filmId": "archive-mojin-the-lost-legend-2015",
+      "filmTitle": "寻龙诀",
+      "year": 2015,
+      "title": "《寻龙诀》· B站正片（会员）",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/bangumi/play/ep329060",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/dfce60343c5ba4dc094c1132882215320bc39177.png"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "mojin-the-lost-legend-2015",
+      "filmId": "archive-mojin-the-lost-legend-2015",
+      "filmTitle": "寻龙诀",
+      "year": 2015,
+      "title": "8年前乌尔善拍的寻宝探险电影，集合陈坤、舒淇和黄渤，拍的最好的鬼吹灯电影《寻龙诀》",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1QM411o76Y/",
+      "coverUrl": "https://i1.hdslb.com/bfs/archive/f7a567f5087bb208746aed6823a3b1a1e0abb762.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "monster-hunt-2015",
+      "filmId": "archive-monster-hunt-2015",
+      "filmTitle": "捉妖记",
+      "year": 2015,
+      "title": "你真的看懂《捉妖记》了吗？宋天荫竟然不是人，奶奶隐藏的最深！",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1eJRfYiEDX/",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/03e4eaf55f1bcb8db5bb878e57635f86c8b2b152.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "operation-mekong-2016",
+      "filmId": "archive-operation-mekong-2016",
+      "filmTitle": "湄公河行动",
+      "year": 2016,
+      "title": "《湄公河行动》· 北师大鉴赏",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1z5411p7W8/?p=61",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/cfb1e4c230378d9603ff19075b362abe01b29d62.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "wolf-warriors-2-2017",
+      "filmId": "archive-wolf-warriors-2-2017",
+      "filmTitle": "战狼2",
+      "year": 2017,
+      "title": "《战狼2》· 北师大鉴赏",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1z5411p7W8/?p=65",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/cfb1e4c230378d9603ff19075b362abe01b29d62.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
       "eventId": "dying-to-survive-2018",
       "filmId": "archive-dying-to-survive-2018",
       "filmTitle": "我不是药神",
@@ -611,6 +1738,17 @@
       "kind": "analysis",
       "url": "https://www.bilibili.com/video/BV1Xe411v7pm/",
       "coverUrl": "https://i1.hdslb.com/bfs/archive/aacfcde503aa0ea1d4e4e074b8b2e5dc6cf3f653.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "operation-red-sea-2018",
+      "filmId": "archive-operation-red-sea-2018",
+      "filmTitle": "红海行动",
+      "year": 2018,
+      "title": "《红海行动》· 北师大鉴赏",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1z5411p7W8/?p=66",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/cfb1e4c230378d9603ff19075b362abe01b29d62.jpg"
     },
     {
       "stageId": "industrialization-and-digital-era",
@@ -643,6 +1781,138 @@
       "kind": "trailer",
       "url": "https://www.bilibili.com/video/BV1Nt411h7sC/",
       "coverUrl": "https://i1.hdslb.com/bfs/archive/47e6d82034bd54ceac7d64b919bf95e94e6f7ca5.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "nezha-2019",
+      "filmId": "archive-nezha-2019",
+      "filmTitle": "哪吒之魔童降世",
+      "year": 2019,
+      "title": "《哪吒之魔童降世》· 无障碍版正片",
+      "kind": "full-film",
+      "url": "https://www.bilibili.com/video/BV1JKNaeoEDj/",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/86ab7fcad07b6ab5dd837f97b3653964c0c5ff44.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "nezha-2019",
+      "filmId": "archive-nezha-2019",
+      "filmTitle": "哪吒之魔童降世",
+      "year": 2019,
+      "title": "68分钟带你详细了解《哪吒之魔童降世》的剧情细节 #哪吒 #哪吒之魔童降世 #哪吒之魔童闹海 #国产动画",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV11bKseQEfv/",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/bfca50bd4b72b7aa9a30bd48c93d8e388b893ed9.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "lost-in-russia-2020",
+      "filmId": "archive-lost-in-russia-2020",
+      "filmTitle": "囧妈",
+      "year": 2020,
+      "title": "【首映影评】囧妈：第一部免费的贺岁片，好看吗？",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1p7411k77Q/",
+      "coverUrl": "https://i1.hdslb.com/bfs/archive/951986f96a832a92e688a1d41b9318640f329ee6.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "the-eight-hundred-2020",
+      "filmId": "archive-the-eight-hundred-2020",
+      "filmTitle": "八佰",
+      "year": 2020,
+      "title": "【万字精讲】一口气看完《八佰》，评价国军抗战的功与过。",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1sPWz6jEop/",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/4be35eb038fec2425e2e722cb008cfa831c21969.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "hi-mom-2021",
+      "filmId": "archive-hi-mom-2021",
+      "filmTitle": "你好，李焕英",
+      "year": 2021,
+      "title": "《你好，李焕英》全网最全解说！！首发支持一下",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV16A411T7me/",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/86881f83270c5f06ec1af58dcda46d75cda8fd77.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "love-will-tear-us-apart-2021",
+      "filmId": "archive-love-will-tear-us-apart-2021",
+      "filmTitle": "爱情神话",
+      "year": 2021,
+      "title": "【1900】这电影讲的是爱情？明明是生活啊！上海UP精讲《爱情神话》",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1pS4y1r7ZK/",
+      "coverUrl": "https://i1.hdslb.com/bfs/archive/b53e9b0e3f91021ec793f2e5790c1e94d4f62457.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "the-battle-at-lake-changjin-2021",
+      "filmId": "archive-the-battle-at-lake-changjin-2021",
+      "filmTitle": "长津湖",
+      "year": 2021,
+      "title": "长津湖完整版解说奉上，弥补没有去电影院的遗憾吧",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1bY41137ds/",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/5042811a329fb5a9c2a09141895551152074ccd3.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "moon-man-2022",
+      "filmId": "archive-moon-man-2022",
+      "filmTitle": "独行月球",
+      "year": 2022,
+      "title": "独自在月球生活两年半什么体验？太空版人在囧途，科幻喜剧《独行月球》",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1TodRYUEWK/",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/8e51c81742adf8bc14eb92dfeab2eda199927aa5.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "creation-of-the-gods-i-2023",
+      "filmId": "archive-creation-of-the-gods-i-2023",
+      "filmTitle": "封神第一部：朝歌风云",
+      "year": 2023,
+      "title": "等待封神！硬核解析《封神第一部》背后的残酷真相",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV11N411a7Nf/",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/0d0e1a31c907f4faa84b6d18c563b4acc508fb1f.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "lost-in-the-stars-2023",
+      "filmId": "archive-lost-in-the-stars-2023",
+      "filmTitle": "消失的她",
+      "year": 2023,
+      "title": "【消失的她】解读：多重反转，动物隐喻，这部悬疑大片值得看吗（剧透）",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1qh4y1M77e/",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/06a54c57ef8d20cf450418aebcd05b0662221923.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "the-wandering-earth-2-2023",
+      "filmId": "archive-the-wandering-earth-2-2023",
+      "filmTitle": "流浪地球2",
+      "year": 2023,
+      "title": "深度解析《流浪地球2》一次看懂球2的隐藏故事线！",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV1pT411C7X1/",
+      "coverUrl": "https://i1.hdslb.com/bfs/archive/c6f6c2b381248234499d83e25c25e2095e0bb94d.jpg"
+    },
+    {
+      "stageId": "industrialization-and-digital-era",
+      "eventId": "yolo-2024",
+      "filmId": "archive-yolo-2024",
+      "filmTitle": "热辣滚烫",
+      "year": 2024,
+      "title": "影评｜《热辣滚烫》优缺点总结，它适合谁看？",
+      "kind": "analysis",
+      "url": "https://www.bilibili.com/video/BV18v421y7AB/",
+      "coverUrl": "https://i0.hdslb.com/bfs/archive/15fa2c40466680a759f13eb6dc861eda16ad0712.jpg"
     },
     {
       "stageId": "industrialization-and-digital-era",
