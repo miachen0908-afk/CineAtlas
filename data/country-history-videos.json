@@ -2550,9 +2550,10 @@
       "eventId": "us-stage-5-event-06",
       "filmTitle": "劳拉",
       "year": 1944,
-      "title": "《劳拉》· Prime Video正片",
+      "title": "《劳拉》· 哔哩哔哩正片",
       "kind": "full-film",
-      "url": "https://www.primevideo.com/detail/0IZFDA93POO7RWJNRSZW05C0Q8"
+      "url": "https://www.bilibili.com/video/BV1rK4y1q7qn/",
+      "coverUrl": "https://i1.hdslb.com/bfs/archive/5dab534d0c9660a9e84766631261485a9748b835.jpg"
     },
     {
       "stageId": "war-mobilization-and-classical-peak",
@@ -2644,9 +2645,10 @@
       "eventId": "us-stage-6-event-04",
       "filmTitle": "白色圣诞",
       "year": 1954,
-      "title": "《白色圣诞》· Paramount+正片",
+      "title": "《白色圣诞》· 哔哩哔哩正片",
       "kind": "full-film",
-      "url": "https://www.paramountplus.com/movies/video/ALVE01M4RH7GWCE4HRRY0NGFB94Z8D/"
+      "url": "https://www.bilibili.com/video/BV1pp421R788/",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/939768eb7a13dbbd2de925265ff94ddee6695bf2.jpg"
     },
     {
       "stageId": "television-shock-and-studio-dissolution",
@@ -2681,35 +2683,6 @@
     },
     {
       "stageId": "television-shock-and-studio-dissolution",
-      "eventId": "us-stage-6-event-07",
-      "filmId": "us-stage-6-film-07",
-      "filmTitle": "无因的反叛",
-      "year": 1955,
-      "title": "《无因的反叛》· Prime Video正片",
-      "kind": "full-film",
-      "url": "https://www.primevideo.com/detail/0IB8KNM81MZOV5YKHPES4KBPAE"
-    },
-    {
-      "stageId": "television-shock-and-studio-dissolution",
-      "eventId": "us-stage-6-event-07",
-      "filmTitle": "黑板丛林",
-      "year": 1955,
-      "title": "《黑板丛林》· Prime Video正片",
-      "kind": "full-film",
-      "url": "https://www.primevideo.com/detail/0I5L76M9LSEE3C50DCY8MX65V3"
-    },
-    {
-      "stageId": "television-shock-and-studio-dissolution",
-      "eventId": "us-stage-6-event-08",
-      "filmId": "us-stage-6-film-08",
-      "filmTitle": "影子",
-      "year": 1959,
-      "title": "《影子》· Prime Video正片",
-      "kind": "full-film",
-      "url": "https://www.primevideo.com/detail/0IKQMVJZKOXOBP8OHAF14SMQUW"
-    },
-    {
-      "stageId": "television-shock-and-studio-dissolution",
       "eventId": "us-stage-6-event-10",
       "filmId": "us-stage-6-film-10",
       "filmTitle": "精神病患者",
@@ -2729,36 +2702,6 @@
       "kind": "analysis",
       "url": "https://www.bilibili.com/video/BV1nt421w7PH/",
       "coverUrl": "https://i2.hdslb.com/bfs/archive/73dd1202e0a894b155be2160b82a5f1b10d87a27.jpg"
-    },
-    {
-      "stageId": "television-shock-and-studio-dissolution",
-      "eventId": "us-stage-6-event-09",
-      "filmId": "us-stage-6-film-09",
-      "filmTitle": "阳光下的葡萄干",
-      "year": 1961,
-      "title": "《阳光下的葡萄干》· Prime Video正片",
-      "kind": "full-film",
-      "url": "https://www.primevideo.com/detail/0R5JLPD5UQRYO8XTQJAFGR2896/"
-    },
-    {
-      "stageId": "television-shock-and-studio-dissolution",
-      "eventId": "us-stage-6-event-12",
-      "filmId": "us-stage-6-film-12",
-      "filmTitle": "邦妮和克莱德",
-      "year": 1967,
-      "title": "《邦妮和克莱德》· Prime Video正片",
-      "kind": "full-film",
-      "url": "https://www.primevideo.com/detail/0Q7FZBMDBHUT88F5UK61N6VLIR"
-    },
-    {
-      "stageId": "television-shock-and-studio-dissolution",
-      "eventId": "us-stage-6-event-12",
-      "filmTitle": "毕业生",
-      "year": 1967,
-      "title": "《毕业生》· Hami Video正片",
-      "kind": "full-film",
-      "url": "https://hamivideo.hinet.net/product/94923.do?cs=2",
-      "coverUrl": "https://apl-hamivideo.cdn.hinet.net/HamiVideo/getHamiVideoImg.php?imageId=sourceImages%40a91822a22a08dd7e39d239fddb260427760e0a97%40bitwel_191108.jpg:"
     },
     {
       "stageId": "television-shock-and-studio-dissolution",
@@ -2812,16 +2755,6 @@
       "kind": "full-film",
       "url": "https://www.bilibili.com/video/BV1uY4y1R73A/",
       "coverUrl": "https://i1.hdslb.com/bfs/archive/b7134829abe8b8af07d3f153d39252521c4ec350.jpg"
-    },
-    {
-      "stageId": "new-hollywood-and-author-revival",
-      "eventId": "us-stage-7-event-05",
-      "filmId": "us-stage-7-film-05",
-      "filmTitle": "甜蜜甜蜜贝克的坏歌",
-      "year": 1971,
-      "title": "《甜蜜甜蜜贝克的坏歌》· Prime Video正片",
-      "kind": "full-film",
-      "url": "https://www.primevideo.com/detail/0N74B9YVS2F7CEHXZ3S8KDMTYW"
     },
     {
       "stageId": "new-hollywood-and-author-revival",
@@ -2957,15 +2890,6 @@
       "kind": "analysis",
       "url": "https://www.bilibili.com/video/BV1hx411G79E/",
       "coverUrl": "https://i1.hdslb.com/bfs/archive/af5d0de1dc2fd9fd64f5d27dafb30b961cb670c0.jpg"
-    },
-    {
-      "stageId": "new-hollywood-and-author-revival",
-      "eventId": "us-stage-7-event-11",
-      "filmTitle": "天堂之门",
-      "year": 1980,
-      "title": "《天堂之门》· Prime Video正片",
-      "kind": "full-film",
-      "url": "https://www.primevideo.com/detail/0TJVBM87I1S5M8DLK9WMDXC5PA"
     },
     {
       "stageId": "blockbuster-media-groups-and-home-video",
@@ -3166,15 +3090,6 @@
     },
     {
       "stageId": "blockbuster-media-groups-and-home-video",
-      "eventId": "us-stage-8-event-09",
-      "filmTitle": "毒药",
-      "year": 1991,
-      "title": "《毒药》· Kino Film Collection正片",
-      "kind": "full-film",
-      "url": "https://watch.kinofilmcollection.com/poison"
-    },
-    {
-      "stageId": "blockbuster-media-groups-and-home-video",
       "eventId": "us-stage-8-event-07",
       "filmTitle": "阿拉丁",
       "year": 1992,
@@ -3212,15 +3127,6 @@
       "kind": "analysis",
       "url": "https://www.bilibili.com/video/BV1Ps411j71N/",
       "coverUrl": "https://i2.hdslb.com/bfs/archive/1bd9b7ab396ab2741baabf0e3ed3e107eb4cafd6.jpg"
-    },
-    {
-      "stageId": "blockbuster-media-groups-and-home-video",
-      "eventId": "us-stage-8-event-09",
-      "filmTitle": "喜宴",
-      "year": 1993,
-      "title": "《喜宴》· Tubi正片",
-      "kind": "full-film",
-      "url": "https://tubitv.com/movies/303018/the-wedding-banquet?start=true"
     },
     {
       "stageId": "blockbuster-media-groups-and-home-video",
@@ -3273,15 +3179,6 @@
       "kind": "analysis",
       "url": "https://www.bilibili.com/video/BV1t4411u7iK/",
       "coverUrl": "https://i1.hdslb.com/bfs/archive/30f372eed596d8515b636ff20f4cf17e412a20b7.jpg"
-    },
-    {
-      "stageId": "blockbuster-media-groups-and-home-video",
-      "eventId": "us-stage-8-event-09",
-      "filmTitle": "西瓜女人",
-      "year": 1996,
-      "title": "《西瓜女人》· Criterion Channel正片",
-      "kind": "full-film",
-      "url": "https://www.criterionchannel.com/films/dfYcgGAJ/the-watermelon-woman"
     },
     {
       "stageId": "blockbuster-media-groups-and-home-video",
@@ -3339,31 +3236,10 @@
       "filmId": "us-stage-8-film-14",
       "filmTitle": "黑客帝国",
       "year": 1999,
-      "title": "《黑客帝国》· Hami Video正片",
-      "kind": "full-film",
-      "url": "https://hamivideo.hinet.net/product/206811.do?cs=2",
-      "coverUrl": "https://apl-hamivideo.cdn.hinet.net/HamiVideo/getHamiVideoImg.php?imageId=sourceImages%404021100030_o_20221105081842.jpg:"
-    },
-    {
-      "stageId": "blockbuster-media-groups-and-home-video",
-      "eventId": "us-stage-8-event-14",
-      "filmId": "us-stage-8-film-14",
-      "filmTitle": "黑客帝国",
-      "year": 1999,
       "title": "【木鱼微剧场】《黑客帝国》第一部",
       "kind": "analysis",
       "url": "https://www.bilibili.com/video/BV1Ls411C7we/",
       "coverUrl": "https://i2.hdslb.com/bfs/archive/547fd66f65c78700e807be8f43d840344e3704e0.jpg"
-    },
-    {
-      "stageId": "digital-production-franchises-and-globalization",
-      "eventId": "us-stage-9-event-01",
-      "filmId": "us-stage-9-film-01",
-      "filmTitle": "记忆碎片",
-      "year": 2000,
-      "title": "《记忆碎片》· Prime Video正片",
-      "kind": "full-film",
-      "url": "https://www.primevideo.com/detail/0FPNY8R1SELKY2JOLDHJ6NA6AC"
     },
     {
       "stageId": "digital-production-franchises-and-globalization",
@@ -3474,29 +3350,10 @@
       "filmId": "us-stage-9-film-08",
       "filmTitle": "断背山",
       "year": 2005,
-      "title": "《断背山》· Prime Video正片",
-      "kind": "full-film",
-      "url": "https://www.primevideo.com/detail/0R1A5EQSYL864DPJ9QL1YW9UI8?tr=ca"
-    },
-    {
-      "stageId": "digital-production-franchises-and-globalization",
-      "eventId": "us-stage-9-event-08",
-      "filmId": "us-stage-9-film-08",
-      "filmTitle": "断背山",
-      "year": 2005,
       "title": "【大象】近15年来，最心碎的爱情片 《断背山》",
       "kind": "analysis",
       "url": "https://www.bilibili.com/video/BV1iT4y137mh/",
       "coverUrl": "https://i2.hdslb.com/bfs/archive/aebfffebd043ef686240d8060157e948031849df.jpg"
-    },
-    {
-      "stageId": "digital-production-franchises-and-globalization",
-      "eventId": "us-stage-9-event-07",
-      "filmTitle": "难以忽视的真相",
-      "year": 2006,
-      "title": "《难以忽视的真相》· Prime Video正片",
-      "kind": "full-film",
-      "url": "https://www.primevideo.com/detail/0NCPC6ZX4D6EY6UUUV5XXQM4SR"
     },
     {
       "stageId": "digital-production-franchises-and-globalization",
@@ -3580,31 +3437,10 @@
       "filmId": "us-stage-10-film-04",
       "filmTitle": "无境之兽",
       "year": 2015,
-      "title": "《无境之兽》· Netflix观看页",
-      "kind": "full-film",
-      "url": "https://www.netflix.com/title/80044545"
-    },
-    {
-      "stageId": "streaming-super-ip-and-platform-ecosystem",
-      "eventId": "us-stage-10-event-04",
-      "filmId": "us-stage-10-film-04",
-      "filmTitle": "无境之兽",
-      "year": 2015,
       "title": "【小明】《无境之兽》获奖无数的战争电影，因影片过于真实，很多人不忍看第二遍",
       "kind": "analysis",
       "url": "https://www.bilibili.com/video/BV1N341187uv/",
       "coverUrl": "https://i2.hdslb.com/bfs/archive/b76b649aa626ff670349754e26f60598eadc452e.jpg"
-    },
-    {
-      "stageId": "streaming-super-ip-and-platform-ecosystem",
-      "eventId": "us-stage-10-event-05",
-      "filmId": "us-stage-10-film-05",
-      "filmTitle": "月光男孩",
-      "year": 2016,
-      "title": "《月光男孩》· Hami Video正片",
-      "kind": "full-film",
-      "url": "https://hamivideo.hinet.net/product/46477.do?cs=2",
-      "coverUrl": "https://apl-hamivideo.cdn.hinet.net/HamiVideo/getHamiVideoImg.php?imageId=sourceImages%402166100036_o.jpg:"
     },
     {
       "stageId": "streaming-super-ip-and-platform-ecosystem",
@@ -3674,15 +3510,6 @@
       "eventId": "us-stage-10-event-08",
       "filmTitle": "罗马",
       "year": 2018,
-      "title": "《罗马》· Netflix观看页",
-      "kind": "full-film",
-      "url": "https://www.netflix.com/title/80240715"
-    },
-    {
-      "stageId": "streaming-super-ip-and-platform-ecosystem",
-      "eventId": "us-stage-10-event-08",
-      "filmTitle": "罗马",
-      "year": 2018,
       "title": "Movietalk:《罗马》奥斯卡最佳外语片，阿方索卡隆力作，全方位深度解析。",
       "kind": "analysis",
       "url": "https://www.bilibili.com/video/BV1Kb411U7xe/",
@@ -3724,10 +3551,10 @@
       "filmId": "us-stage-10-film-12",
       "filmTitle": "瞬息全宇宙",
       "year": 2022,
-      "title": "《瞬息全宇宙》· Hami Video正片",
+      "title": "《瞬息全宇宙》· 哔哩哔哩正片",
       "kind": "full-film",
-      "url": "https://hamivideo.hinet.net/product/268350.do?cs=2",
-      "coverUrl": "https://apl-hamivideo.cdn.hinet.net/HamiVideo/getHamiVideoImg.php?imageId=sourceImages%404024100034_o_20240719221023.jpg:"
+      "url": "https://www.bilibili.com/video/BV1H9nu6SExS/",
+      "coverUrl": "https://i2.hdslb.com/bfs/archive/31f89ba2c6f203d96fb94d87e8555a8068c2ed96.jpg"
     },
     {
       "stageId": "streaming-super-ip-and-platform-ecosystem",
@@ -3767,9 +3594,9 @@
       "eventId": "us-stage-10-event-14",
       "filmTitle": "芭比",
       "year": 2023,
-      "title": "《芭比》· Prime Video正片",
+      "title": "《芭比》· 爱奇艺正片",
       "kind": "full-film",
-      "url": "https://www.primevideo.com/detail/0GKNEEOK90DYICABAGL9ZQTBTO"
+      "url": "https://www.iqiyi.com/v_1a1hmhd2pu8.html"
     },
     {
       "stageId": "streaming-super-ip-and-platform-ecosystem",
