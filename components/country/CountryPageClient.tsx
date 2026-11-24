@@ -10,6 +10,7 @@ import { getGenreDistribution, getProductionCities } from "@/utils/filmFilters";
 import { EmptyState } from "@/components/layout/EmptyState";
 import { markMapReturnPending } from "@/components/home/mapReturnNavigation";
 import { validateCountryCinemaHistory } from "@/lib/countryCinemaHistory";
+import { historyEventAnchor, historyFilmAnchor, normalizeHistoryFilmTitle as normalizeFilmTitle, readHistoryAnchor } from "@/lib/historyAnchors";
 import { CountryStageNavigation } from "./CountryStageNavigation";
 import { CountryHistoryEditor } from "./CountryHistoryEditor";
 import { CountryHistoryVideoStage, HistoryVideoLinks } from "./CountryHistoryVideoResources";
@@ -44,6 +45,13 @@ function stageAnchor(view: HistoryView, stageId: string) {
   return view === "videos" ? `history-video-stage-${stageId}` : `history-stage-${stageId}`;
 }
 
+function scrollToHistoryAnchor(id: string) {
+  const target = document.getElementById(id);
+  if (!target) return;
+  target.focus({ preventScroll: true });
+  target.scrollIntoView({ behavior: "instant", block: "start", inline: "nearest" });
+}
+
 export function CountryPageClient({ countryCode, allFilms, history, editorState, videos }: Props) {
   const country = getCountry(countryCode);
   const prefersReducedMotion = useReducedMotion() ?? false;
@@ -60,6 +68,7 @@ export function CountryPageClient({ countryCode, allFilms, history, editorState,
   const [showBackToTop, setShowBackToTop] = useState(false);
   const navigationRef = useRef<HTMLElement>(null);
   const pendingStage = useRef<string | null>(null);
+  const pendingHistoryAnchor = useRef<string | null>(null);
 
   const { videosByStage, videosByEvent } = useMemo(() => {
     const byStage = new Map<string, CountryHistoryVideo[]>();
@@ -123,6 +132,34 @@ export function CountryPageClient({ countryCode, allFilms, history, editorState,
     window.addEventListener("scroll", update, { passive: true });
     return () => window.removeEventListener("scroll", update);
   }, [history]);
+  useEffect(() => {
+    let frame = 0;
+    const locate = () => {
+      const anchor = readHistoryAnchor(window.location.hash);
+      pendingHistoryAnchor.current = anchor;
+      if (frame) window.cancelAnimationFrame(frame);
+      if (!anchor) return;
+      if (!document.getElementById(anchor)) {
+        setView("overview");
+        return;
+      }
+      pendingHistoryAnchor.current = null;
+      frame = window.requestAnimationFrame(() => scrollToHistoryAnchor(anchor));
+    };
+    locate();
+    window.addEventListener("hashchange", locate);
+    return () => {
+      window.removeEventListener("hashchange", locate);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  }, [countryCode]);
+  useEffect(() => {
+    const anchor = pendingHistoryAnchor.current;
+    if (view !== "overview" || !anchor) return;
+    pendingHistoryAnchor.current = null;
+    const frame = window.requestAnimationFrame(() => scrollToHistoryAnchor(anchor));
+    return () => window.cancelAnimationFrame(frame);
+  }, [view, countryCode]);
 
   const allCountryFilms = useMemo(() => allFilms.filter((f) => f.primaryProductionCountry === countryCode).sort((a, b) => a.year - b.year || (a.id < b.id ? -1 : a.id > b.id ? 1 : 0)), [allFilms, countryCode]);
   const filteredCountryFilms = useMemo(() => allCountryFilms.filter((f) => f.year >= yearStart && f.year <= yearEnd && (!selectedGenreId || f.genreIds.includes(selectedGenreId))), [allCountryFilms, selectedGenreId, yearEnd, yearStart]);
@@ -246,10 +283,6 @@ function eventHasExtraDetail(event: CinemaHistoryEvent) {
   return Boolean(normalizedSummary && normalizedDescription !== normalizedSummary && normalizedDescription.length > normalizedSummary.length);
 }
 
-function normalizeFilmTitle(title: string) {
-  return title.normalize("NFKC").replace(/[\s《》〈〉「」『』·:：!！?？,，.。'“”\"\-—–_]/g, "").toLocaleLowerCase("zh-CN");
-}
-
 function resolveHistoryFilms(event: CinemaHistoryEvent, filmMap: Map<string, Film>, countryCode: string): ResolvedHistoryFilm[] {
   const results: ResolvedHistoryFilm[] = [];
   const seenIds = new Set<string>();
@@ -357,7 +390,7 @@ function VisualEventRow({ event, videos, countryCode, mapQuery, filmMap }: Omit<
   const eventStyle = EVENT_TYPE_STYLES[event.type ?? "historical"];
   const resolvedFilms = resolveHistoryFilms(event, filmMap, countryCode);
   const eventVideos = videos.filter((video) => !resolvedFilms.some((film) => videoMatchesFilm(video, film)));
-  return <article id={`history-event-${event.id}`} className="relative mx-auto grid w-full max-w-[1360px] scroll-mt-36 gap-3 md:grid-cols-[128px_1px_minmax(0,1fr)] md:gap-x-6">
+  return <article id={historyEventAnchor(event.id)} tabIndex={-1} className="relative mx-auto grid w-full max-w-[1360px] scroll-mt-36 gap-3 rounded-2xl outline-none target:ring-1 target:ring-[#35c8b4]/55 md:grid-cols-[128px_1px_minmax(0,1fr)] md:gap-x-6">
     <div className="whitespace-nowrap font-mono text-xl font-medium leading-7 text-[#e0bb63] md:pt-1 md:text-right md:text-[1.35rem]">{year}</div>
     <div className={`relative hidden bg-gradient-to-b ${eventStyle.line} to-transparent md:block`}><span className="absolute left-1/2 top-2 -translate-x-1/2"><EventGlyph type={event.type} /></span></div>
     <div className="min-w-0 rounded-2xl border border-white/[0.04] bg-black/35 p-5 transition-colors md:p-6">
@@ -472,6 +505,9 @@ function HistoryFilmCollection({
   const renderFilm = (item: ResolvedHistoryFilm) => {
     const relatedVideos = videos.filter((video) => videoMatchesFilm(video, item));
     const withPoster = item.kind === "archive-poster" || item.kind === "official-poster";
+    const archiveAnchor = item.kind === "archive-poster" || item.kind === "archive-text"
+      ? historyFilmAnchor(eventId, item.film.id)
+      : undefined;
     let archiveLink;
 
     switch (item.kind) {
@@ -490,7 +526,7 @@ function HistoryFilmCollection({
     }
 
     return (
-      <div key={item.key} className={`min-w-0 max-w-full ${withPoster ? "shrink-0" : ""} ${relatedVideos.length ? "w-56" : ""}`}>
+      <div key={item.key} id={archiveAnchor} tabIndex={archiveAnchor ? -1 : undefined} className={`min-w-0 max-w-full scroll-mt-44 rounded-md outline-none target:ring-1 target:ring-[#35c8b4]/55 ${withPoster ? "shrink-0" : ""} ${relatedVideos.length ? "w-56" : ""}`}>
         {archiveLink}
         <HistoryVideoLinks videos={relatedVideos} />
       </div>

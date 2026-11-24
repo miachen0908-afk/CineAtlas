@@ -153,7 +153,10 @@ export function MapHomeClient({ films, initialFilters }: MapHomeClientProps) {
     if (phase !== "intro") return;
 
     const handleIntroKeyDown = (event: KeyboardEvent) => {
-      if (event.repeat || (event.key !== "Enter" && event.key !== " ")) {
+      if (event.defaultPrevented || event.repeat || event.isComposing || (event.key !== "Enter" && event.key !== " ")) {
+        return;
+      }
+      if (event.target instanceof HTMLElement && event.target.closest("button, a, input, textarea, select, [contenteditable], [role='dialog']")) {
         return;
       }
       event.preventDefault();

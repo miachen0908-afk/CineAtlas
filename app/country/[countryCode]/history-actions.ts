@@ -2,6 +2,7 @@
 
 import { timingSafeEqual } from "node:crypto";
 import { revalidatePath } from "next/cache";
+import { SEARCH_INDEX_PATH } from "@/lib/siteSearch";
 import {
   restoreCountryCinemaHistoryRevision,
   saveCountryCinemaHistoryEditableContent,
@@ -40,7 +41,10 @@ export async function saveCountryHistoryAction(
   const code = normalizedCountryCode(countryCode);
   if (!code || !Number.isInteger(expectedVersion) || expectedVersion < 0) return { ok: false, kind: "validation", message: "保存参数无效" };
   const result = await saveCountryCinemaHistoryEditableContent(code, expectedVersion, content);
-  if (result.ok) revalidatePath(`/country/${code}`);
+  if (result.ok) {
+    revalidatePath(`/country/${code}`);
+    revalidatePath(SEARCH_INDEX_PATH);
+  }
   return result;
 }
 
@@ -54,6 +58,9 @@ export async function restoreCountryHistoryRevisionAction(
   const code = normalizedCountryCode(countryCode);
   if (!code || !Number.isInteger(revisionId) || revisionId < 1 || !Number.isInteger(expectedVersion) || expectedVersion < 0) return { ok: false, kind: "validation", message: "恢复参数无效" };
   const result = await restoreCountryCinemaHistoryRevision(code, revisionId, expectedVersion);
-  if (result.ok) revalidatePath(`/country/${code}`);
+  if (result.ok) {
+    revalidatePath(`/country/${code}`);
+    revalidatePath(SEARCH_INDEX_PATH);
+  }
   return result;
 }

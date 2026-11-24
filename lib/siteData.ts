@@ -80,6 +80,12 @@ export async function getSiteCountryHistoryPageData(
   return getCountryCinemaHistoryPageData(countryCode);
 }
 
+export async function getSiteCountryHistories(): Promise<CountryCinemaHistory[]> {
+  if (isPublicStaticBuild) return Object.values(publicSnapshot.histories);
+  const pages = await Promise.all(countries.map(({ code }) => getSiteCountryHistoryPageData(code)));
+  return pages.flatMap(({ history }) => history ? [history] : []);
+}
+
 export function getStaticCountryParams() {
   return countries.map((country) => ({ countryCode: country.code }));
 }

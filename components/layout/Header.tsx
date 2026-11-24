@@ -10,6 +10,7 @@ import {
   markMapReturnPending,
 } from "@/components/home/mapReturnNavigation";
 import { buildMapQueryParams, useMapStore } from "@/store/useMapStore";
+import { SiteSearch } from "./SiteSearch";
 
 export function Header() {
   const pathname = usePathname();
@@ -34,45 +35,45 @@ export function Header() {
     selectedGenreId,
   });
   const brandHref = isMapDetailPage ? `/?${mapQuery}` : "/";
+  const showSearch = isGlobeHome || /^\/country\/[^/]+\/?$/.test(pathname);
 
   return (
-    <motion.header
-      initial={isGlobeHome ? { opacity: 0, y: -12 } : false}
-      animate={{
-        opacity: introActive ? 0 : 1,
-        y: introActive ? -12 : 0,
-      }}
-      transition={{ duration: introActive ? 0.16 : 0.42, ease: "easeOut" }}
-      aria-hidden={introActive}
-      className={`site-header relative z-50 flex shrink-0 items-center px-4 pb-3 pt-8 md:px-6 ${
-        introActive
-          ? "pointer-events-none bg-transparent"
-          : "brand-header glass-bar"
-      }`}
-    >
-      <Link
-        href={brandHref}
-        onClick={isMapDetailPage ? markMapReturnPending : undefined}
-        className="group flex min-w-0 items-center gap-2 md:gap-3"
-        aria-label="影迹 CineAtlas 首页"
+    <header className={`site-header relative z-50 flex shrink-0 items-center justify-between gap-3 px-4 pb-3 pt-8 md:px-6 ${
+      introActive ? "pointer-events-none bg-transparent" : "brand-header glass-bar"
+    }`}>
+      <motion.div
+        initial={isGlobeHome ? { opacity: 0, y: -12 } : false}
+        animate={{ opacity: introActive ? 0 : 1, y: introActive ? -12 : 0 }}
+        transition={{ duration: introActive ? 0.16 : 0.42, ease: "easeOut" }}
+        aria-hidden={introActive}
+        inert={introActive}
+        className="min-w-0"
       >
-        <ShinyTitleImage
-          src="/branding/cineatlas-title-zh.png"
-          width={1373}
-          height={508}
-          displayHeight="clamp(20px, 1.7vw, 24px)"
-          disabled={prefersReducedMotion}
-          delay={1.8}
-        />
-        <ShinyTitleImage
-          src="/branding/cineatlas-title-en.png"
-          width={1954}
-          height={206}
-          displayHeight="clamp(16px, 1.36vw, 19.2px)"
-          disabled={prefersReducedMotion}
-          delay={1.8}
-        />
-      </Link>
-    </motion.header>
+        <Link
+          href={brandHref}
+          onClick={isMapDetailPage ? markMapReturnPending : undefined}
+          className="group flex min-w-0 items-center gap-2 md:gap-3"
+          aria-label="影迹 CineAtlas 首页"
+        >
+          <ShinyTitleImage
+            src="/branding/cineatlas-title-zh.png"
+            width={1373}
+            height={508}
+            displayHeight="clamp(20px, 1.7vw, 24px)"
+            disabled={prefersReducedMotion}
+            delay={1.8}
+          />
+          <ShinyTitleImage
+            src="/branding/cineatlas-title-en.png"
+            width={1954}
+            height={206}
+            displayHeight="clamp(16px, 1.36vw, 19.2px)"
+            disabled={prefersReducedMotion}
+            delay={1.8}
+          />
+        </Link>
+      </motion.div>
+      {showSearch && <div className="pointer-events-auto shrink-0"><SiteSearch countryCode={routeCountryCode} /></div>}
+    </header>
   );
 }
